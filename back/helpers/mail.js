@@ -14,21 +14,21 @@ const transporter = nodemailer.createTransport({
 
 //Mario
 const mandarCorreoActivacion = (vKey, userId, destinatario, ruta) => {
-    const cuerpoHtml = `Pincha en el <a href="http://${process.env.HOST}:${process.env.PORT}/api/${ruta}/${userId}/${vKey}">link</a> para confirmar tu correo`;
+    // const cuerpoHtml = `Pincha en el <a href="http://${process.env.HOST}:${process.env.PORT}/api/${ruta}/${userId}/${vKey}">link</a> para confirmar tu correo`;
 
-    const asunto = 'Confirmación de cuenta de correo electrónico';
+    // const asunto = 'Confirmación de cuenta de correo electrónico';
 
-    mailOptions = {
-        from: process.env.EMAIL_ACCOUNT,
-        to: destinatario,
-        subject: asunto,
-        html: cuerpoHtml
-    };
+    // mailOptions = {
+    //     from: process.env.EMAIL_ACCOUNT,
+    //     to: destinatario,
+    //     subject: asunto,
+    //     html: cuerpoHtml
+    // };
 
-    transporter.sendMail(mailOptions, (error, info) => {
-        if (error) throw error;
-        else console.log('Email sent: ' + info.response);
-    });
+    // transporter.sendMail(mailOptions, (error, info) => {
+    //     if (error) throw error;
+    //     else console.log('Email sent: ' + info.response);
+    // });
 }
 
 
