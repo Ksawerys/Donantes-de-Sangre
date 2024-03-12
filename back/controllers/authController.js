@@ -16,7 +16,7 @@ const { v4: uuidv4 } = require('uuid');
 // Mario
 const login = (req, res = response) => { // traer y comparar aquí o traer y volver a chocar con la db.
 
-    console.log('llego')
+    console.log(' Login ----------------------------------------------------------------------------------------------------')
     queriesUsers.getUserLogin(req.body.email, req.body.passwd).then(user => { // get abilities
         const resp = {
             success: true,
@@ -91,13 +91,14 @@ const register = async (req, res = response) => { // poner código
    
     try {
         const emailUser = await queriesUsers.insertEmail(vKey, req.body.email);
+        console.log('--------------------------------------------------------------------------------------------------------------------')
         const resp = await queriesUsers.insertUser(emailUser.id, titleCase.titleCase(req.body.nombre), req.body.passwd);
     
         correo.mandarCorreoActivacion(vKey, resp.id, req.body.email, 'activarCorreo');
         res.status(201).json({ success: true, msg: 'registrado con éxito' });
     } 
     catch (err) {
-
+        console.log(err)
         const msg = (err.name == 'SequelizeUniqueConstraintError')
             ? 'usuario ya registrado'
             : 'se ha producido un error';
