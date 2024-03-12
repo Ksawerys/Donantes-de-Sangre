@@ -1,0 +1,29 @@
+<main>
+
+  <div class="text-center f-contraste">
+    <h1 class="titulo subrayado fs-2">Test - Idoneidad para donar</h1>
+  </div>
+
+  <svg _ngcontent-ncw-c20="" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 190">
+    <path _ngcontent-ncw-c20="" fill="#f1eef5" fill-opacity="1"
+      d="M0,50L380,150L960,80L1950,128L1440,0L960,0L480,0L0,0Z"></path>
+  </svg>
+
+  <div class="text-center">
+    <ng-container *ngIf="preguntas.length > 0">
+      <app-preguntas [pregunta]="preguntas[contador]" (botonAparece)="mostrarBoton($event)"></app-preguntas>
+    </ng-container>
+
+    <div class="justify-content-center">
+      <div class="mt-3 mb-3">
+        <button #siguiente
+          type="button"
+          class="btn-secundario w-25 mb-2 mt-3"
+          (click)="evaluarRespuesta()">
+          Siguiente
+        </button>
+      </div>
+    </div>
+  </div>
+
+</main>

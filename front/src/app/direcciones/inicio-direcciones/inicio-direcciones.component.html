@@ -1,0 +1,25 @@
+<div class="lh-lg" *ngIf="dirsData.length > 0">
+  <i class="fa-solid fa-map-location"></i>
+
+  <h1 class="titulo subrayado">Dónde donar</h1>
+
+  <div *ngFor="let dir of dirsData">
+    <p class="fw-bold">{{ dir.lugar }}</p>
+
+    <p>
+      Calle {{ dir.calle }},
+      <span *ngIf="dir.numero; else noNum">{{ dir.numero }}</span>
+      <ng-template #noNum>s/n</ng-template>
+    </p>
+
+    <p>{{ dir.ciudad }}, {{ dir.cp }}</p>
+
+    <p>{{ dir.provincia }}</p>
+
+    <div *ngIf="dir.urlMapa" class="clearfix mt-3 mb-5">
+      <iframe class="mapa mt-2 float-end" allowfullscreen="" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade" [src]="dir.urlMapa | safeUrl">
+      </iframe>
+    </div>
+  </div>
+</div>

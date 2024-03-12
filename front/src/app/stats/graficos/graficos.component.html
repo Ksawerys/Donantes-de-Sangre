@@ -1,0 +1,124 @@
+<main class="f-contraste">
+    <h1 class="titulo subrayado text-center">Estadísticas</h1>
+
+    <div class="contenido">
+      <div class="pb-5 tipos">
+        <h2 class="titulo">Donaciones por tipo</h2>
+        <p>En este gráfico puedes ver el número total de donaciones de plasma, sangre, médula y órganos.</p>
+
+        <div class="contenedor gx-0 row flex-column flex-md-row">
+          <div class="menu-vertical col-12 col-md-3">
+            <ul class="row gx-0">
+              <li class="col-6 col-md-12" [ngClass]="{ activo : activoDonTipos == 0 }">
+                <input type="radio" id="don-mensuales" value="mensuales"
+                  (click)="activoDonTipos = 0" (click)="activarDatosMensDonTipos(donTiposSelect.value)">
+
+                  <label for="don-mensuales">
+                  Mensuales
+                  <select #donTiposSelect (change)="activoDonTipos = 0"
+                    (change)="activarDatosMensDonTipos(donTiposSelect.value)">
+                    <option *ngFor="let anio of aniosDonaciones; let first = first"> {{ anio }}</option>
+                  </select>
+                </label>
+              </li>
+
+              <li class="col-6 col-md-12" [ngClass]="{ activo : activoDonTipos == 1 }">
+                <input type="radio" id="don-anuales" value="anuales"
+                  (click)="activoDonTipos = 1" (click)="activarDatosAnualesDonTipos()">
+
+                <label for="don-anuales">Anuales</label>
+              </li>
+            </ul>
+          </div>
+
+          <div class="grafico col-12 col-md-9">
+            <canvas id="grafDonTipos">{{ grafDonTipos }}</canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="row gx-0">
+        <div class="pt-4 pb-5 col-12 col-lg-6 pe-lg-4 grp-sang">
+          <div class="contenedor-titulo">
+            <h2 class="titulo">Donaciones por grupo sanguíneo</h2>
+            <p>Número total de donaciones de sangre del año seleccionado agrupadas por grupo sanguíneo.</p>
+          </div>
+
+          <div class="contenedor gx-0 row">
+            <div class="menu-vertical col-3">
+              <ul>
+                <li *ngFor="let anio of aniosGenerosGrpSang; let i = index" [class.activo]="i == anioActivoGrpSang">
+                  <input type="radio" id="gs{{anio}}" value="anuales" (click)="cambiarAnioGrupSang(i)" >
+
+                  <label for="gs{{anio}}">{{ anio }}</label>
+                </li>
+              </ul>
+            </div>
+
+            <div class="grafico col-9">
+              <canvas id="grafDonGrpSang">{{ grafDonGrpSang }}</canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="pt-4 pb-5 col-12 col-lg-6 ps-lg-4 generos">
+          <div class="contenedor-titulo">
+            <h2 class="titulo">Donaciones por género</h2>
+            <p>Número total de donaciones de sangre del año seleccionado agrupadas por género.</p>
+          </div>
+
+          <div class="contenedor gx-0 row">
+            <div class="menu-vertical col-3">
+              <ul>
+                <li *ngFor="let anio of aniosGenerosGrpSang; let i = index" [class.activo]="i == anioActivoGeneros">
+                  <input type="radio" id="g{{anio}}" value="anuales" (click)="cambiarAnioGeneros(i)">
+
+                  <label for="g{{anio}}">{{ anio }}</label>
+                </li>
+              </ul>
+            </div>
+
+            <div class="grafico col-9">
+              <canvas id="grafDonGenero">{{ grafDonGenero }}</canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pt-4 pb-5 altas">
+        <h2 class="titulo">Número de altas</h2>
+        <p>En este gráfico puedes ver el número total de altas del año seleccionado.</p>
+
+        <div class="contenedor gx-0 row flex-column flex-md-row">
+          <div class="menu-vertical col-12 col-md-3">
+            <ul class="row gx-0">
+              <li class="col-6 col-md-12" [ngClass]="{ activo : activoNumAltas == 0 }">
+                <input type="radio" id="altas-mensuales" value="mensuales"
+                    (click)="activoNumAltas = 0" (click)="activarDatosMensNumAltas(numAltasSelect.value)">
+
+                <label for="altas-mensuales">
+                  Mensuales
+                  <select #numAltasSelect (change)="activoNumAltas = 0"
+                    (change)="activarDatosMensNumAltas(numAltasSelect.value)">
+                    <option *ngFor="let anio of aniosAltas; let first = first">{{ anio }}</option>
+                  </select>
+                </label>
+              </li>
+
+              <li class="col-6 col-md-12" [ngClass]="{ activo : activoNumAltas == 1 }">
+                <input type="radio" id="altas-anuales" value="anuales"
+                    (click)="activoNumAltas = 1" (click)="activarDatosAnualesNumAltas()">
+
+                <label for="altas-anuales">Anuales</label>
+              </li>
+            </ul>
+          </div>
+
+          <div class="grafico col-12 col-md-9">
+            <canvas id="grafNumAltas">{{ grafNumAltas }}</canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+</main>

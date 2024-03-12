@@ -1,0 +1,110 @@
+<div *ngIf="this.tokenExpirado" class="sesion-caducada container-fluid">
+    <div class="modal-sesion-caducada">
+      <h3 class="titulo">Sesión caducada</h3>
+
+      <p>Debes volver a iniciar sesión.</p>
+
+      <div class="botones d-flex justify-content-end p-2 pt-3 pt-sm-5 flex-column flex-sm-row align-items-end">
+        <button class="btn-primario max mb-2" (click)="irLogin()">Iniciar sesión</button>
+        <button class="btn-secundario ms-2 max mb-2" (click)="cerrarSesion()">Cancelar</button>
+      </div>
+    </div>
+</div>
+
+<header>
+  <img #banner class="banner" src="../../../assets/imagenes/banner.png" (load)="posicionarMenu()">
+
+
+  <nav [class.fijo]="fijo" class="navbar navbar-expand-xl">
+
+    <a class="navbar-brand d-flex" href="#">
+      <i class="fa-solid fa-house align-self-center "></i>
+      <!-- <img src="../../../assets/imagenes/logo.png"> -->
+    </a>
+
+    <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse"
+      data-bs-target="#menu-horizontal" aria-controls="menu-horizontal" aria-expanded="false"
+      aria-label="Toggle navigation">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+
+    <div class="collapse navbar-collapse text-center" id="menu-horizontal">
+      <ul class="navbar-nav mb-xl-0">
+        <li class="nav-item dropdown ms-xl-3 me-xl-5">
+          <a class="nav-link enlace dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Información
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item enlace" href="./donacion/sangre">Donación de sangre</a></li>
+            <li><a class="dropdown-item enlace" href="./donacion/plasma">Donación de plasma</a></li>
+            <li><a class="dropdown-item enlace" href="./donacion/medula-osea/donaMedulaOsea">Donación de médula</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link enlace" href="./aviso">¿Puedo donar?</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link enlace" href="./noticias">Noticias</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link enlace" href="./galeria">Galería</a>
+        </li>
+
+        <!-- <li class="nav-item me-lg-5">
+          <a class="nav-link enlace" href="#">Galería</a>
+        </li> -->
+
+        <li class="nav-item" *ngIf="!puedeModificar">
+          <a class="nav-link enlace" (click)="ensenarModal()">Pedir cita</a>
+        </li>
+
+        <li class="nav-item" *ngIf="puedeModificar">
+          <a class="nav-link enlace enlace-grande" href="./citas/admincitas">
+            <span class="enlace-grande">Administrar citas</span>
+            <span class="enlace-pequeno">Admin. citas</span>
+          </a>
+        </li>
+
+        <!-- <li class="nav-item">
+          <a class="nav-link enlace" href="#">Contacto</a>
+        </li> -->
+
+        <li class="nav-item" *ngIf="puedeModificar">
+          <a class="nav-link enlace" href="./configuracion/hermandad">
+            <span class="enlace-grande">Modificar contenidos</span>
+            <span class="enlace-pequeno">Mod. contenidos</span>
+          </a>
+        </li>
+
+        <li class="nav-item" *ngIf="puedeModificar">
+          <a class="nav-link enlace" href="./stats/registrar-datos">
+            <span class="enlace-grande">Registrar datos</span>
+            <span class="enlace-pequeno">Reg. datos</span>
+          </a>
+        </li>
+
+        <li class="nav-item" *ngIf="!estaRegistrado">
+          <a class="nav-link enlace" href="./auth/login/">Iniciar sesión</a>
+        </li>
+      </ul>
+
+    </div>
+
+    <div class="usuario-contenedor" *ngIf="estaRegistrado">
+
+      <i class="fa-solid fa-user-large usuario dropdown-toggle"
+        data-bs-toggle="dropdown" data-bs-target="dropdown-user"></i>
+
+      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuUser">
+        <li><a class="dropdown-item enlace" href="../../usuarios/perfil">Perfil</a></li>
+        <li *ngIf="!puedeModificar"><a class="dropdown-item enlace" href="../../citas/mostrarcitas">Mis citas</a></li>
+        <li><a class="dropdown-item enlace" href="./notificacion">Notificaciones</a></li>
+        <li><a class="dropdown-item enlace" (click)="cerrarSesion()">Cerrar sesión</a></li>
+      </ul>
+    </div>
+  </nav>
+</header>

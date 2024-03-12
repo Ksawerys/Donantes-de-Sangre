@@ -1,0 +1,77 @@
+<!--Todo Isa-->
+<div class="modal" id="modalEditado" tabindex="-1">
+  <div class="modal-dialog modal-xl modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bordeColor">
+        <h3 class="modal-title modalTitulo">Modificando audio</h3>
+        <button (click)="limpiarAlert()" (click)="limpiarContenido()" type="button" class="btn-close"
+          data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="qho==='si'" class="container mt-3 mb-2">
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            Se ha producido un error y no he encontrado la información del audio.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
+              (click)="limpiarAlert()"></button>
+          </div>
+        </div>
+        <form (ngSubmit)="editarAudio();">
+          <div class="row">
+            <div class="col-12">
+              <div class="form-group">
+
+                <label for="titulo">Título del himno o audio:</label>
+
+                <input [(ngModel)]="infoAudio.titulo" type="text" id="titulo" name="titulo" class="form-control mb-3"
+                  placeholder="Escribe un titulo" />
+
+                <label for="titulo">Letra del himno o audio:</label>
+                <angular-editor name="editadoConfig" [config]="editadoConfig" [placeholder]="'Escribe la letra'"
+                  [(ngModel)]="infoAudio.letra"></angular-editor>
+
+                <label class="mt-4" for="audio">Seleccionar archivo de audio:</label>
+
+                <input (change)="capturarFile($event)" class="form-control mb-3" type="file" #audio name="audio" />
+              </div>
+            </div>
+          </div>
+          <div *ngIf="alert!=='no'" class="container mt-3 mb-2">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              <strong>Error!!</strong> El campo titulo es obligatorio.
+              <button (click)="limpiarAlert()" type="button" class="btn-close" data-bs-dismiss="alert"
+                aria-label="Close"></button>
+            </div>
+          </div>
+          <div *ngIf="aviso===1" class="container mt-3 mb-2">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+              El himno o audio se ha añadido correctamente.
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
+                (click)="limpiarAlert()"></button>
+            </div>
+          </div>
+          <div *ngIf="aviso===2" class="container mt-3 mb-2">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              El himno o audio no se ha podido añadir.
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
+                (click)="limpiarAlert()"></button>
+            </div>
+          </div>
+          <div *ngIf="aviso===3" class="container mt-3 mb-2">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              Asegurate de que el archivo tiene extension y es una de las siguientes: mp3 o mp4
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
+                (click)="limpiarAlert()"></button>
+            </div>
+          </div>
+
+          <div class="modal-footer bordeArriba">
+            <button type="submit" class="btn btn-terciario">Aceptar</button>
+
+            <button type="button" (click)="limpiarAlert()" (click)="limpiarContenido()" class="btn btn-terciario ms-4"
+              data-bs-dismiss="modal">Cerrar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

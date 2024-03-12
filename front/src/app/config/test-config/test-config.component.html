@@ -1,0 +1,62 @@
+<h3 class="titulo">Configuracion de Test Apto (Preguntas)</h3>
+
+<div class="row mt-3 gx-0">
+  <div class="col-12 table-responsive ">
+    <table class="table table-hover overflow-auto table-bordered m-auto text-center">
+      <thead>
+        <tr>
+          <th scope="col">Titulo</th>
+          <th scope="col">Enunciado</th>
+          <th scope="col">Imagen</th>
+          <th scope="col">Respuesta</th>
+          <th scope="col">Recomendación</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let pregunta of this.preguntas;
+          let i = index">
+          <tr scope="row">
+            <th class="align-middle">
+              {{pregunta.titulo | titlecase}}
+            </th>
+            <td class="align-middle">
+              {{pregunta.enunciado}}
+            </td>
+            <td class="align-middle">
+              <img class="w-100" src="../../../assets/imagenes/apto_sangre/{{pregunta.nombre_img}}">
+            </td>
+            <td class="align-middle" *ngIf="pregunta.respuesta == 1; else mostrarNo">
+              Si
+            </td>
+            <ng-template #mostrarNo>
+              <td class="align-middle">
+                No
+              </td>
+            </ng-template>
+            <td class="align-middle">
+              {{pregunta.solucion_problema}}
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="row d-flex justify-content-center align-items-center mt-4 mb-3">
+  <div class="d-grid justify-content-center col-lg-4 col-md-6 col-12 mt-1 mb-1">
+    <button class="btn-secundario" data-bs-toggle="modal" data-bs-target="#borrarPregunta">Eliminar Pregunta</button>
+  </div>
+
+  <div class="d-grid justify-content-center col-lg-4 col-md-6 col-12 mt-1 mb-1">
+    <button class="btn-secundario" data-bs-toggle="modal" data-bs-target="#modificarPregunta">Modificar
+      Pregunta</button>
+  </div>
+
+  <div class="d-grid justify-content-center col-lg-4 col-md-6 col-12 mt-1 mb-1">
+    <button class="btn-secundario" data-bs-toggle="modal" data-bs-target="#añadirPregunta">Añadir Pregunta</button>
+  </div>
+</div>
+
+<app-aniadir-pregunta (recargarPreguntas)="mostrarPreguntas()"></app-aniadir-pregunta>
+<app-modificar-pregunta [preguntas_array]="preguntas" (recargarPreguntas)="mostrarPreguntas()"></app-modificar-pregunta>
+<app-borrar-pregunta [preguntas_array]="preguntas" (recargarPreguntas)="mostrarPreguntas()"></app-borrar-pregunta>

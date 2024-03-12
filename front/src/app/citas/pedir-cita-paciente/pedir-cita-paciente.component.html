@@ -1,0 +1,60 @@
+<!-- <div *ngIf="this.registradoExito == 0" class="alert alert-success alert-dismissible position-fixed fade show ms-3" role="alert">
+  El registro se ha realizado correctamente. Te hemos mandado un correo de confirmación.
+  Pincha en el enlace para poder acceder con tu cuenta.
+  <a (click)="irAlLogin()" class="pe-auto"><strong>Ir al login</strong></a>. -->
+
+  <div class="container-fluid fondo px-2 py-5 p-md-5">
+    <div class="row">
+      <div class="col-0 col-sm-1 col-lg-2"></div>
+  
+      <div class="col-12 col-sm-10 col-lg-8 contenedor">
+        <div class="card border-0 rounded-0 w-100 mb-0">
+          <div class="card-header d-flex justify-content-center align-items-center py-1 border-bottom-0">
+            <h1>Pedir cita</h1>
+          </div>
+          <div class="card-body p-5 mt-5">
+            <form [formGroup]="citaForm" (ngSubmit)="pedirCita()">
+              <div class="row">
+                <div class="col-12 col-md-6 d-flex justify-content-center mb-4 mb-md-0">
+                  <app-date-picker (onNuevaFecha)="setDia($event)"></app-date-picker> 
+                </div>
+                <div class="col-12 col-md-6">
+                  <div class="row">
+                    <div class="col-12">
+                      <select formControlName="hora" name="hora" class="form-select form-select-sm mb-3">
+                        <option *ngIf="this.sinSeleccionar" value="" disabled selected hidden>Selecciona una hora</option>
+                        <option value="" disabled selected hidden>Horas disponibles</option>
+                        <option *ngIf="this.noHayHoras">
+                          No hay horas disponibles
+                        </option>
+                        <option *ngFor="let hora of this.horasDisponibles" value="{{ hora }}">
+                          {{ hora }}
+                        </option>
+                      </select>
+                    </div>
+                    <div class="col-12">
+                      <select formControlName="donacion" name="donacion" class="form-select form-select-sm">
+                        <option value="sangre" selected>Sangre</option>
+                        <option value="plasma">Plasma</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="card-body botones p-0 mt-5 d-flex justify-content-end">
+                <button type="submit" class="btn btn-primario" [disabled]="citaForm.invalid">Aceptar</button>
+                <button type="button" class="ms-3 btn btn-secundario">Cancelar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+  
+      <div class="col-0 col-sm-1 col-lg-3"></div>
+    </div>
+  </div>
+  
+  
+  
+  

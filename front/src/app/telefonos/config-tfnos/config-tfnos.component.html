@@ -1,0 +1,113 @@
+<div class="mensaje" [@entradaSalidaVentana]="mensaje == ''" *ngIf="mensaje != ''">
+    <div [ngClass]="exito ? 'mensaje-ok' : 'mensaje-error'" class="d-flex align-items-center justify-content-center">
+
+    <i [ngClass]="exito ? 'fa-circle-check' : 'fa-triangle-exclamation'" class="fa-solid me-3"></i>
+
+    <p>{{ mensaje }}</p>
+  </div>
+</div>
+
+<div>
+  <h3 class="titulo mb-4">Teléfonos</h3>
+
+  <div class="telefonos">
+
+    <div class="telefono row g-0 align-items-center" *ngFor="let tfno of tfnosData; let i = index">
+
+      <div class="col-12 col-md-6 d-flex flex-column flex-md-row">
+        <div class="f-rojo">Número</div>
+        <input type="text" class="numero" readonly [(ngModel)]="tfno.numero"/>
+      </div>
+
+      <div class="col-12 col-md-5 d-flex flex-column flex-md-row">
+        <div class="f-rojo">Extensión</div>
+        <input type="text" class="extension" readonly [(ngModel)]="tfno.extension"/>
+      </div>
+
+      <div class="iconos col-12 col-md-1 d-flex justify-content-end align-items-center">
+        <i class="fa-solid fa-pen me-2" data-bs-toggle="modal" data-bs-target="#insertOrUpdateTfn"
+         (click)="setInfoTfn(i); accion=acciones[1]; limpiarMensaje()"></i>
+
+        <i class="fa-solid fa-trash me-2" (click)="deleteTfno(i); accion=acciones[2]; limpiarMensaje()"></i>
+      </div>
+
+    </div>
+
+  </div>
+
+  <button type="button" class="btn-primario mt-2" data-bs-toggle="modal"
+    data-bs-target="#insertOrUpdateTfn" (click)="accion=acciones[0]; limpiarMensaje()">
+    <i class="fa-solid fa-plus me-2"></i>Añadir teléfono
+  </button>
+</div>
+
+
+<!--  Modal -->
+<div class="modal" id="insertOrUpdateTfn" tabindex="-1" aria-hidden="true"
+  aria-labelledby="insertOrUpdateTfnLabel" data-bs-backdrop="static" data-bs-keyboard="false">
+
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="insertOrUpdateTfnLabel">{{ accion | titlecase }} teléfono</h1>
+        <button #closeModal type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"
+          (click)="limpiarFormulario()"></button>
+      </div>
+
+      <form [formGroup]="modalForm" (ngSubmit)="insertOrUpdateTfno()" novalidate>
+        <div class="modal-body">
+          <div class="mb-4">
+            <label for="numero">Número</label><br>
+
+            <input type="text" name="numero" id="numero" class="numero form-control" required
+              formControlName="numero" placeholder="Introduce el número de teléfono."/>
+
+            <div>
+              <p *ngIf="formCtrls['numero']?.errors?.['required'] && formCtrls['numero']?.touched"
+                class="mensaje-error">
+                El número es obligatorio.
+              </p>
+
+              <p *ngIf="formCtrls['numero']?.errors?.['pattern']" class="mensaje-error">
+                Formato no válido.
+              </p>
+
+              <p *ngIf="formCtrls['numero']?.errors?.['maxlength']" class="mensaje-error">
+                Número máximo de caracteres excedido.
+              </p>
+            </div>
+          </div>
+
+          <div>
+            <label for="extension">Extensión</label><br>
+
+            <input type="text" name="extension" id="extension" class="extension form-control" required
+              formControlName="extension" placeholder="Introduce la extensión."/>
+
+            <div>
+              <p *ngIf="formCtrls['extension']?.errors?.['pattern']" class="mensaje-error">
+                La extensión debe ser un número.
+              </p>
+
+              <p *ngIf="formCtrls['extension']?.errors?.['maxlength']" class="mensaje-error">
+                Número máximo de caracteres excedido.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn-terciario" data-bs-dismiss="modal"
+            aria-label="Cancelar edición" (click)="limpiarFormulario()">
+            Cancelar
+          </button>
+
+          <button type="submit" class="btn-terciario ms-4" aria-label="Guardar edición">
+            Guardar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

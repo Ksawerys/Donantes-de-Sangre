@@ -1,0 +1,68 @@
+<div class="container">
+    <div class="row p-0">
+
+        <div class="col-1"></div>
+        <div class="col-3">
+            <div class="row">
+                <div class="col-12 d-flex justify-content-center">
+                    <ngb-timepicker [(ngModel)]="time"></ngb-timepicker>
+                </div>
+                <div class="col-12 d-flex justify-content-center pt-5">
+                    <button (click)="anadirHora(this.diaSeleccionado)" [disabled]="!this.horaValida"
+                        class="btn-primario">Añadir</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-4 p-0">
+            <div class="row p-0 ">
+                <div class="col-9 sombra">
+                    <div class="row">
+                        <div class="col-5 p-0">
+                            <div class="btnes-dias">
+                                    <div *ngFor="let dia of this.diasSemana" 
+                                        class="btn-dia w-100 p-2" (click)="onDiaChange(dia.cod)"
+                                        [ngClass]="(this.diaSeleccionado == dia.cod ? 'selected' : '')">
+                                            {{ dia.dia }}
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="col-7 p-0">
+                            <div class="horas">
+                                <ng-container *ngFor="let hora of this.horasMostrar; let i = index">
+                                    <div class="hora px-3" [ngClass]="this.isHoraEntradaSalida[i] ? 'hora-horario' : ''">
+                                        {{hora}}
+                                        <button class="quitar ms-auto" *ngIf="!this.isHoraEntradaSalida[i]" (click)="quitar(i)">
+                                            <i class="fa-solid fa-xmark"></i>
+                                        </button>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3"></div>
+            </div> 
+        </div>
+        <div class="col-3">
+            <div class="row align-items-center g-0">
+              
+                <div class="col-12 d-flex flex-column flex-md-row mb-5 mt-2 mt-md-0">
+                    <div class="row w-100 mx-0">
+                        <div class="f-rojo col-8 col-md-8 aparece-grande">Donantes a la vez</div>
+                        <div class="f-rojo col-8 col-md-8 aparece-pequeno"></div>
+                        <input type="text"
+                          class="inpt campo col-4 col-md-4"
+                          formControlName="nALaVez"
+                        />
+                        <div class="row mensajito">aaaaaaaa</div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-1"></div>
+    </div>
+      
+</div>
+
+  

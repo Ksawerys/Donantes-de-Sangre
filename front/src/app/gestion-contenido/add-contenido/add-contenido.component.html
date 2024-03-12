@@ -1,0 +1,86 @@
+<!--Todo Isa-->
+<div class="container pb-5">
+  <div class="row">
+    <div class="col">
+      <h4 class="titulo">¿Aún sin contenido o quieres añadir una nueva noticia? Haz click en Añadir Contenido</h4>
+      <button type="button" class="btn-secundario mt-3" data-bs-toggle="modal"
+        data-bs-target="#modalContenido">Añadir Contenido</button>
+    </div>
+  </div>
+</div>
+<div class="modal" id="modalContenido" tabindex="-1">
+  <div class="modal-dialog modal-xl modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bordeColor">
+        <h3 class="modal-title modalTitulo">Añadiendo Contenido</h3>
+        <button (click)="limpiarAlert()" (click)="limpiarContenido()" type="button" class="btn-close"
+          data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="agregarNoticia();">
+          <div class="row">
+            <div class="col-12">
+              <div class="form-group">
+
+                <label for="titulo">Título del contenido:</label>
+
+                <input [(ngModel)]="noticia.titulo" type="text" id="titulo" name="titulo" class="form-control mb-3"
+                  placeholder="Escribe un titulo" />
+
+                <label for="titulo">Subtítulo del contenido:</label>
+
+                <input [(ngModel)]="noticia.subtitulo" type="text" id="subtitulo" placeholder="Escribe un subtitulo"
+                  name="subtitulo" class="form-control mb-3" />
+
+                <label for="titulo">Contenido:</label>
+                <angular-editor name="contenido" [config]="addConfig" [placeholder]="'Enter text here...'"
+                  [(ngModel)]="noticia.contenido"></angular-editor>
+
+                <label class="mt-4" for="imagen">Seleccionar Imagen:</label>
+
+                <input (change)="capturarFile($event)" accept="image/*" class="form-control mb-3" type="file" #imagen
+                  name="imagen" />
+              </div>
+            </div>
+          </div>
+          <div *ngIf="alert!=='no'" class="container mt-3 mb-2">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              <strong>Error!!</strong> Los campos titulo y contenido son obligatorios.
+              <button (click)="limpiarAlert()" type="button" class="btn-close" data-bs-dismiss="alert"
+                aria-label="Close"></button>
+            </div>
+          </div>
+          <div *ngIf="aviso===1" class="container mt-3 mb-2">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+              La noticia se ha añadido correctamente.
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
+                (click)="limpiarAlert()"></button>
+            </div>
+          </div>
+          <div *ngIf="aviso===2" class="container mt-3 mb-2">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              La noticia no se ha podido añadir.
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
+                (click)="limpiarAlert()"></button>
+            </div>
+          </div>
+          <div *ngIf="aviso===3" class="container mt-3 mb-2">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              Asegurate de que la imagen tiene extension y es una de las siguientes:PNG, JPG, png, jpg, jpeg, gif, tiff,
+              svg, webp.
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
+                (click)="limpiarAlert()"></button>
+            </div>
+          </div>
+
+          <div class="modal-footer bordeArriba">
+            <button type="button" (click)="limpiarAlert()" (click)="limpiarContenido()" class="btn btn-terciario"
+              data-bs-dismiss="modal">Cerrar</button>
+
+            <button type="submit" class="btn btn-terciario ms-4">Aceptar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

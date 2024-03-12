@@ -1,0 +1,22 @@
+<main class="container g-0">
+  <h3 class="titulo mt-3">Chat</h3>
+  <div class="container mt-2 g-0">
+    <h4 class="titulo text-center">¿Quieres deshabilitar/habilitar el chat?</h4>
+    <div class="container mt-4">
+      <div class="row d-flex justify-content-center align-items-center mt-4 mb-3">
+        <div class="d-grid justify-content-center col-lg-6 col-md-6 col-12 mt-1 mb-1">
+          <button (click)="actulizarEstado(1)" [disabled]="habilitado==1" class="btn-secundario">Habilitar</button>
+        </div>
+        <div  class="d-grid justify-content-center col-lg-6 col-md-6 col-12 mt-1 mb-1">
+          <button (click)="actulizarEstado(2)" [disabled]="habilitado==2" class="btn-secundario">Deshabilitar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row"><span class=" col-12 form-text CorrectSpan mt-3" *ngIf="aviso==1"><i
+        class="fa-regular fa-circle-check me-2"></i>Se actualizado el estado del
+      chat</span></div>
+  <div class="row"><span class=" col-12 form-text errorSpan mt-3" *ngIf="aviso==2"><i
+        class="fa-solid fa-xmark me-2"></i>No se ha podido actualizar el estado
+      del chat </span></div>
+</main>

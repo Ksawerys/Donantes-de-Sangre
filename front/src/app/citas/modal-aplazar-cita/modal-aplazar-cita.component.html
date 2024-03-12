@@ -1,0 +1,38 @@
+<div class="modal-header">
+    <h4 class="titulo">Aplazar cita</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="cancelar()"></button>
+</div>
+<div class="modal-body">
+    <div class="card border-0 rounded-0 w-100 mb-0">
+        <form [formGroup]="aplazarCitaForm" (ngSubmit)="aplazarCita()">
+            <div class="row">
+                <div class="col-12 col-md-6 d-flex justify-content-center mb-4 mb-md-0">
+                    <app-date-picker (onNuevaFecha)="setDia($event)"></app-date-picker> 
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="row">
+                        <div class="col-1 col-xs-3 col-sm-1 col-md-0"></div>
+                        <div class="col-10 col-xs-6 col-sm-10 col-md-12">
+                            <select formControlName="hora" name="hora" class="form-select form-select-sm mb-3">
+                            <option *ngIf="this.sinSeleccionar" value="" disabled selected hidden>Selecciona una hora</option>
+                            <option value="" disabled selected hidden>Horas disponibles</option>
+                            <option *ngIf="this.noHayHoras">
+                                No hay horas disponibles
+                            </option>
+                            <option *ngFor="let hora of this.horasDisponibles" value="{{ hora }}">
+                                {{ hora }}
+                            </option>
+                            </select>
+                        </div>
+                        <div class="col-1 col-xs-3 col-sm-1 col-md-12"></div>
+                    </div>
+                </div>
+
+                <div class="card-body p-4 mt-5 d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primario" [disabled]="aplazarCitaForm.invalid">Aceptar</button>
+                    <button type="button" class="ms-3 btn btn-secundario" (click)="cancelar()">Cancelar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

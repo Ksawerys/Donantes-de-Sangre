@@ -1,0 +1,6 @@
+projectKey=sonarDespliegue
+serverUrl=http://192.168.100.7:9000
+serverVersion=8.2.0.32929
+dashboardUrl=http://192.168.100.7:9000/dashboard?id=sonarDespliegue
+ceTaskId=AYYRN76nbnP9yQNMGc8g
+ceTaskUrl=http://192.168.100.7:9000/api/ce/task?id=AYYRN76nbnP9yQNMGc8g

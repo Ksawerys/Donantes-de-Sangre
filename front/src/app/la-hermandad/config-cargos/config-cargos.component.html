@@ -1,0 +1,64 @@
+<div class="cargos">
+
+  <h3 class="titulo">Cargos</h3>
+
+  <div class="contenedor-cargos">
+    <div class="cargo row gx-0" *ngFor="let cargo of cargosService; let i = index">
+
+      <input type="text" class="nombre col-12 col-md-5 f-rojo" value="Nombre" readonly="readonly">
+
+      <input type="text" class="nombre align-middle col-10 col-md-6" [(ngModel)]="cargo.nombre"
+        readonly="readonly">
+
+      <div class="col-2 col-md-1 d-flex justify-content-end align-items-center">
+        <i class="fa-solid fa-trash me-2" (click)="deleteCargo(i); accion=acciones[2]"></i>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-2">
+    <button class="btn-primario" data-bs-toggle="modal" (click)="accion=acciones[0]"
+      data-bs-target="#insertCargo">
+      <i class="fa-solid fa-plus me-2"></i>Añadir cargo
+    </button>
+  </div>
+</div>
+
+<!--  Modal Cargo -->
+<div class="modal" id="insertCargo" tabindex="-1" aria-hidden="true" aria-labelledby="insertCargoLabel"
+  data-bs-backdrop="static" data-bs-keyboard="false">
+
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="insertCargoLabel">Añadir cargo</h1>
+        <button #closeModalCargo type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"
+          (click)="limpiarCargo()"></button>
+      </div>
+
+      <form (ngSubmit)="formCargo.form.valid && insertCargo(formCargo)" novalidate #formCargo="ngForm">
+        <div class="modal-body">
+          <label for="cargo-nuevo">Nombre</label>
+          <input type="text" class="form-control" name="nombre" [(ngModel)]="infoCargo.nombre"
+            #nombre="ngModel" placeholder="Introduce el nombre del cargo nuevo" required/>
+
+          <p class="mensaje-error" *ngIf="formCargo.submitted && nombre?.errors?.['required']">
+            El nombre es obligatorio.
+          </p>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn-terciario" data-bs-dismiss="modal"
+            aria-label="Cancelar edición" (click)="limpiarCargo()">
+            Cancelar
+          </button>
+
+          <button type="submit" class="btn-terciario ms-4" aria-label="Guardar edición">
+            Guardar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

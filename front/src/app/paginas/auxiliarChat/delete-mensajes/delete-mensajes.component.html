@@ -1,0 +1,40 @@
+<div class="modal" id="borrarTodo" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bordeColor">
+        <h5 class="modal-title modalTitulo">Borrando Todo</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>¿Realmente quieres eliminar <strong>todos</strong>?</p>
+        <p>Una vez le de aceptar se eliminaran todos los mensajes</p>
+      </div>
+      <div class="row"><span class=" col-12 form-text CorrectSpan ms-3 mb-3" *ngIf="aviso==1">Se han eliminado correctamente</span></div>
+      <div class="row"><span class=" col-12 form-text errorSpan ms-3 mb-3" *ngIf="aviso==2">No se han podido eliminar los mensajes</span></div>
+      <div class="modal-footer bordeArriba">
+        <button (click)="borrarTodo()" type="button" class="btn btn-terciario me-3">Si</button>
+        <button type="button" class="ms-2 me-2 btn btn-terciario" data-bs-dismiss="modal">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="borrarMensaje" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bordeColor">
+        <h5 class="modal-title modalTitulo">Borrando Mensaje</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>¿Realmente quieres eliminar este mensaje?</p>
+      </div>
+      <div class="row"><span class=" col-12 form-text CorrectSpan ms-3 mb-3" *ngIf="aviso==1">Se ha eliminado correctamente</span></div>
+      <div class="row"><span class=" col-12 form-text errorSpan ms-3 mb-3" *ngIf="aviso==2">No se ha podido eliminar el mensaje</span></div>
+      <div class="modal-footer bordeArriba">
+        <button (click)="borrarMensaje()" type="button" class="btn btn-terciario me-3">Si</button>
+        <button type="button" class="ms-2 me-2 btn btn-terciario" data-bs-dismiss="modal">No</button>
+      </div>
+    </div>
+  </div>
+</div>

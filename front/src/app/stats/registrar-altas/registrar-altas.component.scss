@@ -1,0 +1,30 @@
+h2.titulo {
+  font-size: 1.7rem;
+  padding-bottom: 2.5rem;
+}
+
+div.calendario {
+  margin-bottom: 3rem;
+}
+
+div.calendario label {
+  width: 100%;
+}
+
+div.contenedor {
+  border-bottom: 2px solid var(--color-primario);
+}
+
+p.mensaje-error {
+  line-height: 1.5rem;
+}
+
+select.inpt {
+  background-color: var(--bs-white);
+}
+
+@media (min-width: 768px) {
+  div.calendario {
+    margin-bottom: 0;
+  }
+}

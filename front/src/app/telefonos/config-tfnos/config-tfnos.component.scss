@@ -1,0 +1,44 @@
+.telefono {
+  position: relative;
+  margin-bottom: 3rem;
+  border-bottom: 2px solid var(--color-primario);
+
+  input, .f-rojo {
+    cursor: context-menu;
+  }
+
+  input {
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: .5rem;
+  }
+
+  .iconos {
+    position: absolute;
+    top: .7rem;
+
+    i {
+      color: var(--bs-white);
+
+      &:hover {
+        color: var(--color-granate);
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .telefono {
+    margin-bottom: 2rem;
+
+    .iconos {
+      position: unset;
+
+      i {
+        color: var(--color-contraste-oscuro);
+      }
+    }
+  }
+}
+

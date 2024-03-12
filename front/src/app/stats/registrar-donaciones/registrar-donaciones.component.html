@@ -1,0 +1,65 @@
+<form #donacionForm="ngForm" (ngSubmit)="onSubmit(donacionForm)" novalidate class="pb-4">
+
+  <div class="btns mensajes d-flex justify-content-between mb-3">
+    <div [ngClass]="registrada ? 'mensaje-ok' : 'mensaje-error'" class="d-flex align-items-center">
+
+      <i [ngClass]="registrada ? 'fa-circle-check' : 'fa-triangle-exclamation'"
+        *ngIf="mensaje" class="fa-solid icono-peq me-2">
+      </i>
+
+      <div>{{ mensaje }}</div>
+    </div>
+
+    <button type="submit" class="btn-primario">Registrar donación</button>
+  </div>
+
+  <h2 class="titulo">Registrar donaciones</h2>
+
+  <div class="row gx-0">
+
+    <div class="calendario col-12 col-md-6 col-lg-5 pe-md-3 pe-xl-4">
+      <label for="calendario" class="f-rojo">Fecha</label>
+      <app-calendario id="calendario" (onNuevaFecha)="setDia($event)"></app-calendario>
+
+      <p *ngIf="errorFecha" class="mensaje-error mt-1">
+        Debes seleccionar una fecha.
+      </p>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-7 ps-md-3 ps-xl-4 d-flex flex-column justify-content-between">
+      <div class="tipo-donacion contenedor row gx-0">
+        <label for="tipo-donacion" class="f-rojo col-7">Tipo de donación</label>
+
+        <select id="tipo-donacion" class="inpt tipo-donacion col-5"
+          [(ngModel)]="tipoDonacion" name="tipoDonacion">
+          <option *ngFor="let td of tiposDonacion" [ngValue]="td">{{ td | titlecase }}</option>
+        </select>
+      </div>
+
+      <div class="grp-sang contenedor row gx-0" *ngIf="tipoDonacion == 'sangre'">
+        <label for="grp-sang" class="f-rojo col-7">Grupo sanguíneo</label>
+
+        <select id="grp-sang" class="inpt col-5"
+          [(ngModel)]="gSanguineo" name="gSanguineo">
+          <option *ngFor="let grp of grpsSanguineos" [ngValue]="grp">{{ grp }}</option>
+        </select>
+      </div>
+
+      <div class="genero contenedor row gx-0" *ngIf="tipoDonacion == 'sangre'">
+        <label for="genero" class="f-rojo col-7">Género</label>
+
+        <select id="genero" class="inpt col-5"
+          [(ngModel)]="genero" name="genero">
+          <option *ngFor="let gen of generos" [ngValue]="gen">{{ gen | titlecase }}</option>
+        </select>
+      </div>
+
+      <div class="num-donante contenedor row gx-0">
+        <label for="num-donante" class="f-rojo col-7">Número donante</label>
+
+        <input type="number" id="num-donante" class="inpt col-5"
+          [(ngModel)]="nDonante" name="nDonante">
+      </div>
+    </div>
+  </div>
+</form>

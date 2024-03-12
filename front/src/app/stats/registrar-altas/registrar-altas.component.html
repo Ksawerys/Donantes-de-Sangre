@@ -1,0 +1,42 @@
+<form #altasForm="ngForm" (ngSubmit)="onSubmit(altasForm)" novalidate class="pb-4">
+
+  <div class="btns mensajes d-flex justify-content-between mb-3">
+    <div [ngClass]="registrada ? 'mensaje-ok' : 'mensaje-error'" class="d-flex align-items-center">
+
+      <i [ngClass]="registrada ? 'fa-circle-check' : 'fa-triangle-exclamation'"
+        *ngIf="mensaje" class="fa-solid icono-peq me-2">
+      </i>
+
+      <div>{{ mensaje }}</div>
+    </div>
+
+    <button type="submit" class="btn-primario">Registrar altas</button>
+  </div>
+
+  <h2 class="titulo">Registrar altas</h2>
+
+  <div class="row gx-0">
+    <div class="calendario col-12 col-md-6 col-lg-5 pe-md-3 pe-xl-4">
+      <label for="calendario" class="f-rojo">Fecha</label>
+      <app-calendario id="calendario" (onNuevaFecha)="setDia($event)"></app-calendario>
+
+      <p *ngIf="errorFecha" class="mensaje-error mt-1">
+        Debes seleccionar una fecha.
+      </p>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-7 ps-md-3 ps-xl-4">
+      <div class="altas contenedor row gx-0">
+        <label for="altas" class="f-rojo col-5">Altas</label>
+
+        <input type="number" id="altas" class="inpt col-7"
+          [(ngModel)]="altas" name="altas" required>
+      </div>
+
+      <p *ngIf="errorAltas" class="mensaje-error mt-1">
+        Debes introducir un <span class="fw-bold">número</span> de altas para registrar en la fecha seleccionada.
+      </p>
+    </div>
+  </div>
+
+</form>

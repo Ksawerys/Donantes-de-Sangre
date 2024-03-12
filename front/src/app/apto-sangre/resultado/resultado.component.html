@@ -1,0 +1,40 @@
+<div class="resultado">
+  <div class="row gx-0">
+    <div class="col-12 text-center mt-5 mb-4">
+      <h1 class="titulo subrayado">Resultado</h1>
+    </div>
+  </div>
+
+  <div class="row d-flex justify-content-center gx-0">
+    <div class="col-md-4 col-sm-6 col-12 text-center p-3"
+    *ngFor="let pregunta of apto_servicio.preguntasEnviadas[0];
+            let i = index;
+            let ultimo = last">
+      <p>{{i + 1}}. {{pregunta.enunciado}}</p>
+      <input type="text" class="text-center w-25" disabled value="{{mensaje_respuesta[i]}}">
+      <i *ngIf="pregunta.respuesta == apto_servicio.preguntasEnviadas[1][i]; else respuestaIncorrecta"
+      class="fa-solid fa-circle-check text-success ms-1"></i>
+      <ng-template #respuestaIncorrecta>
+        <i class="fa-solid fa-circle-xmark text-danger ms-1"></i>
+      </ng-template>
+
+    </div>
+  </div>
+
+  <div class="row gx-0" *ngIf="apto_servicio.preguntasEnviadas[0][apto_servicio.preguntasEnviadas[0].length - 1].respuesta == apto_servicio.preguntasEnviadas[1][apto_servicio.preguntasEnviadas[1].length - 1]
+  ; else mensajeRecomendado">
+    <div *ngIf="!puedeModificar" class="col-12 text-center mb-2">
+          <a href="./citas/pedircita"><button class="btn-secundario border-0 w-25 mb-2">Pedir Cita</button></a>
+    </div>
+  </div>
+  <ng-template #mensajeRecomendado>
+    <div class="row d-flex justify-content-center text-center gx-0">
+      <div class="alert alert-warning w-50" role="alert">
+        <p>{{apto_servicio.preguntasEnviadas[0][apto_servicio.preguntasEnviadas[0].length - 1].solucion_problema}}</p>
+      </div>
+      <div class="col-12 text-center mb-2">
+        <a href="#"><button class="btn-secundario mt-4">Ir a la pagina principal</button></a>
+      </div>
+    </div>
+  </ng-template>
+</div>

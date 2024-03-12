@@ -1,0 +1,27 @@
+<ng-template #content let-modal>
+	<div class="modal-header">
+		<h4 *ngIf="!this.registrado"
+			class="modal-title titulo" id="modal-basic-title">Inicio de sesión necesario.</h4>
+		<h4 *ngIf="this.registrado && !this.puedePedirCita"
+			class="modal-title titulo" id="modal-basic-title">Ya has pedido una cita.</h4>
+	</div>
+	<div class="modal-body px-1 py-5 px-md-3 p-lg-5">
+		<p *ngIf="!this.registrado">
+			Es necesario que inicies sesión para poder pedir cita.
+		</p>
+
+		<p *ngIf="this.registrado && !this.puedePedirCita">
+			Solamente es posible reservar una cita a la vez.
+		</p>
+	</div>
+	<div class="modal-footer border-0">
+		<button *ngIf="!this.registrado"
+			type="button" class="btn-secundario" (click)="irAlLogin()">Iniciar sesión</button>
+        <button type="button" class="btn-primario" (click)="atras()">Atrás</button>
+	</div>
+</ng-template>
+
+
+<hr/>
+
+<pre>{{ closeResult }}</pre>

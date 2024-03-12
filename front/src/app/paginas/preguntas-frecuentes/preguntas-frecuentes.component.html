@@ -1,0 +1,44 @@
+<div class="container-fluid f-contraste">
+  <div class="row">
+    <div class="col text-center">
+      <h1 class="titulo subrayado">FAQ</h1>
+    </div>
+  </div>
+</div>
+<div>
+  <svg _ngcontent-ncw-c20="" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 200">
+    <path _ngcontent-ncw-c20="" fill="#f1eef5" fill-opacity="1"
+      d="M0,50L380,150L960,80L1950,128L1440,0L960,0L480,0L0,0Z">
+    </path>
+  </svg>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-1"></div>
+    <div class="col-10">
+      <div class="container">
+        <div class="row">
+          <section class="col-12">
+            <div class="accordion mb-5" id="accordionExample">
+              <div class="accordion-item" *ngFor="let faq of faqs" >
+                <h2 class="accordion-header" id="flush-heading{{faq.id}}">
+                  <button class="accordion-button fondoAcordeon" type="button" data-bs-toggle="collapse"
+                   [attr.data-bs-target]="'#flush-collapse'+ faq.id" aria-expanded="false" [attr.aria-controls]="'flush-collapse'+ faq.id">
+                    <strong>{{faq.pregunta}}</strong>
+                  </button>
+                </h2>
+                <div id="flush-collapse{{faq.id}}" class="accordion-collapse collapse" [attr.aria-labelledby]="'flush-heading'+ faq.id"
+                  data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <p>{{faq.respuesta}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <div class="col-1"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

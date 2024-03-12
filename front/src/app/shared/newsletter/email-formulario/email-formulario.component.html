@@ -1,0 +1,23 @@
+<form [formGroup]="emailForm" (ngSubmit)="suscribirse()" #form="ngForm">
+
+  <div class="row gx-0">
+    <input type="email"
+      class="col-7 inpt"
+      formControlName="email"
+      placeholder="Introduce tu email"/>
+
+    <button type="submit" class="col-5 btn-primario">Suscribirse</button><br>
+  </div>
+
+  <div class="mensaje-error mt-2 gx-0">
+    <div *ngIf="suscrito != undefined">
+
+      <i class="fa-solid me-2"
+        [ngClass]="suscrito ? 'fa-circle-check' : 'fa-triangle-exclamation'">
+      </i>
+      <span>{{ mensaje }}</span>
+
+    </div>
+  </div>
+
+</form>

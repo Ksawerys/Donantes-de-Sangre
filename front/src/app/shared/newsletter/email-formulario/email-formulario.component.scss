@@ -1,0 +1,13 @@
+input[type=email] {
+  border-radius: 2px 0px 0 2px;
+  font-size: var(--letra-pequena);
+  height: 35px;
+
+  &:hover, &:active {
+    background-color: var(--bs-white);
+  }
+}
+
+button[type=submit] {
+  border-radius: 0 2px 2px 0;
+}

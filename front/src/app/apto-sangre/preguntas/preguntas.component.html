@@ -1,0 +1,14 @@
+<div>
+    <div>
+      <p class="pregunta mb-4">{{pregunta.enunciado}}</p>
+      <img *ngIf="pregunta.nombre_img" #imagen class="img-fluid w-25" src="../../assets/imagenes/apto_sangre/{{pregunta.nombre_img}}">
+    </div>
+    <div class="row gx-0">
+      <div class="col-12 mt-3 mb-4">
+        <input #{{pregunta.titulo}}_no type="radio" name="{{pregunta.titulo}}" (change)="dandoValor($event)" class="me-1">
+        <label class="me-4" for="{{pregunta.titulo}}_no">No</label>
+        <input #{{pregunta.titulo}}_si type="radio" name="{{pregunta.titulo}}" (change)="dandoValor($event)" class="me-1">
+        <label for="{{pregunta.titulo}}_si">Si</label>
+      </div>
+    </div>
+</div>

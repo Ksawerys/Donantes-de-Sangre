@@ -1,0 +1,107 @@
+
+
+<form [formGroup]="registroForm" (ngSubmit)="registro()">
+
+    <div class="mb-2">
+        <label class="form-label" for="nombre">Nombre</label><br>
+        <input
+            type="text"
+            class="form-control"
+            name="nombre"
+            placeholder="Introduce tu nombre"
+            formControlName="nombre"
+        >
+    </div>
+    <span
+        class="form-text errorLogin mb-3"
+        *ngIf="this.registroForm.get('nombre')?.invalid && this.registroForm.get('nombre')?.touched"
+    >Este campo es obligatorio</span>
+
+    <div class="mt-4 mb-2">
+        <label class="form-label" for="ap1">Primer apellido</label><br>
+        <input
+            type="text"
+            class="form-control"
+            name="ap1"
+            placeholder="Introduce tu primer apellido"
+            formControlName="ap1"
+        >
+    </div>
+    <span
+        class="form-text errorLogin mb-3"
+        *ngIf="this.registroForm.get('ap1')?.invalid && this.registroForm.get('ap1')?.touched"
+    >Este campo es obligatorio</span>
+
+    <div class="mt-4 mb-2">
+        <label class="form-label" for="ap2">Segundo apellido</label><br>
+        <input
+            type="text"
+            class="form-control"
+            name="ap2"
+            placeholder="Introduce tu segundo apellido"
+            formControlName="ap2"
+        >
+    </div>
+    <span
+        class="form-text errorLogin mb-3"
+        *ngIf="this.registroForm.get('ap2')?.invalid && this.registroForm.get('ap2')?.touched"
+    >Este campo es obligatorio</span>
+
+
+    <div class="mt-4 mb-4">
+        <label class="form-label" for="email">Email</label><br>
+        <input
+            type="text"
+            class="form-control"
+            name="email"
+            placeholder="Introduce tu email"
+            formControlName="email"
+        >
+    </div>
+    <span
+        class="form-text errorLogin mb-2"
+        *ngIf="this.registroForm.get('email')?.errors?.['pattern'] && this.registroForm.get('email')?.touched"
+    >Formato de email inválido</span>
+    <span
+        class="form-text errorLogin mb-3"
+        *ngIf="this.registroForm.get('email')?.errors?.['required'] && this.registroForm.get('email')?.touched"
+    >Este campo es obligatorio</span>
+
+    <span *ngIf="this.contraErronea" class="form-text errorLogin mt-4 mb-2">
+        Las dos contraseñas deben coincidir.
+    </span>
+    <div class="passwd mt-2 mb-3">
+        <label class="form-label" for="passwd">Constraseña</label><br>
+        <input
+            type="password"
+            class="form-control"
+            name="passwd"
+            placeholder="Introduce tu contraseña"
+            formControlName="passwd"
+        >
+    </div>
+    <span
+        class="form-text errorLogin"
+        *ngIf="this.registroForm.get('passwd')?.invalid && this.registroForm.get('passwd')?.touched"
+    >Este campo es obligatorio</span>
+    <div class="passwd mt-4 mb-5">
+        <label class="form-label" for="passwdRep">Repite la constraseña</label><br>
+        <input
+            type="password"
+            class="form-control"
+            name="passwdRep"
+            placeholder="Repite tu contraseña"
+            formControlName="passwdRep"
+        >
+    </div>
+    <span
+        class="errorLogin"
+        *ngIf="this.registroForm.get('passwdRep')?.invalid && this.registroForm.get('passwdRep')?.touched"
+    >Este campo es obligatorio</span>
+
+    <div class="botonesLogin mb-3 d-flex justify-content-center">
+        <button [disabled]="registroForm.invalid" type="submit" class="btn-secundario">Aceptar</button>
+    </div>
+
+</form>
+

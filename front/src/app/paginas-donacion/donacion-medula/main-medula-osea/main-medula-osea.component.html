@@ -1,0 +1,35 @@
+<div class="container-fluid f-contraste">
+  <div class="row">
+    <div class="col-12 text-center">
+      <h1 class="titulo subrayado">Donación de médula</h1>
+    </div>
+  </div>
+</div>
+<div>
+  <svg _ngcontent-ncw-c20="" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 200">
+    <path _ngcontent-ncw-c20="" fill="#f1eef5" fill-opacity="1"
+      d="M0,50L380,150L960,80L1950,128L1440,0L960,0L480,0L0,0Z">
+    </path>
+  </svg>
+</div>
+
+<main>
+  <div class="contenedor row">
+    <div class="col-2 col-md-3 menu-vertical g-0" id="menu-medula-Osea">
+      <ul class="">
+        <li *ngFor="let e of elementos; let i = index"
+          routerLink="./{{ e.enlace }}"
+          [class.activo]="i == elementoActivo"
+          (click) = "elementoActivo = i">
+          <i tooltip="{{ e.nombre }}" placement="top" [showDelay]="500" class="fa-solid {{ e.icono }}"></i>
+          <span class="oculto">{{ e.nombre | titlecase }}</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="col-10 col-md-9 config">
+      <router-outlet></router-outlet>
+    </div>
+
+  </div>
+</main>

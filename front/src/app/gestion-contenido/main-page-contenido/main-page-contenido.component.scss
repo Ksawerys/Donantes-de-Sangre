@@ -1,0 +1,30 @@
+//Todo Isa
+h1 {
+  padding-top: 5rem;
+}
+
+.bordeSubrayado {
+  border-bottom: 0.3rem solid var(--color-primario);
+}
+
+.imagen {
+  border-radius: 10px;
+}
+
+.botonNoticia {
+  color: var(--bs-white);
+  background-color: var(--color-secundario);
+
+  &:hover {
+    color: var(--bs-white);
+    background-color: var(--bs-dark);
+  }
+}
+span.errorSpan {
+  color: var(--color-primario);
+}
+
+.centrado {
+  display: flex;
+  justify-content: center;
+}

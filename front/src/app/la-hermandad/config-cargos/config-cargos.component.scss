@@ -1,0 +1,42 @@
+.cargos {
+  .titulo {
+    margin-top: 4rem;
+  }
+
+  .info {
+    font-size: var(--letra-pequena);
+  }
+
+  .contenedor-cargos {
+    .cargo {
+      border-bottom: 2px solid var(--color-primario);
+      margin-bottom: 3rem;
+
+      .nombre {
+        border: none;
+        outline: none;
+        padding: .5rem;
+      }
+
+      i {
+        color: var(--color-contraste-oscuro);
+
+        &:hover {
+          color: var(--color-granate);
+        }
+      }
+    }
+  }
+}
+
+
+@media (min-width: 768px) {
+  .cargos .contenedor-cargos .cargo {
+    margin-bottom: 2rem;
+
+    .nombre {
+      padding: .5rem 1rem;
+    }
+  }
+}
+

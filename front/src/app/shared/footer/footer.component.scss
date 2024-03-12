@@ -1,0 +1,46 @@
+footer {
+  background-color: var(--color-primario);
+  color: var(--bs-white);
+  height: fit-content;
+  padding: 2rem 4rem;
+
+  .enlace {
+    padding-top: 0 !important;
+  }
+
+  @media (max-width: 992px) {
+    padding: 2rem;
+  }
+
+  .datos,
+  .copyright {
+    gap: 6%;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+
+      &.datos>div:not(:first-child) {
+        margin-top: 1.5rem;
+      }
+
+      &.copyright .enlace {
+        margin-top: .7rem;
+      }
+    }
+
+    &.datos {
+      border-bottom: 1px solid var(--bs-white);
+
+      .titulo {
+        margin-bottom: 1rem;
+        font-size: var(--letra-grande);
+        padding-bottom: .2rem;
+        border-bottom: 2px solid var(--bs-white);
+      }
+    }
+
+    &.copyright {
+      font-size: var(--letra-pequena);
+    }
+  }
+}

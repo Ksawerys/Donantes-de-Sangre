@@ -1,0 +1,11 @@
+.pregunta  {
+  font-size: 1.5rem;
+}
+
+button {
+  width: 100%;
+
+  @media (min-width: 576px) {
+    width: 200px;
+  }
+}

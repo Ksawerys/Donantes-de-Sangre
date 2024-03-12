@@ -1,0 +1,19 @@
+<p class="fw-bold mb-3">Hermandad de Donantes de Sangre de Puertollano</p>
+
+<div *ngIf="dirPrincipal">
+  <p *ngIf="dirPrincipal.lugar"><i class="fa fa-hospital mb-3"></i>{{ dirPrincipal.lugar }}</p>
+
+  <div class="d-flex align-items-center mb-3">
+    <i class="fa-solid fa-location-dot"></i>
+
+    <div>
+      <p>
+        Calle {{ dirPrincipal.calle }},
+        <span *ngIf="dirPrincipal.numero; else noNum">{{ dirPrincipal.numero }}</span>
+        <ng-template #noNum>s/n</ng-template>
+      </p>
+      <p>{{ dirPrincipal.cp }} {{ dirPrincipal.ciudad }}, {{ dirPrincipal.provincia }}</p>
+    </div>
+  </div>
+</div>
+

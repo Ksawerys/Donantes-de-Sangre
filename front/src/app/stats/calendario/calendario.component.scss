@@ -1,0 +1,32 @@
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) { 
+    .ngb-dp-months {
+      max-width: 500px;
+    }
+  
+    .ngb-dp-day {
+      width: calc(100% / 7);
+    }
+  }
+  
+  /* Medium devices (tablets, 768px and up) */
+  @media (min-width: 768px) { 
+    .ngb-dp-months {
+      max-width: 600px;
+    }
+  }
+  
+  /* Large devices (desktops, 992px and up) */
+  @media (min-width: 992px) { 
+    .ngb-dp-months {
+      max-width: 700px;
+    }
+  }
+  
+  /* Extra large devices (large desktops, 1200px and up) */
+  @media (min-width: 1200px) { 
+    .ngb-dp-months {
+      max-width: 800px;
+    }
+  }
+  

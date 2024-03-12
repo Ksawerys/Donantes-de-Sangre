@@ -1,0 +1,204 @@
+<main>
+  <div class="container gx-0">
+
+    <div class="mensaje"
+      [@entradaSalidaVentana]="codAccion == -1"
+      *ngIf="codAccion != -1">
+
+      <ng-container *ngIf="codAccion == 0">
+        <div class="mensaje-ok d-flex align-items-center justify-content-center">
+          <i class="fa-solid fa-circle-check me-3"></i>
+          <p *ngIf="codAccion == 0">Éxito al {{ accion }} la memoria</p>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="codAccion == 1">
+        <div class="mensaje-error d-flex align-items-center justify-content-center">
+          <i class="fa-solid fa-triangle-exclamation me-3"></i>
+          <p *ngIf="codAccion == 1">Error al {{ accion }} la memoria</p>
+        </div>
+      </ng-container>
+    </div>
+
+    <div>
+      <div class="f-contraste text-center">
+        <h1 class="titulo subrayado">Memorias</h1>
+      </div>
+
+      <svg _ngcontent-ncw-c20="" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 200">
+        <path _ngcontent-ncw-c20="" fill="#f1eef5" fill-opacity="1" d="M0,50L380,150L960,80L1950,128L1440,0L960,0L480,0L0,0Z">
+        </path>
+      </svg>
+    </div>
+
+    <div class="contenido">
+      <div class="contenedor-btns" *ngIf="puedeModificar">
+        <button class="btn-secundario mt-3"
+          data-bs-toggle="modal"
+          data-bs-target="#insertOrUpdateMemoria"
+          (click)="accion=acciones[0]"
+          (click)="limpiarMemoria()">
+          Añadir memoria
+        </button>
+      </div>
+
+      <div class="memorias">
+
+        <ng-container *ngFor="let memoria of memorias; let i = index">
+
+          <div class="memoria d-flex flex-column align-items-center mt-5">
+            <h2 class="titulo">Memoria {{ memoria.anio }}</h2>
+
+            <a *ngIf="memoria.documento; else templateElse"
+              (click)="irA(memoria.documento)">
+              <img src="{{ memoria.imagen }}">
+            </a>
+
+            <ng-template #templateElse>
+              <img src="{{ memoria.imagen }}">
+            </ng-template>
+
+            <div class="iconos d-flex align-content-center justify-content-center mt-4">
+              <i *ngIf="memoria.documento"
+                class="fa-solid fa-file-arrow-down"
+                (click)="descargarArchivo(memoria.documento)">
+              </i>
+
+              <div class="d-flex align-content-center ms-auto" *ngIf="puedeModificar">
+                <i class="fa-solid fa-pen me-3"
+                  (click)="setInfoMemoria(i)"
+                  (click)="accion=acciones[1]"
+                  data-bs-toggle="modal"
+                  data-bs-target="#insertOrUpdateMemoria">
+                </i>
+
+                <i class="fa-solid fa-trash"
+                  (click)="borrarMemoria(i)"
+                  (click)="accion=acciones[2]">
+                </i>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+
+ <!--  Modal -->
+  <div class="modal" id="insertOrUpdateMemoria" tabindex="-1" aria-hidden="true"
+    aria-labelledby="insertOrUpdateMemoriaLabel" data-bs-backdrop="static" data-bs-keyboard="false">
+
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="insertOrUpdateMemoriaLabel">{{ accion | titlecase }} memoria</h1>
+          <button #closeModal type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+
+        <form (ngSubmit)="editarForm.form.valid && insertOrUpdateMemoria()" novalidate #editarForm="ngForm">
+          <div class="modal-body">
+            <div class="mb-4">
+              <label for="anio">Año</label><br>
+
+              <input type="number"
+                #anio="ngModel"
+                name="anio"
+                class="form-control"
+                pattern="[0-9]{4}"
+                required
+                min="1"
+                [(ngModel)]="infoMemoria.anio"/>
+
+              <div *ngIf="anio.dirty || anio.touched">
+                <p class="mensaje-error" *ngIf="anio.errors?.['pattern']">
+                  El año debe ser un número de 4 cifras.
+                </p>
+
+                <p class="mensaje-error" *ngIf="anio.errors?.['required']">
+                  Debes introducir un número.
+                </p>
+
+                <p class="mensaje-error" *ngIf="anio.errors?.['min']">
+                  El año no puede ser negativo.
+                </p>
+              </div>
+            </div>
+
+
+            <div class="mb-4">
+              <label for="documento">Documento</label><br>
+
+              <div class="contenedor-inpt d-flex align-items-center">
+                <input type="file"
+                  name="documento"
+                  id="inpt-doc"
+                  class="form-control"
+                  accept="application/pdf, application/odt, application/doc, application/docx"
+                  (change)="onDocumentoSeleccionado($event)"/>
+
+                  <label for="inpt-doc" class="nombre-archivo d-flex g-0">
+                    <span>Examinar</span>
+                    <span>{{ nombreDocMemoria }}</span>
+                  </label>
+
+                  <div class="eliminar-archivo ms-2" [ngClass]="{'oculto' : !infoMemoria.documento}">
+                    <i class="fa-solid fa-xmark" (click)="eliminarDoc()"></i>
+                    <span class="tt">Elimina el documento de esta memoria</span>
+                  </div>
+
+                </div>
+
+                <p class="mensaje-error" *ngIf="!documentoError">
+                  Documento no válido. Los formatos admitidos son <b>pdf, odt, doc y docx</b>.
+                </p>
+            </div>
+
+
+            <div class="mb-4">
+              <label for="imagen">Imagen de la portada</label><br>
+
+              <div class="contenedor-inpt d-flex align-items-center">
+                <input type="file"
+                  name="imagen"
+                  id="inpt-img"
+                  class="form-control"
+                  accept="image/png, image/jpg, image/jpeg, image/gif, image/tiff, image/svg, image/webp"
+                  (change)="onImgSeleccionada($event)"/>
+
+                  <label for="inpt-img" class="nombre-archivo d-flex g-0">
+                    <span>Examinar</span>
+                    <span>{{ nombreImgMemoria }}</span>
+                  </label>
+
+                  <div class="eliminar-archivo ms-2" [ngClass]="{'oculto' : !infoMemoria.imagen}">
+                    <i class="fa-solid fa-xmark" (click)="eliminarImg()"></i>
+                    <span class="tt">Elimina la imagen de esta memoria</span>
+                  </div>
+              </div>
+
+              <p class="mensaje-error" *ngIf="!imagenError">
+                Imagen no válida. Los formatos admitidos son <b>png, jpg, jpeg, gif, tiff, svg y webp</b>.
+              </p>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button"
+              class="btn-terciario"
+              data-bs-dismiss="modal"
+              aria-label="Cancelar edición">
+              Cancelar
+            </button>
+
+            <button type="submit"
+              class="btn-terciario ms-4"
+              aria-label="Guardar edición">
+              Guardar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>

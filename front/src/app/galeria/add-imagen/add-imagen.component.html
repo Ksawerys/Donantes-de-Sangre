@@ -1,0 +1,50 @@
+<div class="modal fade" id="modalSubirFoto" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bordeColor">
+        <h3 class="modal-title modalTitulo" id="staticBackdropLabel">Subir Foto</h3>
+        <button (click)="limpiarContenido()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <label for="imagen">Imagen:</label>
+              <input #imagen id="imagen" (change)="capturarFile($event)" type="file"
+              class="form-control mb-3"
+              accept="image/jpg,image/gif,image/png,image/jpeg,image/tiff,image/svg,image/webp"
+              required>
+              <div *ngIf="previsualizacion">
+                <label>Previsualizacion:</label>
+                <img [src]="previsualizacion" class="form-control w-50">
+              </div>
+              <label for="decripcion:">Descripcion:</label>
+              <textarea #descripcion id="descripcion" class="form-control"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer d-flex justify-content-end">
+        <div *ngIf="qhp == 1" class="alert alert-success alert-dismissible w-100" role="alert">
+          <p>Se ha añadido la imagen correctamente</p>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <div *ngIf="qhp == 2" class="alert alert-warning alert-dismissible w-100" role="alert">
+          <p>Se ha subido la foto como peticion para los administradores. Espere un rato mientras que los Administradores lo verifiquen</p>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <div *ngIf="qhp == 3" class="alert alert-danger alert-dismissible w-100" role="alert">
+          <p>Ha ocurrido un error al intentar ingresar la imagen</p>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+          <button (click)="limpiarContenido()" type="button" class="btn btn-terciario" data-bs-dismiss="modal">Cerrar</button>
+          <button *ngIf="puedeModificar" type="button" class="ms-4 btn btn-terciario" [disabled]="loading" (click)="subirFoto()">
+              {{(loading) ? 'Cargando......' : 'Subir Imagen'}}
+          </button>
+          <button *ngIf="estaRegistrado && !puedeModificar" type="button" class="ms-4 btn btn-terciario" [disabled]="loading" (click)="subirPeticionFoto()">
+            {{(loading) ? 'Cargando......' : 'Pedir petición'}}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

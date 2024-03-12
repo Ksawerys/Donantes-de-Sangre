@@ -1,0 +1,80 @@
+main {
+
+  .f-contraste {
+    padding: 5rem 5rem 0;
+  }
+
+  .info {
+    padding: 0 1rem 10rem;
+
+    @media (min-width: 576px) {
+      padding: 0 3rem 10rem;
+    }
+
+    @media (min-width: 992px) {
+      padding: 0 7rem 10rem;
+    }
+
+    table {
+      margin-bottom: 5rem;
+
+      td,
+      th {
+        padding: 1rem;
+        vertical-align: middle;
+      }
+
+      thead,
+      tbody .cabecera {
+        color: var(--bs-white);
+      }
+
+      thead {
+        background-color: var(--color-granate);
+        border-color: var(--color-granate);
+      }
+
+      tbody {
+        border-color: var(--color-contraste-medio);
+
+        .cabecera {
+          background-color: var(--color-secundario);
+          border-color: var(--color-secundario);
+        }
+
+        .separador,
+        .separador td {
+          border: none;
+          border-bottom: 1px solid var(--color-secundario);
+
+          td {
+            height: 50px;
+          }
+        }
+      }
+    }
+
+    button {
+      width: 100%;
+
+      @media (min-width: 576px) {
+        width: 200px;
+      }
+    }
+  }
+
+  .texto {
+      @media (min-width: 576px) {
+        padding: 0 7rem;
+      }
+
+      @media (min-width: 1200px) {
+        padding: 0 20rem;
+      }
+  }
+
+  p {
+    line-height: 2rem;
+    font-size: var(--letra-media);
+  }
+}

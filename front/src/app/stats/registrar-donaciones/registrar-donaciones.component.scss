@@ -1,0 +1,36 @@
+h2.titulo {
+  font-size: 1.7rem;
+  padding-bottom: 2.5rem;
+}
+
+div.calendario, div.contenedor:not(:last-of-type) {
+  margin-bottom: 3rem;
+}
+
+div.calendario label {
+  width: 100%;
+}
+
+div.contenedor {
+  border-bottom: 2px solid var(--color-primario);
+}
+
+select.inpt {
+  background-color: var(--bs-white);
+}
+
+p.mensaje-error {
+  line-height: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  div.calendario, div.contenedor:not(:last-of-type) {
+    margin-bottom: 0;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+  div.calendario, div.contenedor {
+    line-height: 1.5rem;
+  }
+}

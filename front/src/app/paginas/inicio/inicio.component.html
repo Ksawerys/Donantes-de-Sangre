@@ -1,0 +1,41 @@
+<div *ngIf="this.citaPedida == 0"
+  class="alert alert-success alert-dismissible position-fixed fade show ms-3"
+    role="alert">
+  Tu cita ha sido registrada correctamente. Te hemos mandado un correo de confirmación.
+
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+<div *ngIf="this.citaPedida == 1"
+  class="alert alert-danger alert-dismissible position-fixed fade show ms-3"
+  role="alert">
+  Se ha producido un error al pedir tu cita. Por favor, prueba de nuevo más tarde.
+
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+<div class="text-center home">
+  <div class="container">
+    <div class="row lh-lg f-contraste">
+      <div class="horario col-12 col-sm-6">
+        <i class="fa-solid fa-clock"></i>
+        <h1 class="titulo subrayado">Nuestros horarios</h1>
+        <app-inicio-horarios></app-inicio-horarios>
+        <!-- <p>Lunes a Viernes</p>
+        <p>de 9:15 a 13:30</p> -->
+      </div>
+
+      <app-inicio-tfns class="col-12 col-sm-6 mt-5 mt-sm-0"></app-inicio-tfns>
+    </div>
+  </div>
+
+  <svg _ngcontent-ncw-c20="" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 200">
+    <path _ngcontent-ncw-c20="" fill="#f1eef5" fill-opacity="1"
+      d="M0,50L380,150L960,80L1950,128L1440,0L960,0L480,0L0,0Z">
+    </path>
+  </svg>
+
+  <app-inicio-direcciones></app-inicio-direcciones>
+</div>
+
+<app-newsletter-ventana></app-newsletter-ventana>

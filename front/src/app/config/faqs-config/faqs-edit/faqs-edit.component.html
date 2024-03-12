@@ -1,0 +1,47 @@
+<div class="modal" id="EditFaq" tabindex="-1">
+  <div class="modal-dialog modal-xl modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bordeColor">
+        <h5 class="modal-title modalTitulo">Editando una Faq</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="limpiar()"></button>
+      </div>
+      <form [formGroup]="faqEditForm" (ngSubmit)="editarFaq()">
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-12">
+              <div class="form-group">
+                <label for="pregunta">Pregunta:</label>
+                <input type="text" name="pregunta" class="form-control mb-3" placeholder="Escribe una pregunta"
+                  formControlName="pregunta" />
+                <div class="row"><span class=" col-12 form-text errorSpan mb-3"
+                    *ngIf="this.faqEditForm.get('pregunta')?.invalid && (this.faqEditForm.get('pregunta')?.dirty||this.faqEditForm.get('pregunta')?.touched)">Este
+                    campo es obligatorio</span></div>
+
+                <label for="respuesta">Respuesta:</label>
+                <textarea name="respuesta" rows="8" class="form-control mb-3" placeholder="Escribe tu respuesta"
+                  formControlName="respuesta"></textarea>
+
+                <span class="form-text errorSpan mb-3"
+                  *ngIf="this.faqEditForm.get('respuesta')?.invalid && (this.faqEditForm.get('respuesta')?.dirty||this.faqEditForm.get('respuesta')?.touched)">Este
+                  campo es
+                  obligatorio</span>
+
+                <div class="row"><span class=" col-12 form-text errorSpan mb-3" *ngIf="aviso==1">El campo pregunta y el
+                    campo respuesta son obligatorios</span></div>
+                <div class="row"><span class=" col-12 form-text CorrectSpan mb-3" *ngIf="aviso==2">Se ha editado la faq
+                    correctamente</span></div>
+                <div class="row"><span class=" col-12 form-text errorSpan mb-3" *ngIf="aviso==3">Ops!!Algo ha salido mal
+                    y no se ha podido añadir la faq</span></div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer bordeArriba">
+          <button (click)="limpiar()" type="button" class="btn btn-terciario me-4" data-bs-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn btn-terciario">Editar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

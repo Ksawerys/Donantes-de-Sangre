@@ -1,0 +1,37 @@
+div.errorLogin {
+    color: var(--color-primario);
+}
+
+input {
+    padding: .4rem 1rem;
+    border-radius: 2px;
+}
+
+div {
+    a.olvidoPasswd {
+        color: var(--color-constraste-oscuro);
+        text-decoration: none;
+        font-size: (--letra-pequena);
+
+        &:hover {
+            color: var(--color-secundario);
+        }
+    }
+
+    mat-card{
+      max-width: 400px;
+      margin: 2px auto;
+      text-align: center;
+    }
+
+    mat-form-field{
+      display: block;
+      background-color: red;
+    }
+}
+
+button {
+    width: 10rem;
+}
+
+

@@ -1,0 +1,187 @@
+main {
+  margin: 0;
+  max-width: 100%;
+  line-height: 2rem;
+
+  h1.titulo {
+    padding-top: 5rem;
+    margin: 0;
+  }
+
+  h2.titulo {
+    font-size: 1.7rem;
+    padding-bottom: .3rem;
+  }
+
+  .contenido {
+    padding: 4rem 1rem;
+
+    .generos,
+    .grp-sang {
+
+      .contenedor .menu-vertical {
+        border-right: 1.5px solid var(--color-contraste-medio);
+
+        li {
+          border-left: 10px solid var(--bs-white);
+
+          &.activo {
+            border-color: var(--color-granate);
+
+            &,
+            select {
+              color: var(--bs-white);
+              background-color: var(--color-primario);
+            }
+          }
+        }
+      }
+    }
+
+    .tipos,
+    .altas {
+      .contenedor {
+        padding-top: 0;
+
+        .menu-vertical li {
+          background-color: var(--color-contraste);
+          padding-left: 1.5rem;
+
+          &.activo,
+          &.activo select {
+            background-color: var(--bs-white);
+          }
+
+          select {
+            background-color: var(--color-contraste);
+          }
+        }
+      }
+    }
+
+    .contenedor {
+      padding: 1rem 0;
+      margin-top: 2rem;
+      border-radius: 2px;
+      background-color: var(--bs-white);
+      box-shadow: 0 2px 9px rgba(0, 0, 0, .2);
+
+      .grafico {
+        padding: 1.5rem;
+      }
+
+      .menu-vertical {
+        li {
+          padding: 1rem .5rem;
+
+          label {
+            width: 100%;
+          }
+
+          * {
+            cursor: pointer;
+          }
+
+          select {
+            padding: .2rem 0 .2rem .4rem;
+            background-color: var(--bs-white);
+          }
+        }
+
+        * {
+          border-radius: 0;
+          border: unset;
+        }
+
+        input {
+          position: absolute;
+          visibility: hidden;
+        }
+      }
+    }
+  }
+}
+
+
+@media (min-width: 576px) {
+  main .contenido {
+
+    .generos,
+    .grp-sang {
+      .contenedor .grafico {
+        padding: 1.5rem 4rem;
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  main .contenido {
+    padding: 4rem 1.5rem;
+
+    .tipos,
+    .altas {
+      .contenedor {
+        padding-top: 1rem;
+
+        .menu-vertical {
+          border-right: 1.5px solid var(--color-contraste-medio);
+
+          li {
+            padding-left: .5rem;
+            background-color: unset;
+            border-left: 10px solid var(--bs-white);
+
+            &.activo {
+              border-color: var(--color-granate);
+
+              &,
+              select {
+                color: var(--bs-white);
+                background-color: var(--color-primario);
+              }
+            }
+
+            select {
+              background-color: var(--bs-white);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  main .contenido {
+
+    .generos,
+    .grp-sang {
+      .contenedor-titulo p {
+        min-height: 65px;
+      }
+
+      .contenedor {
+        margin-top: 1rem;
+
+        .grafico {
+          padding: 1.5rem;
+        }
+      }
+    }
+
+    .tipos,
+    .altas {
+      .contenedor .grafico {
+        padding: 1.5rem 3rem;
+      }
+    }
+
+  }
+}
+
+@media (min-width: 1200px) {
+  main .contenido {
+    padding: 4rem 7rem;
+  }
+}

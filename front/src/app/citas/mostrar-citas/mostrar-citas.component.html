@@ -1,0 +1,73 @@
+<div class="container-fluid fondo px-2 py-5 p-md-5">
+  <div class="row">
+    <div class="col-xl-2 col-md-1 col-0"></div>
+
+    <div class="col-xl-8 col-md-10 col-0 contenedor">
+      <div class="card border-0 rounded-0 w-100 mb-0">
+        <div class="card-header d-flex justify-content-center align-items-center py-1 border-bottom-0">
+          <h1 class="titulo">Mis citas</h1>
+        </div>
+        <div class="card-body px-2 py-5 px-md-5 mt-5 mb-0">
+          <div class="row">
+            <div class="col-12">
+              <div class="mb-5">
+                <h3 class="titulo mb-3">Citas pendientes</h3>
+                <ul>
+                  <li *ngIf="noHayCitasPendientes; else elseCitasPendientes" class="my-3">
+                    <div class="card w-100 p-0 my-3">
+                      <div class="card-body my-2 w-100 d-flex justify-content-around align-items-center tarjetaNoHay">
+                        No hay citas pendientes
+                      </div>
+                    </div>
+                  </li>
+
+                  <ng-template #elseCitasPendientes>
+                    <li *ngFor="let cita of citasPendientes">
+                      <div class="card p-0 my-3">
+                        <div class="card-body my-0 d-flex justify-content-around align-items-center tarjeta">
+                          <span class="dia">{{ cita.dia }}</span>
+                          <span class="hora">{{ cita.hora }}</span>
+                          <span class="donacion text-center">{{ cita.donacion }}</span>
+                          <div class="align-items-center">
+                            <button *ngIf="!cita.cancelada; else elseCancelada" class="btn-primario px-3" (click)="cancelarCita($event)">Cancelar</button>
+                            <ng-template #elseCancelada>
+                              <span class="derechaTextoGrande text-center">cancelada</span>
+                              <span class="derechaTextoPequeno text-center">can.</span>
+                            </ng-template>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                  </ng-template>
+                </ul>
+
+                <h3 class="titulo mt-5 mb-3">Citas pasadas</h3>
+                <ul>
+                  <li *ngIf="noHayCitasPasadas; else elseCitasPasadas">
+                    <div class="card w-100 p-0 my-3">
+                      <div class="card-body my-2 w-100 d-flex justify-content-around align-items-center tarjetaNoHay">
+                        No reservaste ninguna cita
+                      </div>
+                    </div>
+                  </li>
+
+                  <ng-template #elseCitasPasadas>
+                    <li *ngFor="let cita of citasPasadas">
+                      <div class="card p-0 my-3">
+                        <div class="card-body my-0 d-flex justify-content-around align-items-center tarjeta">
+                          <span class="dia">{{ cita.dia }}</span>
+                          <span class="hora">{{ cita.hora }}</span>
+                          <span class="donacion text-center">{{ cita.donacion }}</span>                          
+                        </div>
+                      </div>
+                    </li>
+                  </ng-template>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,44 @@
+.direccion {
+
+  & > div:not(:last-child) {
+    border-bottom: 2px solid var(--color-primario);
+    margin-bottom: 2rem;
+  }
+
+  input {
+    border: none;
+    outline: none;
+    padding: .5rem;
+  }
+
+  input, .f-rojo {
+    cursor: context-menu;
+  }
+}
+
+.modal {
+  --bs-modal-width: 700px;
+
+  ul img {
+    max-width: 100%;
+    border-radius: 2px;
+  }
+
+  i.info-mapa {
+    cursor: pointer;
+    color: var(--color-contraste-oscuro);
+
+    &:hover {
+      color: var(--color-granate);
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .direccion .calle, .direccion .provincia {
+    margin-bottom: 2rem;
+    border-bottom: 2px solid var(--color-primario);
+  }
+}
+
+

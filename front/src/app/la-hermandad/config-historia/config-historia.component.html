@@ -1,0 +1,51 @@
+<div class="historia">
+  <h3 class="titulo mb-4">Historia</h3>
+
+  <div class="contenedor-historia" [innerHtml]="historia.valor"></div>
+
+  <button class="mt-2 btn-primario" data-bs-toggle="modal" data-bs-target="#updateHistoria">
+    <i class="fa-solid fa-pen me-2"></i>Editar historia
+  </button>
+</div>
+
+<!--  Modal -->
+<div class="modal" id="updateHistoria" tabindex="-1" aria-hidden="true" aria-labelledby="updateHistoriaLabel"
+  data-bs-backdrop="static" data-bs-keyboard="false">
+
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="updateHistoriaLabel">Editar historia</h1>
+        <button #closeModal type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+
+      <form (ngSubmit)="updateHistoria()" novalidate>
+        <div class="modal-body">
+          <div class="mb-4">
+            <angular-editor name="historia" [config]="editorTextoConfig" [(ngModel)]="historia.valor"></angular-editor>
+
+            <p class="max-chars mt-1" [class.mensaje-error]="historia.valor.length>maxLengthHistoria">
+              {{ historia.valor.length }}/{{ maxLengthHistoria }} caracteres.
+            </p>
+
+            <p *ngIf="errorMaxLength" class="mensaje-error">
+              Número máximo de caracteres excedido.
+            </p>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn-terciario" data-bs-dismiss="modal" aria-label="Cancelar edición">
+            Cancelar
+          </button>
+
+          <button type="submit" class="btn-terciario ms-4" aria-label="Guardar edición">
+            Guardar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+

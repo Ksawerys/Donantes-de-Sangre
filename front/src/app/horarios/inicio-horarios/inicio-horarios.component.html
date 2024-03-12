@@ -1,0 +1,27 @@
+<div class="pt-2 pb-2" *ngFor="let h of horariosMostrar">
+  <p>
+    <ng-container *ngFor="let d of h.dias; let first = first; let last = last; let i = index">
+
+      <ng-container *ngIf="h.dias.length == 1; else masDeUnDia">
+        <span>{{ d.nombre | titlecase }}</span>
+      </ng-container>
+
+      <ng-template #masDeUnDia>
+        <ng-container *ngIf="last">
+          <span>y {{ d.nombre | titlecase }}</span>
+        </ng-container>
+
+        <ng-container *ngIf="i == h.dias.length - 2">
+          <span>{{ d.nombre | titlecase }} </span>
+        </ng-container>
+
+        <ng-container *ngIf ="(i != h.dias.length - 2) && !last">
+          <span>{{ d.nombre | titlecase }}, </span>
+        </ng-container>
+      </ng-template>
+
+    </ng-container>
+  </p>
+  <p>de <span class="fw-bold">{{ h.hEntrada }}</span> a <span class="fw-bold">{{ h.hSalida }}</span></p>
+</div>
+

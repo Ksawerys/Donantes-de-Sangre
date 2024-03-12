@@ -1,0 +1,30 @@
+<!--Todo Isa-->
+<div class="modal" id="modalConfirmacion" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bordeColor">
+        <h5 class="modal-title modalTitulo">Borrando Noticia</h5>
+        <button (click)="limpiarIdBorrado()"(click)="limpiarMensaje()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>¿Realmente quieres eliminarla?</p>
+      </div>
+      <div *ngIf="mensaje===1" class="container mt-3 mb-2">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          La noticia se ha borrado correctamente.
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      </div>
+      <div *ngIf="mensaje===2" class="container mt-3 mb-2">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          La noticia no se ha podido borrar, por favor intentelo de nuevo.
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      </div>
+      <div class="modal-footer bordeArriba">
+        <button (click)="limpiarMensaje()" type="button" class="btn btn-terciario"data-bs-dismiss="modal">No</button>
+        <button (click)="borradoNoticia()" type="button" class="btn btn-terciario ms-4 me-2">Si</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,223 @@
+<div class="mensaje" [@entradaSalidaVentana]="mensaje == ''" *ngIf="mensaje != ''">
+  <div [ngClass]="exito ? 'mensaje-ok' : 'mensaje-error'" class="d-flex align-items-center justify-content-center">
+
+    <i [ngClass]="exito ? 'fa-circle-check' : 'fa-triangle-exclamation'" class="fa-solid me-3"></i>
+
+    <p>{{ mensaje }}</p>
+  </div>
+</div>
+
+<!-- Horarios -->
+<div class="horarios">
+  <h3 class="titulo mb-4">Horario</h3>
+
+  <!-- <p *ngIf="citasForm.get('horarios')?.errors?.['mismaHora']" class="mensaje-error mb-3">
+    Hay horarios con las mismas horas de entrada y salida
+  </p> -->
+
+  <div class="horario row gx-0" *ngFor="let horario of horariosMostrar; let i = index">
+
+    <div class="horas d-flex col-xl-5 col-12">
+      <div class="d-flex flex-column flex-xl-row">
+        <p class="f-rojo">Entrada</p>
+        <input type="time" class="inpt" value="{{ horario.hEntrada }}" readonly/>
+      </div>
+
+      <div class="d-flex flex-column flex-xl-row">
+        <p class="f-rojo">Salida</p>
+        <input type="time" class="inpt" value="{{ horario.hSalida }}" readonly/>
+      </div>
+    </div>
+
+    <div class="col-6 dias d-flex flex-column flex-xl-row">
+      <p class="f-rojo">Días</p>
+
+      <div class="ms-xl-2 d-flex align-items-center justify-content-center">
+        <div class="dia" *ngFor="let dia of horario.dias">
+          <input class="me-1" type="checkbox" disabled value="{{ dia.nombre }}" [checked]="dia.id != -1">
+          <label>{{ dia.letra | titlecase }}</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-1 d-flex justify-content-end align-items-center ms-auto iconos">
+      <i class="fa-solid fa-pen me-2" data-bs-toggle="modal" data-bs-target="#insertOrUpdateHorario"
+       (click)="accion=acciones[1]; setInfoHorario(i); this.index = i"></i>
+
+      <i class="fa-solid fa-trash me-2" (click)="deleteHorarios(i); accion=acciones[2]"></i>
+    </div>
+  </div>
+
+  <div class="mt-2">
+    <button class="me-3 btn-primario" data-bs-toggle="modal" data-bs-target="#insertOrUpdateHorario"
+      (click)="accion=acciones[0]">
+      <i class="fa-solid fa-plus me-2"></i>Añadir horario
+    </button>
+  </div>
+</div>
+
+
+<!-- Horas citas -->
+<div class="horas-citas">
+  <h3 class="titulo">Horas citas</h3>
+  <div class="row p-0">
+
+    <div class="col-12 col-sm-4 col-md-6 col-xl-4">
+      <div class="row">
+        <div class="col-12 d-flex pe-3">
+          <ngb-timepicker class="" [(ngModel)]="time"></ngb-timepicker>
+        </div>
+        <div class="col-12 d-flex pt-0 p-md-2">
+          <button (click)="anadirHora(this.diaSeleccionado)" [disabled]="!this.horaValida" class="btn-primario me-0">
+            <i class="fa-solid fa-plus me-2"></i>Añadir
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="col-0 col-sm-1 col-md-0"></div> -->
+    <div class="col-12 col-sm-8 col-md-6 col-xl-4 py-0 pt-5 pt-sm-0 px-5 px-xs-4 px-sm-0">
+      <div class="row px-0 px-xs-5 px-md-1 py-0 py-md-0">
+        <div class="col-12 col-md-9 sombra">
+          <div class="row px-0">
+            <div class="col-5 p-0">
+              <div class="btnes-dias">
+                <div *ngFor="let dia of this.diasSemana" class="btn-dia w-100 p-3" (click)="onDiaChange(dia.cod)"
+                  [ngClass]="(this.diaSeleccionado == dia.cod ? 'selected' : '')">
+                  {{ dia.dia | titlecase }}
+                </div>
+              </div>
+            </div>
+            <div class="col-7 p-0">
+              <div class="horas">
+                <ng-container *ngFor="let hora of this.horasMostrar; let i = index">
+                  <div class="hora px-3" [ngClass]="this.isHoraEntradaSalida[i] ? 'hora-horario' : ''">
+                    {{hora}}
+                    <button class="quitar ms-auto my-0" *ngIf="!this.isHoraEntradaSalida[i]" (click)="quitar(i)">
+                      <i class="fa-solid fa-xmark"></i>
+                    </button>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-0 col-md-3"></div>
+      </div>
+    </div>
+    <div class="col-12 col-xl-4 py-2 py-sm-5 py-xl-0">
+      <div class="row align-items-center g-0 p-0">
+        <div class="col-12 d-flex flex-column flex-md-row mb-5 mt-2 mt-md-0 p-0">
+          <div class="row w-100 mx-0">
+            <form class="col-12 p-0" [formGroup]="aLaVezForm" (ngSubmit)="updateCitasALavez()">
+              <div class="row pt-5 p-0 p-sm-2 p-md-3 pt-xl-0 mx-0 gx-0">
+                <div class="col-0 col-xs-2 col-sm-6 col-xl-0"></div>
+                <div class="b-bottom f-rojo col-9 col-xs-7 col-sm-4 col-xl-8 aparece-grande">Donantes a la vez</div>
+
+                <input type="text" class="b-bottom inpt campo col-3 col-sm-2 col-xl-4" formControlName="nALaVez"
+                  [placeholder]="this.numCitasALaVez" />
+                <div class="col-12 mensajito">
+                  <div class="row gx-0">
+                    <div class="col-6 col-xl-0"></div>
+                    <span *ngIf="aLaVezForm.get('nALaVez')?.errors?.['pattern']"
+                      class="mensaje-error col-6 col-xl-12">Introduce un número.
+                    </span>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-end w-100">
+                  <button type="submit" class="btn-primario">
+                    Guardar
+                  </button>
+                </div>
+              </div>
+
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--  Modal Horario -->
+<div class="modal" id="insertOrUpdateHorario" tabindex="-1" aria-hidden="true"
+  aria-labelledby="insertOrUpdateHorarioLabel" data-bs-backdrop="static" data-bs-keyboard="false">
+
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="insertOrUpdateHorarioLabel">{{ accion | titlecase }} horario</h1>
+        <button #closeModalHorario type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"
+          (click)="limpiarFormulario()"></button>
+      </div>
+
+      <form [formGroup]="horarioForm" (ngSubmit)="insertOrUpdateHorario()" novalidate>
+        <div class="modal-body">
+          <div class="mb-4 horas row gx-0">
+
+            <div class="col-6 pe-3">
+              <label for="hEntrada">Hora de entrada</label><br>
+
+              <input type="time" name="hEntrada" id="hEntrada" class="hEntrada form-control"
+                formControlName="hEntrada" />
+
+              <p class="mensaje-error"
+                *ngIf="horarioFormCtrls['hEntrada']?.errors?.['required'] && horarioFormCtrls['hEntrada']?.touched">
+                La hora de entrada es obligatoria.
+              </p>
+            </div>
+
+            <div class="col-6">
+              <label for="hSalida">Hora de salida</label><br>
+
+              <input type="time" name="hSalida" id="hSalida" class="hSalida form-control" formControlName="hSalida" />
+
+              <p class="mensaje-error"
+                *ngIf="horarioFormCtrls['hSalida']?.errors?.['required'] && horarioFormCtrls['hSalida']?.touched">
+                La hora de salida es obligatoria.
+              </p>
+            </div>
+          </div>
+
+          <div>
+            <label for="dias">Días</label><br>
+
+            <ng-container formArrayName="dias">
+              <div id="dias" class="form-control">
+
+                <ng-container *ngFor="let dia of diasHorarioCtrls; let j = index">
+                  <div class="dia mb-1 mt-1" [formGroupName]="j">
+
+                    <input type="checkbox" class="me-1" name="{{ dia.get('nombre')!.value }}"
+                      value="{{ dia.get('nombre')!.value }}" formControlName="seleccionado" />
+
+                    <label for="{{ dia.get('nombre')!.value }}">{{ dia.get('nombre')!.value | titlecase }}</label>
+                  </div>
+                </ng-container>
+
+              </div>
+
+              <p class="mensaje-error"
+                *ngIf="horarioFormCtrls['dias']?.errors?.['noDiaSelecc'] && horarioFormCtrls['dias']?.touched">
+                Debes seleccionar al menos un día.
+              </p>
+            </ng-container>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn-terciario" data-bs-dismiss="modal" aria-label="Cancelar edición"
+            (click)="limpiarFormulario()">
+            Cancelar
+          </button>
+
+          <button type="submit" class="btn-terciario ms-4" aria-label="Guardar edición">
+            Guardar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

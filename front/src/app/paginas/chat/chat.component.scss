@@ -1,0 +1,60 @@
+h1 {
+  padding-top: 5rem;
+}
+
+form {
+  .form-control {
+    width: 80%;
+  }
+
+  button {
+    width: 20%;
+  }
+}
+
+.fondoCard {
+  background-color: var(--color-contraste);
+}
+
+.scroll {
+  overflow-y: scroll;
+}
+
+.chatContainer,
+.usuariosContainer {
+  box-shadow: 0 2px 9px rgba(0, 0, 0, .2);
+  border-radius: 2px;
+}
+.usuariosContainer {
+  height: 20rem;
+}
+.chatContainer {
+  height: 50rem;
+}
+
+.borderRojo {
+  border-bottom-color: var(--color-granate);
+}
+
+.letraColor {
+  color: var(--color-secundario);
+}
+
+span.errorSpan {
+  color: var(--color-primario);
+}
+span.CorrectSpan{
+  color: var(--bs-green);
+}
+.modalTitulo {
+  color: var(--color-secundario);
+  font-family: var(--tipo-textos);
+}
+
+.bordeColor {
+  border-bottom: 1px solid var(--color-secundario);
+}
+
+.bordeArriba {
+  border-top: 1px solid var(--color-secundario);
+}

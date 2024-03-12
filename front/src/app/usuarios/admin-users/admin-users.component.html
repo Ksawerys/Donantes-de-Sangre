@@ -1,0 +1,122 @@
+<div class="container-fluid fondo px-2 py-2 p-md-3 p-lg-5">
+
+    <div class="mensaje"
+        [@entradaSalidaVentana]="codAccion == -1"
+        *ngIf="codAccion != -1">
+  
+        <ng-container *ngIf="codAccion == 0">
+          <div class="mensaje-ok d-flex align-items-center justify-content-center">
+            <i class="fa-solid fa-circle-check me-3"></i>
+            <p *ngIf="codAccion == 0">{{mensaje}}</p>
+          </div>
+        </ng-container>
+  
+        <ng-container *ngIf="codAccion == 1">
+          <div class="mensaje-error d-flex align-items-center justify-content-center">
+            <i class="fa-solid fa-triangle-exclamation me-3"></i>
+            <p *ngIf="codAccion == 1">{{mensaje}}</p>
+          </div>
+        </ng-container>
+      </div>
+  
+      <div class="row">
+        <div class="col-xl-2 col-lg-1 col-0"></div>
+    
+        <div class="col-xl-8 col-lg-10 col-0 contenedor">
+          <div class="card border-0 rounded-0 w-100 mb-0">
+            <div class="card-header d-flex justify-content-center align-items-center py-1 border-bottom-0">
+              <h1>Administrar Usuarios</h1>
+            </div>
+            <div class="card-body px-2 py-5 px-md-5 mt-5 mb-0">
+              <div class="row">
+                <div class="col-12">
+                  <div class="mb-5">
+                    <h3 class="titulo mb-3">Usuarios</h3>
+                    <ul>
+                      <li *ngIf="noHayUsuarios; else elseNoHayUsuarios" class="my-3">
+                        <div class="card w-100 p-0 my-3">
+                          <div class="card-body my-2 w-100 d-flex justify-content-around align-items-center tarjetaNoHay">
+                            No hay usuarios registrados
+                          </div>
+                        </div>
+                      </li>
+    
+                      <ng-template #elseNoHayUsuarios>
+                        <li *ngFor="let user of this.users; let i = index">
+                          <div class="card p-0 my-3">
+                            <div class="card-body my-0 d-flex justify-content-around align-items-center tarjeta px-1 px-sm2 px-md-3 py-3">
+  
+                              <div class="row w-100 px-1 px-sm-2 px-md-3 px-lg-5">
+                                <div class="col-9 info py-1 ps-sm-1 ps-md-3 ps-lg-5">
+                                  <div class="row">
+                                    <div class="col-12">
+                                      <div class="row">
+                                        <div class="col-12">
+                                          <div class="row">
+                                            <span class="nombre mb-2 col-7 col-mg-6 p-2">{{ user.nombre }}</span>
+                                            <span class="col-5 col-mg-6 text-center align-items-bottom pt-3 ps-0 pe-2 pe-mg-3 pe-lg-5">{{ user.dni }}</span>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="row" [formGroup]="infoFormArray[i]">
+                                      <div class="col-12 col-md-6">
+                                        <div class="row w-100 mx-0">
+                                            <div class="f-rojo col-4 col-md-4 aparece-grande">Grupo sanguíneo</div>
+                                            <!-- <div class="f-rojo col-4 col-md-4 aparece-pequeno">G. sanguíneo</div> -->
+                                            <select class="inpt campo col-8 col-md-8"
+                                                formControlName="gSanguineo"
+                                                >
+                                                <option *ngIf="user.gSanguineo == null" [value]="null" selected>No se ha aportado</option>
+                                                <option 
+                                                    *ngFor="let gSang of this.gruposSanguineos"
+                                                    [value]="gSang"
+                                                    [selected]="gSang == user.gSanguineo"
+                                                    >{{ gSang }}</option>
+                                            </select>
+                                            <div class="row mensajito"></div>
+                                        </div>
+                                      </div>
+
+                                      <div class="col-12 col-md-6">
+                                        <div class="row w-100 mx-0">
+                                            <div class="f-rojo col-4 col-md-4 aparece-grande">Nº donante</div>
+                                            <!-- <div class="f-rojo col-4 col-md-4 aparece-pequeno">G. sanguíneo</div> -->
+                                            <input type="text"
+                                                class="inpt campo col-8 col-md-8"
+                                                formControlName="nDonante"
+                                                [placeholder]="user.nDonante == null ? 'No se ha aportado' : ''"
+                                                [value]="user.nDonante == null ? '' : user.nDonante"
+                                                />
+                                            <div class="row mensajito"></div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-3 px-0 pt-3 py-sm-0 pe-md-3 pe-lg-5">
+                                  <div class="row h-100">
+                                    <div class="col-12 d-flex justify-content-center h-100">
+                                      <div class="row align-items-center h-100 align-items-bottom py-2">
+                                        <button  class="btn-primario px-1 px-sm-2 px-mg-3" (click)="modificarUser(infoFormArray[i])">Guardar</button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>  
+                            </div>                        
+                          </div>
+                        </li>
+                      </ng-template>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-2 col-lg-1 col-0"></div>
+      </div>
+    </div>
+  
+  

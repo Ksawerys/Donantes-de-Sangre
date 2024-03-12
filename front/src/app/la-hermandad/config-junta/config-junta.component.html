@@ -1,0 +1,85 @@
+<div class="junta">
+
+  <h3 class="titulo">Junta rectora</h3>
+
+  <div class="contenedor-integrantes">
+    <div class="integrante row gx-0" *ngFor="let integrante of junta; let i = index">
+
+      <input type="text" class="cargo col-12 col-md-5 f-rojo" [(ngModel)]="integrante.cargo" readonly="readonly">
+
+      <input type="text" class="nombre align-middle col-10 col-md-6" [(ngModel)]="integrante.nombre"
+        readonly="readonly">
+
+      <div class="col-2 col-md-1 d-flex justify-content-end align-items-center">
+        <i class="fa-solid fa-pen me-2" (click)="setInfoIntegrante(i)" data-bs-toggle="modal"
+          data-bs-target="#insertOrUpdateIntegrante" (click)="accion=acciones[1]"></i>
+
+        <i class="fa-solid fa-trash me-2" (click)="deleteIntegrante(i); accion=acciones[2]"></i>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-2">
+    <button class="me-3 btn-primario" data-bs-toggle="modal"
+      data-bs-target="#insertOrUpdateIntegrante" (click)="accion=acciones[0]">
+      <i class="fa-solid fa-plus me-2"></i>Añadir integrante
+    </button>
+  </div>
+
+</div>
+
+<!--  Modal Integrantes -->
+<div class="modal" id="insertOrUpdateIntegrante" tabindex="-1" aria-hidden="true" aria-labelledby="insertOrUpdateIntegranteLabel"
+  data-bs-backdrop="static" data-bs-keyboard="false">
+
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="insertOrUpdateIntegranteLabel">{{ accion | titlecase }} integrante</h1>
+        <button #closeModalInt type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"
+          (click)="limpiarIntegrante()"></button>
+      </div>
+
+      <form (ngSubmit)="formIntegrante.form.valid && insertOrUpdateIntegranteJunta(formIntegrante)" novalidate #formIntegrante="ngForm">
+        <div class="modal-body">
+          <div class="mb-4">
+            <label for="cargos">Cargo</label><br>
+
+            <select name="cargo" id="cargos" class="cargos form-select"
+              [(ngModel)]="infoInt.cargo" #cargo="ngModel" required >
+              <option disabled selected>Selecciona un cargo</option>
+              <option value="{{ cargo.nombre }}" *ngFor="let cargo of cargosService">{{ cargo.nombre }}</option>
+            </select>
+
+            <p class="mensaje-error" *ngIf="formIntegrante.submitted && cargo?.errors?.['required']">
+              El cargo es obligatorio.
+            </p>
+          </div>
+
+          <div>
+            <label for="nombre">Nombre</label><br>
+
+            <input type="text" name="nombre" id="nombre" class="nombre form-control" required
+              [(ngModel)]="infoInt.nombre" #nombre="ngModel" placeholder="Introduce el nombre."/>
+
+            <p class="mensaje-error" *ngIf="formIntegrante.submitted && nombre?.errors?.['required']">
+              El nombre es obligatorio.
+            </p>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn-terciario" data-bs-dismiss="modal"
+            aria-label="Cancelar edición" (click)="limpiarIntegrante()">
+            Cancelar
+          </button>
+
+          <button type="submit" class="btn-terciario ms-4" aria-label="Guardar edición">
+            Guardar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

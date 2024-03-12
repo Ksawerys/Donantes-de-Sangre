@@ -1,0 +1,109 @@
+div.alert {
+    z-index: 9000;
+    width: 25rem;
+
+    a {
+        text-decoration: none;
+        color: rgb(9, 43, 9);
+
+        &:hover {
+            color: rgb(2, 51, 2);
+        }
+    }
+}
+
+div.container-fluid {
+    background-color: var(--color-contraste);
+    min-height: 80vh;
+
+    div.card {
+        box-shadow: 0 3px 9px rgba(0, 0, 0, .5);
+        // width: 40vw;
+
+
+        div.card-header {
+            background-color: var(--color-primario);
+            font-family: var(--tipo-titulos);
+            color: var(--bs-white);
+            height: 9rem;
+
+            border-radius: 2px 2px 0px 0px;
+        }
+
+        div.card-body {
+            margin-bottom: 2.5rem;
+
+            ul {
+                list-style: none;
+
+                .tarjetaNoHay {
+                    height: 5rem;
+                }
+
+                .tarjeta {
+                    // height: 7rem;
+                    border-radius: 2px;
+                    background-color: var(--color-contraste);
+                    // box-shadow: 2px 2px 2px 2px #888888;
+
+                    .info {
+                        // max-width: 40rem !important;
+                        // max-height: 3rem;
+
+
+                        span.nombre {
+                            font-size: 21px;
+                        }
+
+                        span.dia, span.hora {
+                            font-size: 17px;
+                        }
+
+
+                        span.donacion {
+                            background-color: var(--color-secundario);
+                            color: var(--bs-white);
+                            width: 5.5rem;
+                            max-width: 5.5rem;
+                            border-radius: 2px 2px 2px 2px;
+                        }
+                    }
+
+                    span.derechaTextoGrande {
+                        display: block;
+                        // width: 6rem;
+                        // max-width: 6rem;
+                    }
+
+                    span.derechaTextoPequeno {
+                        display: none;
+                    }
+
+                    @media(max-width: 576px) {
+                        span.derechaTextoGrande {
+                            display: none;
+                        }
+
+                        span.derechaTextoPequeno {
+                            display: block;
+                            width: 3rem;
+                            max-width: 3rem;
+                        }
+
+                        button.btn-primario {
+                            width: 5.6rem;
+
+                        }
+                    }
+
+                    span.derechaBoton {
+                        height: 100%;
+                        width: 6rem;
+                        max-width: 6rem;
+                    }
+                }
+            }
+        }
+    }
+}
+

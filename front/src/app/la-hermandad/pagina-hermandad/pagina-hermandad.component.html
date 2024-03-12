@@ -1,0 +1,25 @@
+<main>
+  <div class="container gx-0">
+    <div class="f-contraste historia">
+      <h1 class="titulo subrayado">Historia</h1>
+      <div class="contenedor-historia mt-4" [innerHtml]="historia.valor"></div>
+    </div>
+
+    <svg _ngcontent-ncw-c20="" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 200">
+      <path _ngcontent-ncw-c20="" fill="#f1eef5" fill-opacity="1"
+        d="M0,50L380,150L960,80L1950,128L1440,0L960,0L480,0L0,0Z">
+      </path>
+    </svg>
+
+    <div *ngIf="junta">
+      <h1 class="titulo subrayado">Junta rectora</h1>
+
+      <div class="tarjetas d-flex flex-wrap text-center">
+        <div class="tarjeta f-contraste flex-fill" *ngFor="let integrante of junta">
+          <p>{{ integrante.cargo }}</p>
+          <p>{{ integrante.nombre }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

@@ -1,0 +1,37 @@
+<!--Todo Isa-->
+<div class="container-fluid f-contraste">
+  <div class="row">
+    <div class="col text-center">
+      <h1 class="titulo subrayado">Himnos</h1>
+    </div>
+  </div>
+</div>
+<div>
+  <svg _ngcontent-ncw-c20="" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 200">
+    <path _ngcontent-ncw-c20="" fill="#f1eef5" fill-opacity="1"
+      d="M0,50L380,150L960,80L1950,128L1440,0L960,0L480,0L0,0Z">
+    </path>
+  </svg>
+</div>
+<section>
+  <div class="container">
+    <div *ngFor="let cancion of resultado" class="row mb-5 mt-5">
+      <div class="col">
+        <h3 class="titulo tit-subrayado text-center">{{cancion.titulo}}</h3>
+        <audio class="mt-5 mb-3 centrarAudio" controls controlsList="nodownload">
+          <source [src]=cancion.cancion type="audio/mp4">
+        </audio>
+      </div>
+      <div class="row mb-3 mt-5">
+        <div class="col-4"></div>
+        <a class="btn btn-terciario col-4" download [href]=cancion.descarga>Descargar</a>
+        <div class="col-4"></div>
+      </div>
+      <div *ngIf="cancion.letra!==null" class="text-center mt-4 mb-5">Letra de la canción:
+       <div *ngFor="let l of letra; let i = index">
+        <div *ngIf="cancion.letra===letra[i]" [innerHTML]= "letra[i]"></div>
+       </div>
+      </div>
+    </div>
+  </div>
+</section>

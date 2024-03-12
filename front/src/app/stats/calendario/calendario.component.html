@@ -1,0 +1,9 @@
+<div>
+  <ngb-datepicker #dp
+    [(ngModel)]="model"
+    (click)="mandarFecha()"
+    [navigation]="navigation"
+    (navigate)="reiniciarFecha()"
+    [displayMonths]="displayMonths">
+  </ngb-datepicker>
+</div>

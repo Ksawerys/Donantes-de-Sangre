@@ -1,0 +1,75 @@
+<div class="modal fade" id="modificarPregunta" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header border-buttom border-danger border-3">
+        <h3 class="modal-title titulo" id="staticBackdropLabel">Modificado una pregunta</h3>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form (ngSubmit)="modificarPregunta();">
+        <div class="modal-body border-buttom border-danger">
+          <div class="row d-flex justify-content-center">
+            <div class="col-12">
+              <select (change)="seleccionarPregunta()" #select class="form-select">
+                <option selected>Selecciona una pregunta</option>
+                <option *ngFor="let pregunta of this.preguntas_array" value="{{pregunta.id}}">{{pregunta.titulo}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="row" [hidden]="!mostrar">
+            <div class="col-12">
+              <h4>Titulo:</h4>
+                <input [ngModel]="pregunta.titulo" [ngModelOptions]="{standalone: true}" #titulo type="text" class="form-control mb-3" placeholder="Escribe el titulo para esta pregunta">
+            </div>
+            <div class="col-12">
+              <h4>Enunciado:</h4>
+              <input [ngModel]="pregunta.enunciado" [ngModelOptions]="{standalone: true}" #enunciado type="text" class="form-control mb-3" placeholder="Escribe tu enunciado">
+            </div>
+            <div class="col-12">
+              <h4>Imagen:</h4>
+              <input #input_file (change)="capturarFile($event)" type="file" class="btn btn-light form-control border-3 rounded-2 mb-2" accept="image/jpg,image/gif,image/png,image/jpeg,image/tiff,image/svg,image/webp">
+            </div>
+            <div *ngIf="previsualizacion" class="col-12 d-flex justify-content-center">
+              <img [src]="previsualizacion" class="w-50">
+            </div>
+            <div *ngIf="previsualizacion_apto_sangre" class="col-12 d-flex justify-content-center">
+              <img src="../../../../assets/imagenes/apto_sangre/{{previsualizacion_apto_sangre}}" class="w-50">
+            </div>
+            <div class="col-12">
+              <h4>Respuesta:</h4>
+              <div class="form-check">
+                <input #respuesta_si type="radio" class="form-check-input" name="respuesta">
+                <label class="form-check-label" for="si">Si</label>
+              </div>
+              <div class="form-check">
+                <input #respuesta_no type="radio" class="form-check-input" name="respuesta">
+                <label class="form-check-label" for="no">No</label>
+              </div>
+            </div>
+            <div class="col-12">
+              <h4>Recomendaciónes a los problemas:</h4>
+              <textarea [ngModel]="pregunta.solucion_problema" [ngModelOptions]="{standalone: true}" #recomendacion_problema class="form-control mb-3" rows="5" placeholder="Escribe tu recomendacion"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer d-flex justify-content-end">
+          <div *ngIf="qhp == 1" class="alert alert-success w-100" role="alert">
+            <p>Pregunta modificada correctamente</p>
+          </div>
+          <div *ngIf="qhp == 2" class="alert alert-danger w-100" role="alert">
+            <p>Ha ocurrido un error al intentar modificar la pregunta</p>
+          </div>
+          <div *ngIf="qhp == 3" class="alert alert-warning w-100" role="alert">
+            <p>Debes seleccionar una pregunta para poder modificar</p>
+          </div>
+          <button type="submit" class="btn btn-secundario" [disabled]="loading">
+            <span>
+              {{(loading) ? 'Cargando......' : 'Modificar'}}
+            </span>
+          </button>
+          <button type="button" class="btn btn-secundario" data-bs-dismiss="modal"><span>Cerrar</span></button>
+        </div>
+      </form>
+    </div>
+
+  </div>
+</div>

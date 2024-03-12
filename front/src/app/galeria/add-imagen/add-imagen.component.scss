@@ -1,0 +1,19 @@
+
+
+.bordeColor {
+  border-bottom: 1px solid var(--color-secundario);
+  .modalTitulo {
+    color: var(--color-secundario);
+    font-family: var(--tipo-textos);
+  }
+}
+
+img{
+  position: relative;
+  left: 25%;
+}
+span.obligatorio{
+  color: var(--color-secundario);
+}
+
+

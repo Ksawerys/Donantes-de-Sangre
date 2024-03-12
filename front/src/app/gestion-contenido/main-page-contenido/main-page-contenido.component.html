@@ -1,0 +1,61 @@
+<router-outlet></router-outlet>
+<div class="container-fluid f-contraste">
+  <div class="row">
+    <div class="col text-center">
+      <h1 class="titulo subrayado">Noticias</h1>
+    </div>
+  </div>
+</div>
+<div>
+  <svg _ngcontent-ncw-c20="" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 200">
+    <path _ngcontent-ncw-c20="" fill="#f1eef5" fill-opacity="1"
+      d="M0,50L380,150L960,80L1950,128L1440,0L960,0L480,0L0,0Z">
+    </path>
+  </svg>
+</div>
+<app-add-contenido *ngIf="estaRegistrado && puedeModificar"></app-add-contenido>
+
+<div *ngIf="resultado.length>0" class="container pb-3 pt-3">
+  <h4 class="titulo mb-3">¿Quieres buscar alguna noticia? Escribe el titulo y encuéntrala</h4>
+  <div class="row">
+    <form class="col-8" [formGroup]="filtroForm" (ngSubmit)="generarFiltro()">
+      <input type="text" name="titulo" class="form-control mb-3" placeholder="Escribe el titulo de la noticia"
+        formControlName="titulo" />
+      <div class="col-4">
+        <div class="row">
+          <div class="col-12 d-flex align-items-end">
+            <button type="submit" class="btn-secundario">Buscar</button>
+            <button (click)="generarTodas()" class="btn-secundario ms-3">Todas</button>
+          </div>
+        </div>
+      </div>
+      <div class="row"><span class=" col-12 form-text errorSpan mb-3" *ngIf="aviso==1">No se han encontrado noticias
+          con ese titulo</span></div>
+    </form>
+  </div>
+</div>
+
+<div class="container pb-5 pt-5" *ngFor="let noticia of resultado| paginate: { itemsPerPage: 3, currentPage: p }">
+  <div class="row">
+    <div class="col">
+      <h1 class="titulo bordeSubrayado">{{noticia.titulo}}</h1>
+      <h5 class="pt-3 pb-2">{{noticia.subtitulo}}</h5>
+      <p class="pb-3"><small>Añadido el {{noticia.fecha}}</small></p>
+      <img *ngIf="noticia.imagen!==''" class="img-fluid mb-3" [src]=noticia.imagen>
+      <div [innerHtml]="noticia.contenido">
+      </div>
+      <div *ngIf="estaRegistrado && puedeModificar" class="pt-5 pb-2 centrado">
+        <button id=A{{noticia.id}} (click)="obtenerId($event)" class="btn-secundario mb-5" data-bs-toggle="modal"
+          data-bs-target="#modalConfirmacion">Borrar</button>
+
+        <button (click)="obtenerNoticiaAEditar($event)" id=M{{noticia.id}} class="btn-secundario ms-5 mb-5"
+          data-bs-toggle="modal" data-bs-target="#modalEditado">Modificar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<pagination-controls (pageChange)="p = $event" previousLabel="Anterior" nextLabel="Siguiente" class="text-center">
+</pagination-controls>
+
+<app-borrar [idBorrado]="idBorrado"></app-borrar>
+<app-editado [idModificar]="idModificar" [infoNoticia]="info" [qho]="qho"></app-editado>

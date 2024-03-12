@@ -1,0 +1,29 @@
+<div class="modal" id="deleteFaq" tabindex="-1">
+  <div class="modal-dialog modal-xl modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bordeColor">
+        <h5 class="modal-title modalTitulo">Eliminando Faq Seleccionados</h5>
+        <button (click)="limpiar()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p *ngIf="listaFaq.length>0; else mensajeAviso">¿Realmente quieres eliminar las faq que han sido seleccionadas?
+        </p>
+        <div class="row"><span class=" col-12 form-text errorSpan mb-3" *ngIf="mensaje==1">Selecciona las faq que quieras eliminar</span></div>
+
+        <div class="row"><span class=" col-12 form-text CorrectSpan mb-3" *ngIf="mensaje==2">Se han eliminado correctamente
+            correctamente</span></div>
+        <div class="row"><span class=" col-12 form-text errorSpan mb-3" *ngIf="mensaje==3">Ops!!Algo ha salido mal y no se
+            han podido eliminar</span></div>
+
+        <ng-template #mensajeAviso>
+          <p>Selecciona las faq que quieras eliminar</p>
+        </ng-template>
+      </div>
+      <div class="modal-footer bordeArriba">
+        <button (click)="limpiar()" type="button" class="btn btn-terciario me-4" data-bs-dismiss="modal">Cerrar</button>
+        <button (click)="eliminarFaqSeleccionadas()" *ngIf="listaFaq.length>0" type="button"
+          class="btn btn-terciario">Eliminar Seleccionados</button>
+      </div>
+    </div>
+  </div>
+</div>

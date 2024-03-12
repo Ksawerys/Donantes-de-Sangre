@@ -1,0 +1,60 @@
+h1 {
+  padding-top: 5rem;
+}
+
+table {
+  margin-bottom: 1.5rem;
+
+  td,
+  th {
+    padding: 1rem;
+    vertical-align: middle;
+  }
+
+  thead,
+  tbody .cabecera {
+    color: var(--bs-white);
+  }
+
+  thead {
+    background-color: var(--color-granate);
+    border-color: var(--color-granate);
+  }
+
+  tbody {
+    border-color: var(--color-contraste-medio);
+
+    .cabecera {
+      background-color: var(--color-secundario);
+      border-color: var(--color-secundario);
+    }
+
+    .separador,
+    .separador td {
+      border: none;
+      border-bottom: 1px solid var(--color-secundario);
+
+      td {
+        height: 50px;
+      }
+    }
+  }
+}
+figcaption {
+  background-color: var(--bs-dark);
+  color:var(--bs-white);
+  padding: 3px;
+  text-align: center;
+}
+
+.fondoAcordeon{
+background-color: var(--color-contraste);
+color:var(--color-primario);
+font-size: var(--letra-media);
+}
+.medio{
+  font-size: var(--letra-grande);
+}
+.peque{
+  font-size: var(--letra-pequena) ;
+}

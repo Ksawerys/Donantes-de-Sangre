@@ -1,0 +1,100 @@
+<form [formGroup]="formulario" (ngSubmit)="borrarPregunta()">
+<div class="modal fade" id="borrarPregunta" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header border-buttom border-danger border-3">
+        <h3 class="modal-title titulo" id="staticBackdropLabel">Borrando una pregunta</h3>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+        <div class="modal-body border-buttom border-danger">
+          <div class="row d-flex justify-content-center">
+            <div class="col-12">
+              <select formControlName="pregunta" (change)="seleccionarPregunta()" #select class="form-select">
+                <option selected>Selecciona una pregunta</option>
+                <option *ngFor="let pregunta of this.preguntas_array" value="{{pregunta.id}}">{{pregunta.titulo}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="row" [hidden]="!mostrar">
+            <div class="col-12">
+              <h4>Titulo:</h4>
+              <input [ngModel]="pregunta.titulo" [ngModelOptions]="{standalone: true}" type="text" class="form-control mb-3" placeholder="Escribe el titulo para esta pregunta" disabled>
+            </div>
+            <div class="col-12">
+              <h4>Enunciado:</h4>
+              <input [ngModel]="pregunta.enunciado" [ngModelOptions]="{standalone: true}" type="text" class="form-control mb-3" placeholder="Escribe tu enunciado" disabled>
+            </div>
+            <h4>Imagen:</h4>
+            <div *ngIf="previsualizacion_apto_sangre" class="col-12 d-flex justify-content-center">
+              <img src="../../../../assets/imagenes/apto_sangre/{{previsualizacion_apto_sangre}}" class="w-50">
+            </div>
+            <div class="col-12">
+              <h4>Respuesta:</h4>
+              <div class="form-check">
+                <input #respuesta_si type="radio" class="form-check-input" name="respuesta" disabled>
+                <label class="form-check-label" for="si">Si</label>
+              </div>
+              <div class="form-check">
+                <input #respuesta_no type="radio" class="form-check-input" name="respuesta" disabled>
+                <label class="form-check-label" for="no">No</label>
+              </div>
+            </div>
+            <div class="col-12">
+              <h4>Recomendaciónes a los problemas:</h4>
+              <textarea [ngModel]="pregunta.solucion_problema" [ngModelOptions]="{standalone: true}" class="form-control mb-3" rows="5" placeholder="Escribe tu recomendacion" disabled></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer d-flex justify-content-end">
+          <button (click)="preguntaSeleccionada()" type="button" class="btn btn-secundario"
+          data-bs-target="#confirmar_Borrar" data-bs-toggle="modal" data-bs-dismiss="modal">
+            Borrar
+          </button>
+          <button type="button" class="btn btn-secundario" data-bs-dismiss="modal"><span>Cerrar</span></button>
+        </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="confirmar_Borrar" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="mostrarConfirmacion" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" *ngIf="mostrar_confirmacion; else mostrar_fallo">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalToggleLabel2">¿Estas seguro?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>¿Estas seguro que desea borrar la pregunta <u>{{pregunta.titulo}}</u>?</p>
+        <p>Esta accion no se puede deshacer</p>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-secundario" data-bs-target="#borrarPregunta"
+        data-bs-toggle="modal" data-bs-dismiss="modal" [disabled]="loading">
+          <span>
+            {{(loading) ? 'Cargando......' : 'Si, estoy seguro'}}
+          </span>
+        </button>
+        <button type="button" class="btn btn-secundario" data-bs-target="#borrarPregunta" data-bs-toggle="modal" data-bs-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+
+    <ng-template #mostrar_fallo>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalToggleLabel2">¡No has seleccionado una pregunta!</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>No has seleccionado una pregunta. Por favor selecciona una pregunta</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secundario" data-bs-target="#borrarPregunta" data-bs-toggle="modal" data-bs-dismiss="modal">OK</button>
+        </div>
+      </div>
+
+    </ng-template>
+  </div>
+</div>
+
+</form>

@@ -1,0 +1,276 @@
+<div class="mensaje" [@entradaSalidaVentana]="mensaje == ''" *ngIf="mensaje != ''">
+  <div [ngClass]="exito ? 'mensaje-ok' : 'mensaje-error'" class="d-flex align-items-center justify-content-center">
+
+    <i [ngClass]="exito ? 'fa-circle-check' : 'fa-triangle-exclamation'" class="fa-solid me-3"></i>
+
+    <p>{{ mensaje }}</p>
+  </div>
+</div>
+
+<div>
+  <h3 class="titulo mb-4">Dirección</h3>
+
+  <div class="direcciones">
+
+    <div class="direccion row g-0 align-items-center" *ngFor="let dir of dirsData; let i = index">
+
+      <div class="row gx-0 lugar">
+        <div class="nombre col-12 col-lg-4 f-rojo">Lugar</div>
+        <input type="text" class="valor align-middle col-12 col-lg-8"  readonly [(ngModel)]="dir.lugar"/>
+      </div>
+
+      <div class="row gx-0">
+        <div class="col-12 col-sm-9">
+          <div class="row gx-0 calle">
+            <div class="nombre col-12 col-lg-4 f-rojo">Calle</div>
+            <input type="text" class="valor align-middle col-12 col-lg-8" readonly [(ngModel)]="dir.calle"/>
+          </div>
+        </div>
+
+        <div class="col-12 col-sm-3">
+          <div class="row gx-0">
+            <div class="nombre col-12 col-lg-4 f-rojo">Nro.</div>
+            <input type="text" class="valor align-middle col-12 col-lg-8" readonly [(ngModel)]="dir.numero"/>
+          </div>
+        </div>
+      </div>
+
+      <div class="row gx-0">
+        <div class="nombre col-12 col-lg-4 f-rojo">Ciudad</div>
+        <input type="text" class="valor align-middle col-12 col-lg-8" readonly [(ngModel)]="dir.ciudad"/>
+      </div>
+
+      <div class="row gx-0">
+        <div class="col-12 col-sm-9">
+          <div class="row gx-0 provincia">
+            <div class="nombre col-12 col-lg-4 f-rojo">Provincia</div>
+            <input type="text" class="valor align-middle col-12 col-lg-8" readonly [(ngModel)]="dir.provincia"/>
+          </div>
+        </div>
+
+        <div class="col-12 col-sm-3">
+          <div class="row gx-0">
+            <div class="nombre col-12 col-lg-4 f-rojo">CP</div>
+            <input type="text" class="valor align-middle col-12 col-lg-8" readonly [(ngModel)]="dir.cp"/>
+          </div>
+        </div>
+      </div>
+
+      <div class="row gx-0">
+        <div class="nombre col-12 col-lg-4 f-rojo">URL del mapa</div>
+        <input type="text" class="valor align-middle col-12 col-lg-8" readonly [(ngModel)]="dir.urlMapa"/>
+      </div>
+
+      <div>
+        <button type="button" class="btn-primario mt-2" data-bs-toggle="modal" *ngIf="dirsData.length > 0"
+          data-bs-target="#insertOrUpdateDir" (click)="setInfoDir(i); accion=acciones[1]; limpiarMensaje()">
+          <i class="fa-solid fa-pen me-2"></i>Editar dirección
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <button type="button" class="btn-primario mt-2" data-bs-toggle="modal" href="#insertOrUpdateDir"
+      *ngIf="dirsData.length == 0" (click)="accion=acciones[0]; limpiarMensaje()">
+      <i class="fa-solid fa-plus me-2"></i>Añadir dirección
+    </button>
+  </div>
+</div>
+
+
+<!--  Modal -->
+<div class="modal" id="insertOrUpdateDir" tabindex="-1" aria-hidden="true"
+  aria-labelledby="insertOrUpdateDirLabel" data-bs-backdrop="static" data-bs-keyboard="false">
+
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="insertOrUpdateDirLabel">{{ accion | titlecase }} dirección</h1>
+        <button #closeModal type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"
+          (click)="limpiarFormulario()"></button>
+      </div>
+
+      <form [formGroup]="modalForm" (ngSubmit)="insertOrUpdateDir()" novalidate>
+        <div class="modal-body">
+          <div class="mb-4">
+            <label for="lugar">Lugar</label><br>
+
+            <input type="text" name="lugar" id="lugar" class="lugar form-control" required
+              formControlName="lugar" placeholder="Introduce el lugar." />
+
+            <div>
+              <p *ngIf="formCtrls['lugar']?.errors?.['maxlength']" class="mensaje-error">
+                Debe tener un máximo de 255 caracteres.
+              </p>
+            </div>
+          </div>
+
+          <div class="row gx-0 mb-4">
+            <div class="col-7 pe-3">
+              <label for="calle">Calle</label><br>
+
+              <input type="text" name="calle" id="calle" class="calle form-control" required
+                formControlName="calle" placeholder="Introduce la calle."/>
+
+              <div>
+                <p *ngIf="(formCtrls['calle']?.errors?.['required'] || formCtrls['calle']?.errors?.['vacio'])
+                  && formCtrls['calle']?.touched" class="mensaje-error">
+                  La calle es obligatoria.
+                </p>
+                <p *ngIf="formCtrls['calle']?.errors?.['maxlength']" class="mensaje-error">
+                  Debe tener un máximo de 255 caracteres.
+                </p>
+              </div>
+            </div>
+
+            <div class="col-5">
+              <label for="numero">Número</label><br>
+
+              <input type="text" name="numero" id="numero" class="numero form-control" required
+                formControlName="numero" placeholder="Número."/>
+
+              <div>
+                <p *ngIf="formCtrls['numero']?.errors?.['pattern'] && formCtrls['numero']?.touched"
+                  class="mensaje-error">
+                  Debe ser un número de un máximo de 3 caracteres.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <label for="ciudad">Ciudad</label><br>
+
+            <input type="text" name="ciudad" id="ciudad" class="ciudad form-control" required
+              formControlName="ciudad" placeholder="Introduce la ciudad." />
+
+            <div>
+              <p *ngIf="(formCtrls['ciudad']?.errors?.['required'] || formCtrls['ciudad']?.errors?.['vacio'])
+                && formCtrls['calle']?.touched" class="mensaje-error">
+                La ciudad es obligatoria.
+              </p>
+              <p *ngIf="formCtrls['ciudad']?.errors?.['maxlength']" class="mensaje-error">
+                Debe tener un máximo de 255 caracteres.
+              </p>
+            </div>
+          </div>
+
+          <div class="row gx-0 mb-4">
+            <div class="col-7 pe-3">
+              <label for="provincia">Provincia</label><br>
+
+              <input type="text" name="provincia" id="provincia" class="provincia form-control" required
+                formControlName="provincia" placeholder="Introduce la provincia." />
+
+              <div>
+                <p *ngIf="(formCtrls['provincia']?.errors?.['required'] || formCtrls['provincia']?.errors?.['vacio'])
+                  && formCtrls['calle']?.touched" class="mensaje-error">
+                  La provincia es obligatoria.
+                </p>
+                <p *ngIf="formCtrls['provincia']?.errors?.['maxlength']" class="mensaje-error">
+                  Debe tener un máximo de 255 caracteres.
+                </p>
+              </div>
+            </div>
+
+            <div class="col-5">
+              <label for="cp">Código postal</label><br>
+
+              <input type="text" name="cp" id="cp" class="cp form-control" required
+                formControlName="cp" placeholder="Introduce el código postal." />
+
+              <div>
+                <p *ngIf="formCtrls['cp']?.errors?.['required'] && formCtrls['calle']?.touched"
+                  class="mensaje-error">
+                  El código postal es obligatorio.
+                </p>
+                <p *ngIf="formCtrls['cp']?.errors?.['pattern'] && formCtrls['cp']?.touched"
+                  class="mensaje-error">
+                  Debe ser un número de 5 caracteres.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <label for="urlMapa">
+              URL del mapa
+              <i class="info-mapa fa-solid fa-circle-info ms-1" data-bs-target="#infoUrl" data-bs-toggle="modal"></i>
+            </label><br>
+
+            <input type="text" name="urlMapa" id="urlMapa" class="urlMapa form-control" required
+              formControlName="urlMapa" placeholder="Introduce una URL de Google Maps." />
+
+            <div>
+              <p *ngIf="formCtrls['urlMapa']?.errors?.['maxlength']" class="mensaje-error">
+                Número máximo de caracteres excedido.
+              </p>
+
+              <p *ngIf="formCtrls['urlMapa']?.errors?.['unsafeUrl'] || formCtrls['urlMapa']?.errors?.['pattern']"
+                class="mensaje-error">
+                Formato no válido. Debes introducir una URL de Google Maps
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn-terciario" data-bs-dismiss="modal" aria-label="Cancelar edición"
+            (click)="limpiarFormulario()">
+            Cancelar
+          </button>
+
+          <button type="submit" class="btn-terciario ms-4" aria-label="Guardar edición">
+            Guardar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!--  Modal Info-->
+<div class="modal" id="infoUrl" tabindex="-1" aria-hidden="true"
+  aria-labelledby="infoUrlLabel" data-bs-backdrop="static" data-bs-keyboard="false">
+
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button #closeModalInfo data-bs-target="#insertOrUpdateDir" data-bs-toggle="modal"
+         type="button" class="btn-close" aria-label="Cerrar"></button>
+      </div>
+
+      <div class="modal-body">
+        <ul>
+          <li class="mb-5">
+            <p class="mb-1">Busca y selecciona el lugar en google maps.</p>
+            <img src="{{ imgBaseUrl }}/tutorial1.png">
+          </li>
+
+          <li class="mb-5">
+            <p class="mb-1">Pulsa Compartir.</p>
+            <img src="{{ imgBaseUrl }}/tutorial2.png">
+          </li>
+
+          <li class="mb-5">
+            <p class="mb-1">Pulsa Insertar un mapa.</p>
+            <img src="{{ imgBaseUrl }}/tutorial3.png">
+          </li>
+
+          <li class="mb-5">
+            <p class="mb-1">Copia la URL del mapa.</p>
+            <img src="{{ imgBaseUrl }}/tutorial4.png">
+          </li>
+
+          <li class="mb-3">
+            <p class="mb-1">De la URL copiada, selecciona la parte dentro de src (sin incluir las comillas).</p>
+            <img src="{{ imgBaseUrl }}/tutorial5.png">
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

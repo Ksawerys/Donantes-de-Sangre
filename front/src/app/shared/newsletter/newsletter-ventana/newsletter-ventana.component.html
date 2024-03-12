@@ -1,0 +1,29 @@
+<div #newsletter class="newsletter container" [@entradaSalidaVentana]="!suscrito" *ngIf="mostrar">
+
+  <div class="row">
+
+    <div class="col-2 icono-grande align-items-center d-flex">
+      <i class="fa-solid text-center"
+        [ngClass]="suscrito ? 'fa-envelope-circle-check' : 'fa-paper-plane'">
+      </i>
+    </div>
+
+    <div class="col-12 col-sm-10 text-start mensaje-inf">
+
+      <div class="d-flex justify-content-between pb-1">
+        <i class="fa-solid icono-peq"
+          [ngClass]="suscrito ? 'fa-envelope-circle-check' : 'fa-paper-plane'">
+        </i>
+        <p class="titulo"> {{ titulo }} </p>
+        <i class="fa-solid fa-xmark" (click)="cerrar()"></i>
+      </div>
+
+      <div class="pb-1">
+        <p class="mb-2"> {{ texto }} </p>
+      </div>
+
+      <app-email-formulario (onSubmit)="cambiarMensaje($event)" *ngIf="!suscrito"></app-email-formulario>
+
+    </div>
+  </div>
+</div>

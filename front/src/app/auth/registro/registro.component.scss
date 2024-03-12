@@ -1,0 +1,24 @@
+span.errorLogin {
+    color: var(--color-primario);
+}
+
+input {
+    padding: .4rem 1rem;
+    border-radius: 2px;
+}
+
+div {
+    a.olvidoPasswd {
+        color: var(--color-constraste-oscuro);
+        text-decoration: none;
+        font-size: (--letra-pequena);
+
+        &:hover {
+            color: var(--color-secundario);
+        }
+    }
+}
+
+button {
+    width: 10rem;
+}

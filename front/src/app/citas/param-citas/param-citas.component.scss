@@ -1,0 +1,93 @@
+.sombra {
+
+    box-shadow: 0 2px 9px rgba(0, 0, 0, 0.2);
+
+    .btnes-dias {
+    
+        border-radius: 2px 0px 0px 2px;
+    
+        .btn-dia {
+            cursor: pointer;
+            background-color: var(--color-contraste);
+    
+            &.selected {
+                background-color: var(--bs-white);
+            }
+
+            input {
+        
+                visibility: hidden;
+            }
+        }
+    }
+    
+    .horas {
+        height: 15rem;
+        overflow: scroll;
+    
+    
+        border-radius: 0px 2px 2px 2px;
+    
+        .hora {
+            display: flex;
+            // justify-content: center;
+            align-items: center;
+            height: 2rem;
+    
+            padding-top: 1.3rem;
+            padding-bottom: 1.3rem;
+
+
+            &.hora-horario {
+                font-weight: bold;
+            }
+    
+            .quitar {
+                justify-self: end; 
+                background-color: var(--bs-white);
+                border: 0px;
+                outline: 0px;
+
+                i {
+                    color: var(--color-contraste-oscuro);
+        
+                    &:hover {
+                      color: var(--color-granate);
+                    }
+                }
+            }
+        }
+    }
+}
+
+input.ng-invalid.ng-touched, .ng-submitted input.ng-invalid {
+    background-color: rgb(255, 220, 231);
+}
+
+.campo {
+    &:not(:first-of-type) {
+      margin-top: 3.5rem;
+    }
+  }
+
+  .aparece-grande {
+      display: inline;
+  }
+
+  .aparece-pequeno {
+      display: none;
+  }
+
+  .mensajito {
+      height: 1rem;
+      color: var(--color-primario);
+  }
+
+  .campos .campo {
+    border-bottom: 2px solid var(--color-primario);
+  
+    input {
+      font-size: unset;
+    }
+}
+  

@@ -1,0 +1,36 @@
+<main class="container g-0">
+  <h3 class="titulo">Himnos</h3>
+
+  <div class="container g-0">
+
+      <div>
+        <ul class="list-group mt-5">
+          <li *ngFor="let himno of audios" class="list-group-item">
+            <h4 class="text-center titulo mt-2 border-bottom">{{himno.titulo}}</h4>
+            <audio class="mt-5 mb-3 centrarAudio" controls controlsList="nodownload">
+              <source [src]=himno.cancion type="audio/mp4">
+            </audio>
+            <div class="mt-5 mb-3">
+              <div class="col d-flex justify-content-around">
+                <button id=E{{himno.id}} class="btn-secundario" data-bs-toggle="modal"
+                  data-bs-target="#modalBorrado" (click)="obtenerId($event)">Eliminar</button>
+
+                <button id=Z{{himno.id}} class="btn-secundario"data-bs-toggle="modal"
+                  data-bs-target="#modalEditado" (click)="obtenerIdEditado($event)"(click)="obtenerAudioModificar()" >Modificar</button>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+    <div class="row mt-5">
+      <div class="col d-flex justify-content-around">
+        <button class="btn-secundario" data-bs-toggle="modal" data-bs-target="#modalBorradoTotal">Eliminar Todo</button>
+        <button class="btn-secundario" data-bs-toggle="modal" data-bs-target="#modalAdd">Añadir</button>
+      </div>
+    </div>
+  </div>
+</main>
+<app-add-himno></app-add-himno>
+<app-delete-himno [idBorrar]="idBorrar"></app-delete-himno>
+<app-edit-himno [infoAudio]="infoAudio" [idModificado]="idModificado" [qho]="qho"></app-edit-himno>

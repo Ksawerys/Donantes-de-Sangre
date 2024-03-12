@@ -1,0 +1,8 @@
+<div class="d-flex align-items-center">
+  <i class="fa fa-phone" aria-hidden="true"></i>
+
+  <div>
+    <p *ngFor="let t of telefonos">{{ t.numero }}<span *ngIf="t.extension"> ext. {{ t.extension }}</span></p>
+  </div>
+</div>
+

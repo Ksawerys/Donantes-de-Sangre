@@ -1,0 +1,17 @@
+<div class="cita">
+  <i class="fa-solid fa-calendar-day"></i>
+
+  <h1 class="titulo subrayado">Cita previa</h1>
+
+  <p>Pide cita llamando a uno de nuestros teléfonos</p>
+
+  <div class="telefonos text-center">
+    <div class="telefono d-flex justify-content-center align-items-center"
+      *ngFor="let t of telefonos">
+
+      <i class="fa-solid fa-phone me-2 fs-6"></i>
+
+      <p class="fw-bold">{{ t.numero }}<span *ngIf="t.extension"> ext. {{ t.extension }}</span></p>
+    </div>
+  </div>
+</div>

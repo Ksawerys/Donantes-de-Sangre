@@ -1,0 +1,74 @@
+<div *ngIf="this.registradoExito == 0"
+ class="alert alert-success alert-dismissible position-fixed fade show ms-3"
+ role="alert">
+    El registro se ha realizado correctamente. Te hemos mandado un correo de confirmación.
+    Pincha en el enlace para poder acceder con tu cuenta.
+    <a (click)="irAlLogin()" class="pe-auto"><strong>Ir al login</strong></a>.
+
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+<div *ngIf="this.recPasswdExito == 3" class="alert alert-danger alert-dismissible position-fixed fade show ms-3" role="alert">
+    Se ha producido un error a la hora de contactar.
+
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+<div *ngIf="this.recPasswdExito == 2" class="alert alert-success alert-dismissible position-fixed fade show ms-3" role="alert">
+    Debes haber recibido un mensaje en tu cuenta de correo con el código a introducir.
+
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+<div *ngIf="this.recPasswdExito == 1" class="alert alert-danger alert-dismissible position-fixed fade show ms-3" role="alert">
+    Se ha producido un error al recuperar la contraseña.
+
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+<div *ngIf="this.recPasswdExito == 0" class="alert alert-success alert-dismissible position-fixed fade show ms-3" role="alert">
+    Contraseña resetada con éxito.<br>
+    <a (click)="irAlLogin()" class="pe-auto"><strong>Ir al login</strong></a>.
+
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+<div *ngIf="this.registradoExito == 1" class="alert alert-danger alert-dismissible position-fixed fade show ms-3" role="alert">
+  Se ha producido un error en el registro.
+
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+<div class="container-fluid d-flex justify-content-center align-content-center px-2 px-sm-5 py-5">
+    <div class="row w-100">
+        <div class="col-0 col-sm-1 col-lg-2"></div>
+
+        <div class="col-12 col-sm-10 col-lg-8">
+            <div class="card border-0 rounded-0">
+                <div class="card-header d-flex justify-content-center align-items-center py-1 border-bottom-0">
+                    <h1 class="titulo" *ngIf="this.accion == 'login'">Login</h1>
+                    <h1 class="titulo" *ngIf="this.accion == 'registro'">Registro</h1>
+                    <h1 class="titulo" *ngIf="this.accion == 'recuperacion'">Recuperar contraseña</h1>
+                </div>
+                <div class="card-body px-4 px-sm-5 py-5">
+
+                    <app-login *ngIf="this.accion == 'login'"></app-login>
+
+                    <app-registro *ngIf="this.accion == 'registro'"
+                        (onFormValido)="showAlertRegistro($event)"></app-registro>
+
+                        <app-recuperar-passwd *ngIf="this.accion == 'recuperacion'"
+                        (onRecPasswd)="showAlertRecPasswd($event)"></app-recuperar-passwd>
+
+                    <div class="card-body w-100 p-0">
+                        <!-- <div class="botonRegistro">
+                            <button type="button" class="btn w-100 border border-black mt-4">sign up with google</button>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-0 col-sm-1 col-lg-2"></div>
+    </div>
+</div>

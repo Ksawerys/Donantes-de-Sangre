@@ -1,0 +1,20 @@
+.modal {
+  --bs-modal-width: 700px;
+
+  .max-chars {
+    font-size: var(--letra-pequena);
+  }
+}
+
+.historia {
+  cursor: context-menu;
+
+  .contenedor-historia {
+    margin-bottom: 2rem;
+    max-height: 450px;
+    outline: none;
+    padding: 1rem 1.5rem;
+    overflow-y: scroll;
+    border: 1px solid var(--color-contraste);
+  }
+}

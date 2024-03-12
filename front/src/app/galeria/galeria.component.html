@@ -1,0 +1,72 @@
+<div class="row d-flex justify-content-center">
+  <h1 class="titulo subrayado text-center mb-5">Galería</h1>
+
+  <div class="gallery-lightbox-container">
+    <ng-container *ngIf="this.galeria_imagenes.length > 0; else ningunMensaje">
+      <div class="contenedor-imagenes text-center mb-5 gallery">
+        <div (click)="fotoSeleccionada($event)"
+        *ngFor="let imagen of this.galeria_imagenes | paginate: { itemsPerPage: 6, currentPage: p }; let i=index"
+        class="gallery-img">
+
+          <img (click)="onPreviewImage(i)"
+          src="../../assets/imagenes/galeria/{{imagen.nombre}}"
+          id="{{p}}-{{i}}">
+          <input *ngIf="puedeModificar" type="checkbox" class="custom-control custom-checkbox image-checkbox custom-control-input checkbox-inline" id="{{imagen.id}}" alt="{{imagen.nombre}}">
+
+          <h4 class="descripcion">{{imagen.descripcion}}</h4>
+        </div>
+      </div>
+
+      <div *ngIf="showMask" class="lightbox" @animation2>
+        <span *ngIf="showCount" class="count">
+          {{currentIndex + 1}}/{{totalImageCount}}
+        </span>
+        <button *ngIf="previewImage" class="close-btn" (click)="onClosePreview()">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+        <button *ngIf="controls" class="btn-lightbox-carousel btn-prev" (click)="prev()">
+          <i class="fas fa-arrow-circle-left icon-lightbox-carousel icon-prev"></i>
+        </button>
+        <button *ngIf="controls" class="btn-lightbox-carousel btn-next" (click)="next()">
+          <i class="fas fa-arrow-circle-right icon-lightbox-carousel icon-next"></i>
+        </button>
+
+        <div *ngIf="previewImage"
+          [@animation]="{value: 'visible'}"
+          (@animation.done)="onAnimationEnd($event)"
+          class="lightbox-img row">
+          <div class="col-12 d-flex justify-content-center bordeColor">
+            <h3 class="titulo">Mostrando Foto</h3>
+          </div>
+          <div *ngIf='this.currentLightboxImage.descripcion' class="bordeColor col-12 d-flex justify-content-center">
+            <h4 class="descripcion">{{this.currentLightboxImage.descripcion}}</h4>
+          </div>
+          <div class="col-12 d-flex justify-content-center darEspacio">
+            <img src="../../assets/imagenes/galeria/{{this.currentLightboxImage.nombre}}" alt="">
+          </div>
+        </div>
+
+      </div>
+
+      <pagination-controls (pageChange)="p = $event" previousLabel="Anterior" nextLabel="Siguiente" class="text-center">
+      </pagination-controls>
+    </ng-container>
+
+    <ng-template #ningunMensaje>
+      <p class="text-center mb-5">No hay ninguna imagen disponible</p>
+    </ng-template>
+
+  </div>
+  <div class="row d-flex justify-content-evenly mb-5 mt-5">
+    <div *ngIf="puedeModificar" class="col-md-6 col-12 text-center">
+      <button #boton_Eliminar class="btn-secundario w-50 mb-2" (click)="eliminandoFotos()">Eliminar fotos</button>
+    </div>
+    <div *ngIf="estaRegistrado" class="col-md-6 col-12 text-center">
+      <button #boton_Añadir class="btn-secundario w-50 mb-2" data-bs-toggle="modal"
+      data-bs-target="#modalSubirFoto">Subir foto</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<app-add-imagen (recargarImagenes)="mostrarImagenes()"></app-add-imagen>

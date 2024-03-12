@@ -1,0 +1,133 @@
+<div class="modal" id="desbloquearUsuario" tabindex="-1">
+  <div class="modal-dialog modal-xl modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bordeColor">
+        <h5 class="modal-title modalTitulo">Desbloquear Usuarios</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+          (click)="limpiarModal('desbloqueado')"></button>
+      </div>
+
+      <ng-template #mensajeAviso>
+        <div class="modal-body">
+          <h4 class="titulo text-center mt-2 mb-2">No hay usuarios bloqueados</h4>
+        </div>
+        <div class="modal-footer bordeArriba">
+          <button type="button" class="btn btn-terciario me-4" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </ng-template>
+
+      <div *ngIf="this.Bloqueados.length>0; else mensajeAviso" class="modal-body">
+        <p>¿Estás buscando algún usuario o usuario? Escribe su nombre:</p>
+        <app-filtro-user (search)="Search($event)"></app-filtro-user>
+        <table class="table table-hover overflow-auto table-bordered p-4 text-center">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Nombre Usuario</th>
+              <th scope="col">Marcar</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container
+              *ngFor="let bloqueado of Bloqueados |search:valorFiltro | paginate: { itemsPerPage: 5, currentPage: a }; let i=index">
+              <tr scope="row">
+                <th class="align-middle">
+                  {{i+1}}
+                </th>
+                <td class="align-middle">
+                  {{bloqueado.nombre}}
+                </td>
+                <td class="align-middle">
+                  <input *ngFor="let c of CheckBloqueados" [checked]=c.marcado [hidden]="c.id != bloqueado.id"
+                    id={{bloqueado.id}} (change)="UserSeleccionado($event,'bloqueado');" type="checkbox"
+                    class="custom-control-input checkbox-inline ms-auto">
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+        <pagination-controls (pageChange)="a = $event" previousLabel="Anterior" nextLabel="Siguiente"
+          class="text-center">
+        </pagination-controls>
+        <div class="row"><span class=" col-12 form-text CorrectSpan ms-3 mt-3 mb-3" *ngIf="mensaje==1">Se han
+            desbloquedo a los usuarios</span></div>
+        <div class="row"><span class=" col-12 form-text errorSpan ms-3 mt-3  mb-3" *ngIf="mensaje==2">No se ha podido
+            desbloquear a los usuarios</span></div>
+        <div class="row"><span class=" col-12 form-text errorSpan ms-3 mt-3  mb-3" *ngIf="mensaje==3">Selecciona a los
+            usuarios que quieras desbloquear</span></div>
+        <div class="modal-footer bordeArriba">
+          <button type="button" (click)="limpiarModal('desbloqueado')" class="btn btn-terciario me-4"
+            data-bs-dismiss="modal">Cerrar</button>
+          <button (click)="DesbloquearUsuario()" type="button" class="btn btn-terciario">Desbloquear Seleccionados</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="bloquearUsuario" tabindex="-1">
+  <div class="modal-dialog modal-xl modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bordeColor">
+        <h5 class="modal-title modalTitulo">Bloquear Usuarios</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+          (click)="limpiarModal('bloqueado')"></button>
+      </div>
+
+      <ng-template #mensajeAvisoDesbloqueados>
+        <div class="modal-body">
+          <h4 class="titulo text-center mt-2 mb-2">No hay usuarios desbloqueados</h4>
+        </div>
+        <div class="modal-footer bordeArriba">
+          <button type="button" class="btn btn-terciario me-4" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </ng-template>
+
+      <div *ngIf="this.Desbloqueados.length>0; else mensajeAvisoDesbloqueados" class="modal-body">
+        <p>¿Estás buscando algún usuario o usuario? Escribe su nombre:</p>
+        <app-filtro-user (search)="Search($event)"></app-filtro-user>
+        <table class="table table-hover overflow-auto table-bordered p-4 text-center">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Nombre Usuario</th>
+              <th scope="col">Marcar</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container
+              *ngFor="let desbloqueado of Desbloqueados |search:valorFiltro | paginate: { itemsPerPage: 5, currentPage: p }; let i=index">
+              <tr scope="row">
+                <th class="align-middle">
+                  {{i+1}}
+                </th>
+                <td class="align-middle">
+                  {{desbloqueado.nombre}}
+                </td>
+                <td class="align-middle">
+                  <input *ngFor="let c of CheckDesbloqueados" [checked]=c.marcado [hidden]="c.id != desbloqueado.id"
+                    id={{desbloqueado.id}} (change)="UserSeleccionado($event,'desbloqueado');" type="checkbox"
+                    class="custom-control-input checkbox-inline ms-auto">
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+        <pagination-controls (pageChange)="p = $event" previousLabel="Anterior" nextLabel="Siguiente"
+          class="text-center">
+        </pagination-controls>
+        <div class="row"><span class=" col-12 form-text CorrectSpan ms-3 mt-3 mb-3" *ngIf="aviso==1">Se han bloqueado a
+            los usuarios</span></div>
+        <div class="row"><span class=" col-12 form-text errorSpan ms-3 mt-3  mb-3" *ngIf="aviso==2">No se ha podido
+            bloquear a los usuarios</span></div>
+        <div class="row"><span class=" col-12 form-text errorSpan ms-3 mt-3  mb-3" *ngIf="aviso==3">Selecciona a los
+            usuarios que quieras bloquear</span></div>
+        <div class="modal-footer bordeArriba">
+          <button type="button" (click)="limpiarModal('bloqueado')" class="btn btn-terciario me-4"
+            data-bs-dismiss="modal">Cerrar</button>
+          <button (click)="BloquearUsuario()" type="button" class="btn btn-terciario">Bloquear Seleccionados</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

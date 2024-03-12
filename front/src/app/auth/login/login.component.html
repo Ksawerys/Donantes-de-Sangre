@@ -1,0 +1,56 @@
+<form (ngSubmit)="login()">
+    <div *ngIf="this.erroneo" class="form-text errorLogin">
+        Usuario o constraseña incorrectos
+    </div>
+
+    <div class="email mb-3">
+        <label class="form-label" for="email">Email</label><br>
+        <input
+            type="text"
+            class="form-control"
+            name="email"
+            placeholder="Introduce tu email"
+            [(ngModel)]="nuevoUsr.email"
+        >
+    </div>
+
+    <div class="passwd mt-4">
+        <label class="form-label" for="passwd">Constraseña</label><br>
+        <input
+            type="password"
+            class="form-control"
+            name="passwd"
+            placeholder="Introduce tu contraseña"
+            [(ngModel)]="nuevoUsr.passwd"
+        >
+        <div class="mt-2 mb-5 d-flex justify-content-end">
+            <a
+                class="me-2 olvidoPasswd"
+                (click)="irARecPasswd()">¿Olvidaste tu contraseña?</a>
+        </div>
+    </div>
+
+
+    <div class="botonesLogin d-flex justify-content-center">
+        <button type="submit" class="btn-primario">Aceptar</button>
+    </div>
+
+</form>
+
+<div class="d-flex justify-content-center mt-5">
+  <mat-card class="cardStyle">
+    <div id="buttonDiv"></div>
+  </mat-card>
+</div>
+
+<div class="card-body w-100 p-0 d-flex justify-content-center mb-5">
+    <div class="text-center mt-5 ">¿Aún no te has registrado?</div>
+</div>
+
+<div class="card-body w-100 p-0 d-flex justify-content-center">
+        <button
+        type="button"
+        class="btn btn-secundario"
+        (click)="irARegistro()"
+        >Registrarse</button>
+</div>

@@ -1,0 +1,48 @@
+main {
+  margin-bottom: 5rem;
+
+  .container {
+    margin: 0;
+    max-width: 100%;
+    line-height: 2rem;
+
+    .historia {
+      padding-top: 5rem;
+      margin: 0;
+    }
+
+    .titulo {
+      text-align: center;
+    }
+
+    &>div {
+      padding: 0 3rem;
+
+      @media (min-width: 576px) {
+        padding: 0 7rem;
+      }
+
+      @media (min-width: 1200px) {
+        padding: 0 20rem;
+      }
+    }
+
+    .tarjetas {
+      gap: 3rem;
+      margin-top: 3.5rem;
+      justify-content: center;
+
+      .tarjeta {
+        box-shadow: 0 2px 9px rgba(0, 0, 0, .2);
+        padding: 1.5rem;
+        border-radius: 2px;
+
+        & p:first-child {
+          font-weight: bold;
+          font-size: var(--letra-media);
+          color: var(--color-secundario);
+        }
+      }
+    }
+  }
+}

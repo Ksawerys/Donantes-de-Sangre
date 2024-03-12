@@ -1,0 +1,48 @@
+div.alert {
+    z-index: 9000;
+    width: 25rem;
+
+    a {
+        text-decoration: none;
+        color: rgb(9, 43, 9);
+
+        &:hover {
+            color: rgb(2, 51, 2);
+        }
+    }
+}
+
+div.container-fluid {
+    background-color: var(--color-contraste);
+    min-height: 80vh;
+
+    div.card {
+        box-shadow: 0 3px 9px rgba(0, 0, 0, .5);
+        // width: 40vw;
+
+        
+        div.card-header {
+            background-color: var(--color-primario);
+            color: var(--bs-white);
+            height: 9rem;
+
+            border-radius: 2px 2px 0px 0px;
+
+        }
+
+        div.card-body {
+            margin-bottom: 2.5rem;
+
+            div.calendario {
+                height: 15rem;
+                width: 20rem;
+                background-color: green;
+            }
+
+            button {
+               width: 10rem;
+            }
+        }
+    }
+}    
+

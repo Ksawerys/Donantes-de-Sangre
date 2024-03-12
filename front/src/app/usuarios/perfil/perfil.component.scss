@@ -1,0 +1,134 @@
+main {
+    padding: 5rem 1.5rem;
+    background-color: var(--color-contraste);
+
+    h2 {
+      text-align: center;
+    }
+
+    .contenedor {
+      margin-top: 4rem;
+      padding: 1rem 0;
+      background-color: var(--bs-white);
+      border-radius: 2px;
+      box-shadow: 0 2px 9px rgba(0, 0, 0, .2);
+
+        .perfil {
+            padding: 1rem 1.5rem;
+
+            input.ng-invalid.ng-touched, .ng-submitted input.ng-invalid {
+                background-color: rgb(255, 220, 231);
+            }
+
+            .botones {
+                margin-bottom: 1rem;
+            }
+
+            .campos {
+
+                margin-top: 4rem;
+
+                i {
+                  color: var(--color-contraste-oscuro);
+
+                  &:hover {
+                    color: var(--color-granate);
+                  }
+                }
+
+                button {
+                  margin-top: 2.5rem;
+                }
+
+                .campo {
+                  &:not(:first-of-type) {
+                    margin-top: 3.5rem;
+                  }
+                }
+
+                .aparece-grande {
+                    display: inline;
+                }
+
+                .aparece-pequeno {
+                    display: none;
+                }
+
+                .mensajito {
+                    height: 1rem;
+                    // color: var(--color-primario);
+                    .mensaje-error {
+
+                    }
+                }
+            }
+
+
+            .campos .campo {
+                border-bottom: 2px solid var(--color-primario);
+
+                input {
+                  font-size: unset;
+                }
+            }
+
+
+            @media (max-width: 768px) {
+
+                .campos .campo {
+                  position: relative;
+
+                  div,
+                  .inpt {
+                    text-align: center;
+                  }
+
+                  div {
+                    width: 100%;
+                  }
+
+                  i {
+                    color: var(--bs-white);
+                    position: absolute;
+                    right: .5rem;
+                    top: .7rem;
+
+                    &:hover {
+                      color: var(--color-granate);
+                    }
+                  }
+                }
+            }
+
+            @media (max-width: 1260px) {
+
+                .campos {
+                    .aparece-pequeno {
+                        display: inline;
+                      }
+
+                      .aparece-grande {
+                        display: none;
+                    }
+                }
+            }
+
+        }
+    }
+}
+
+@media (min-width: 768px) {
+    main .contenedor {
+
+      .perfil {
+        padding: 1rem 3rem;
+      }
+    }
+  }
+
+
+  @media (min-width: 992px) {
+    main {
+      padding: 5rem;
+    }
+  }

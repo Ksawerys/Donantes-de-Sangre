@@ -1,0 +1,63 @@
+<div class="container-fluid f-contraste pb-5">
+  <div class="row">
+    <div class="col text-center">
+      <h1 class="titulo subrayado pt-3">Asistencia</h1>
+    </div>
+  </div>
+</div>
+<section class="f-contraste">
+  <div class="container" [ngSwitch]="aviso">
+    <div *ngSwitchCase="0">
+      <p class="text-center">Hola <strong>{{citaUser.nombre}}</strong>, tu cita es <strong> {{citaUser.fecha}}</strong> a las
+        <strong>{{citaUser.hora}}</strong> la donacion a realizar es de <strong>{{citaUser.donacion}}</strong>, si no puedes venir por favor cancela la cita.
+      </p>
+      <p class="text-center">Recuerda seguir las recomendaciones previas a la donación que puedes consultar pulsando el
+        botón <strong>¿Puedo donar?</strong></p>
+      <div class="row d-flex justify-content-center align-items-center mt-4">
+        <div class="d-grid justify-content-center col-lg-6 col-md-6 col-12 mt-1 mb-3">
+          <button (click)="irASoyApto()" class="btn-secundario">¿Puedo donar?</button>
+        </div>
+        <div class="d-grid justify-content-center col-lg-6 col-md-6 col-12 mt-1 mb-3">
+          <button (click)="irAInicio()" class="btn-secundario">Inicio</button>
+        </div>
+      </div>
+    </div>
+    <div *ngSwitchCase="1">
+      <h4 class="titulo text-center pb-5">Se ha confirmado la asistencia</h4>
+      <div class=" mt-2 pb-3 d-flex justify-content-center f-contraste">
+        <button (click)="irAInicio()" class="btn-secundario">Inicio</button>
+      </div>
+    </div>
+    <!--CASOS DE ERROR-->
+    <div *ngSwitchCase="2">
+      <h4 class="titulo text-center pb-5">No se ha encontrado la cita indicada</h4>
+      <div class=" mt-2 pb-3 d-flex justify-content-center f-contraste">
+        <button (click)="irAInicio()" class="btn-secundario">Inicio</button>
+      </div>
+    </div>
+    <div *ngSwitchCase="3">
+      <h4 class="titulo text-center pb-5">Tu usuario no corresponde con la cita</h4>
+      <div class=" mt-2 pb-3 d-flex justify-content-center f-contraste">
+        <button (click)="irAInicio()" class="btn-secundario">Inicio</button>
+      </div>
+    </div>
+    <div *ngSwitchCase="4">
+      <h4 class="titulo text-center pb-5">Tu cita ha sido cancelada</h4>
+      <div class=" mt-2 pb-3 d-flex justify-content-center f-contraste">
+        <button (click)="irAInicio()" class="btn-secundario">Inicio</button>
+      </div>
+    </div>
+    <div *ngSwitchCase="5">
+      <h4 class="titulo text-center pb-5">No se ha podido confirmar la cita, por favor intentelo más tarde</h4>
+      <div class=" mt-2 pb-3 d-flex justify-content-center f-contraste">
+        <button (click)="irAInicio()" class="btn-secundario">Inicio</button>
+      </div>
+    </div>
+    <div *ngSwitchCase="6">
+      <h4 class="titulo text-center pb-5">Por favor, inicia la sesión para ver los datos de tu cita</h4>
+      <div class=" mt-2 pb-3 d-flex justify-content-center f-contraste">
+        <button (click)="irAInicio()" class="btn-secundario">Inicio</button>
+      </div>
+    </div>
+  </div>
+</section>

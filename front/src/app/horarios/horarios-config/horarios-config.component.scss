@@ -1,0 +1,176 @@
+.inpt:hover {
+  background-color: var(--bs-white);
+}
+
+.f-rojo {
+  cursor: context-menu;
+}
+
+.botones {
+  margin-bottom: 1rem;
+}
+
+.horas-citas h3.titulo {
+  margin-top: 4rem;
+}
+
+.horarios,
+.horas-citas {
+  .b-bottom {
+    border-bottom: 2px solid var(--color-primario);
+  }
+
+  button {
+    margin-top: 2.5rem;
+  }
+
+  .horario {
+    &:not(:first-of-type) {
+      margin-top: 3.5rem;
+    }
+
+    .iconos i {
+      color: var(--color-contraste-oscuro);
+
+      &:hover {
+        color: var(--color-granate);
+      }
+    }
+  }
+}
+
+.horarios {
+  .horario {
+    position: relative;
+    border-bottom: 2px solid var(--color-primario);
+
+    .dia {
+      cursor: context-menu;
+      padding: .5rem 0;
+
+      &:not(:last-of-type) label {
+        margin-right: 1.5rem;
+      }
+    }
+  }
+}
+
+.sombra {
+  box-shadow: 0 2px 9px rgba(0, 0, 0, 0.2);
+
+  .btnes-dias {
+    border-radius: 2px 0px 0px 2px;
+
+    .btn-dia {
+      cursor: pointer;
+      background-color: var(--color-contraste);
+
+      &.selected {
+        background-color: var(--bs-white);
+      }
+
+      input {
+        visibility: hidden;
+      }
+    }
+  }
+
+  .horas {
+    height: 15rem;
+    overflow-y: scroll;
+    border-radius: 0px 2px 2px 2px;
+
+    .hora {
+      display: flex;
+      align-items: center;
+      height: 2rem;
+      padding-top: 1.3rem;
+      padding-bottom: 1.3rem;
+
+      &.hora-horario {
+        font-weight: bold;
+      }
+
+      .quitar {
+        background-color: var(--bs-white);
+        border: 0px;
+        outline: 0px;
+
+        i {
+          color: var(--color-contraste-oscuro);
+
+          &:hover {
+            color: var(--color-granate);
+          }
+        }
+      }
+    }
+  }
+}
+
+.campo {
+  &:not(:first-of-type) {
+    margin-top: 3.5rem;
+  }
+}
+
+.aparece-grande {
+  display: inline;
+}
+
+.aparece-pequeno {
+  display: none;
+}
+
+.mensajito {
+  height: 1rem;
+  color: var(--color-primario);
+}
+
+.campos .campo {
+  border-bottom: 2px solid var(--color-primario);
+
+  input {
+    font-size: unset;
+  }
+}
+
+
+@media (max-width: 576px) {
+  .horarios .horario .dia:not(:last-of-type) label {
+    margin-right: 1rem;
+  }
+}
+
+
+@media (max-width: 1200px) {
+
+  .horarios .horario {
+
+    .horas,
+    .horas>div,
+    .dias {
+      width: 100%;
+    }
+
+    .horas,
+    .dias,
+    .inpt {
+      text-align: center;
+    }
+
+    .iconos {
+      position: absolute;
+      right: .5rem;
+      top: .7rem;
+
+      i {
+        color: var(--bs-white);
+
+        &:hover {
+          color: var(--color-granate);
+        }
+      }
+    }
+  }
+}

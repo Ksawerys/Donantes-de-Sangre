@@ -1,0 +1,123 @@
+<div class="container-fluid fondo px-2 py-5 p-md-5">
+  <div class="row">
+    <div class="col-xl-2 col-md-1 col-0"></div>
+
+    <div class="col-xl-8 col-md-10 col-0 contenedor">
+      <div class="card border-0 rounded-0 w-100 mb-0">
+        <div class="card-header d-flex justify-content-center align-items-center py-1 border-bottom-0">
+          <h1 class="titulo">Notificaciones</h1>
+        </div>
+        <div class="card-body px-2 py-5 px-md-5 mt-5 mb-0">
+          <div class="row">
+            <div class="col-12">
+              <h3 class="titulo mb-3">Fotos de Peticion</h3>
+              <div *ngIf="estaRegistrado; else debeIniciarSesion">
+                <ul *ngIf="this.notificacionesPendienteImagenes.length > 0; else ningunaNotificacion">
+                  <li *ngFor="let notificacion of notificacionesPendienteImagenes; let i=index" class="my-3">
+                    <div *ngIf="!notificacion.leido; else mensajesleidos" class="card text-center p-0 my-3 mensajesNotificacion nuevo"
+                    data-bs-toggle="modal" data-bs-target="#modalNotificacion" (click)="crearModelNotificacion(notificacion)">
+                      <div class="card-header">
+                        <p><strong>{{notificacion.titulo}} de {{notificacion.nombrePropietarioUser}}</strong></p>
+                      </div>
+                      <div class="card-body my-2 w-100 tarjeta">
+                        <div class="row d-flex align-items-center">
+                          <div class="col-8">
+                            <div class="row align-items-center">
+                              <div class="col-md-6 col-12">
+                                <p [innerHTML]="notificacion.mensaje"></p>
+                              </div>
+                              <div *ngIf="notificacion.aceptado_rechazadoImagen != 'Rechazado'; else imagenRechazada" class="col-md-6 col-12 mt-2">
+                                <img src="../../assets/imagenes/peticion_galeria/{{notificacion.nombreImagen}}">
+                                <div *ngIf=notificacion.descripcionImagen>
+                                  <p>{{notificacion.descripcionImagen}}</p>
+                                </div>
+                              </div>
+                              <ng-template #imagenRechazada>
+                                <div class="col-md-6 col-12 mt-2">
+                                  <img src="../../assets/imagenes/peticion_galeria/rechazadas/{{notificacion.nombreImagen}}">
+                                  <div *ngIf=notificacion.descripcionImagen>
+                                    <p>{{notificacion.descripcionImagen}}</p>
+                                  </div>
+                                </div>
+                              </ng-template>
+                            </div>
+                          </div>
+                          <div class="col-4">
+                            <div *ngIf="puedeModificar" class="espacioVertical">
+                              <p>{{notificacion.aceptado_rechazadoImagen}}</p>
+                            </div>
+                            <p><small>{{notificacion.createdAt}}</small></p>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+
+                    <ng-template #mensajesleidos>
+                      <div class="card text-center p-0 my-3 mensajesNotificacion"
+                      data-bs-toggle="modal" data-bs-target="#modalNotificacion" (click)="crearModelNotificacion(notificacion)">
+                        <div class="card-header">
+                          <p><strong>{{notificacion.titulo}} de {{notificacion.nombrePropietarioUser}}</strong></p>
+                        </div>
+                        <div class="card-body my-2 w-100 tarjeta">
+                          <div class="row d-flex align-items-center">
+                            <div class="col-8">
+                              <div class="row align-items-center">
+                                <div class="col-md-6 col-12">
+                                  <p [innerHTML]="notificacion.mensaje"></p>
+                                </div>
+                                <div *ngIf="notificacion.aceptado_rechazadoImagen != 'Rechazado'; else imagenRechazada" class="col-md-6 col-12 mt-2">
+                                  <img src="../../assets/imagenes/peticion_galeria/{{notificacion.nombreImagen}}">
+                                  <div *ngIf=notificacion.descripcionImagen>
+                                    <p>{{notificacion.descripcionImagen}}</p>
+                                  </div>
+                                </div>
+                                <ng-template #imagenRechazada>
+                                  <div class="col-md-6 col-12 mt-2">
+                                    <img src="../../assets/imagenes/peticion_galeria/rechazadas/{{notificacion.nombreImagen}}">
+                                    <div *ngIf=notificacion.descripcionImagen>
+                                      <p>{{notificacion.descripcionImagen}}</p>
+                                    </div>
+                                  </div>
+                                </ng-template>
+                              </div>
+                            </div>
+                            <div class="col-4">
+                              <div *ngIf="puedeModificar" class="espacioVertical">
+                                <p>{{notificacion.aceptado_rechazadoImagen}}</p>
+                              </div>
+                              <p><small>{{notificacion.createdAt}}</small></p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </ng-template>
+
+                                      <!-- Modal Notificacion -->
+                    <app-modal-notificacion [notificacion]="notificacionActual" (recargarNotificaciones)="mostrarNotificaciones()"></app-modal-notificacion>
+
+                  </li>
+                </ul>
+                <ng-template #ningunaNotificacion>
+                  <div class="card w-100 p-0 my-3">
+                    <div class="card-body my-2 w-100 d-flex justify-content-around align-items-center tarjeta">
+                      No hay ningun mensaje en estos momentos.
+                    </div>
+                  </div>
+                </ng-template>
+              </div>
+              <ng-template #debeIniciarSesion>
+                <div class="card w-100 p-0 my-3">
+                  <div class="card-body my-2 w-100 d-flex justify-content-around align-items-center tarjeta">
+                    Debes iniciar sesion para poder ver las notificaciones.
+                  </div>
+                </div>
+              </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

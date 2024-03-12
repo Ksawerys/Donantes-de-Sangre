@@ -1,0 +1,23 @@
+.container {
+  margin: 0;
+  max-width: 100%;
+
+  &>:first-child {
+    padding-top: 5rem;
+  }
+}
+
+input {
+  background-color: var(--color-primario);
+  color: var(--bs-white);
+  padding: .4rem 1rem;
+
+  &:hover {
+    background-color: var(--color-secundario);
+  }
+}
+
+div.alert {
+  z-index: 9000;
+  width: 25rem;
+}

@@ -1,0 +1,18 @@
+span.errorSpan {
+  color: var(--color-primario);
+}
+span.CorrectSpan{
+  color: var(--bs-green);
+}
+.modalTitulo {
+  color: var(--color-secundario);
+  font-family: var(--tipo-textos);
+}
+
+.bordeColor {
+  border-bottom: 1px solid var(--color-secundario);
+}
+
+.bordeArriba {
+  border-top: 1px solid var(--color-secundario);
+}

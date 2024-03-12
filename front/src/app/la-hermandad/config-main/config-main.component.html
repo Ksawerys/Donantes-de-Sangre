@@ -1,0 +1,13 @@
+<div class="mensaje" [@entradaSalidaVentana]="mensaje == ''" *ngIf="mensaje != ''">
+    <div [ngClass]="exito ? 'mensaje-ok' : 'mensaje-error'" class="d-flex align-items-center justify-content-center">
+
+    <i [ngClass]="exito ? 'fa-circle-check' : 'fa-triangle-exclamation'" class="fa-solid me-3"></i>
+
+    <p>{{ mensaje }}</p>
+  </div>
+</div>
+
+
+<app-config-historia (mensaje)="onMensaje($event)"></app-config-historia>
+<app-config-junta (mensaje)="onMensaje($event)"></app-config-junta>
+<app-config-cargos (mensaje)="onMensaje($event)"></app-config-cargos>

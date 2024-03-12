@@ -1,0 +1,166 @@
+<main>
+
+    <div class="mensaje"
+      [@entradaSalidaVentana]="codAccion == -1"
+      *ngIf="codAccion != -1">
+
+      <ng-container *ngIf="codAccion == 0">
+        <div class="mensaje-ok d-flex align-items-center justify-content-center">
+          <i class="fa-solid fa-circle-check me-3"></i>
+          <p *ngIf="codAccion == 0">{{ this.mensaje }}</p>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="codAccion == 1">
+        <div class="mensaje-error d-flex align-items-center justify-content-center">
+          <i class="fa-solid fa-triangle-exclamation me-3"></i>
+          <p *ngIf="codAccion == 1">{{ this.mensaje }}</p>
+        </div>
+      </ng-container>
+    </div>
+
+    <h1 class="titulo subrayado text-center">Zona de usuario</h1>
+  
+    <div class="contenedor row">
+        <div class="col-12 perfil p-2 p-md-4 p-lg-5">
+
+
+            <form [formGroup]="infoForm" (ngSubmit)="updateUser()"  #cForm="ngForm">
+                
+                <div class="campos">
+                  <h3 class="titulo mb-4">Información del usuario</h3>
+              
+                      <div class="row align-items-center g-0">
+              
+                        <div class="col-12 col-md-6 d-flex flex-column flex-md-row mb-5">
+                            <div class="row w-100 mx-0">
+                                <div class="f-rojo col-4 col-md-4">Nombre</div>
+                                <input type="text"
+                                  class="inpt campo col-8 col-md-8"
+                                  formControlName="nombre"
+                                  [placeholder]="this.info.nombre == null ? 'No se ha aportado' : ''"
+                                  (input)="onNombreValueChange()"
+                                  />
+                                  <div class="row mensajito">
+                                  </div>
+                                </div>
+                        </div>
+            
+                        <div class="col-12 col-md-6 d-flex flex-column flex-md-row mb-5">
+                            <div class="row w-100 mx-0">
+                                <div class="f-rojo col-4 col-md-4">DNI</div>
+                                <input type="text"
+                                    class="inpt campo col-8 col-md-8"
+                                    formControlName="dni"
+                                    [placeholder]="this.info.dni == null ? 'No se ha aportado' : ''"
+                                    (input)="onDniValueChange()"
+                                    />
+                                <div class="row mensajito">
+                                    <span *ngIf="infoForm.get('dni')?.errors?.['pattern']"
+                                        class="mensaje-error">Introduce un DNI válido
+                                    </span>
+                                </div>
+                                    
+                            </div>
+                        </div>
+                      </div>
+                      <div class="row align-items-center g-0">
+              
+                        <div class="col-12 col-md-6 d-flex flex-column flex-md-row mb-5 mt-2 mt-md-0">
+                            <div class="row w-100 mx-0">
+                                <div class="f-rojo col-4 col-md-4 aparece-grande">Número de donante</div>
+                                <div class="f-rojo col-4 col-md-4 aparece-pequeno">N. donante</div>
+                                <input type="text"
+                                  class="inpt campo col-8 col-md-8"
+                                  formControlName="nDonante"
+                                  [formControl]="nDonanteInput"
+                                  [placeholder]="this.info.nDonante == null ? 'No se ha aportado' : ''"
+                                />
+                                <div class="row mensajito"></div>
+                            </div>
+
+                        </div>
+            
+                        <div class="col-12 col-md-6 d-flex flex-column flex-md-row mb-5 mt-2 mt-md-0">
+                            <div class="row w-100 mx-0">
+                                <div class="f-rojo col-4 col-md-4 aparece-grande">Grupo sanguíneo</div>
+                                <div class="f-rojo col-4 col-md-4 aparece-pequeno">G. sanguíneo</div>
+                                <input type="text"
+                                    class="inpt campo col-8 col-md-8"
+                                    [formControl]="gSanguineoInput"
+                                    formControlName="gSanguineo"
+                                    [placeholder]="this.info.gSanguineo == null ? 'No se ha aportado' : ''"
+                                    />
+                                    <div class="row mensajito"></div>
+                                </div>
+
+                            </div>
+
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn-primario"
+                        [disabled]="infoForm.invalid || (!this.dniModificado && !this.nombreModificado)">
+                        Guardar
+                    </button>
+                </div>
+              </form>
+              <form [formGroup]="passwdForm" (ngSubmit)="cambiarPasswd()" class="mt-5" #cForm="ngForm">
+                
+                <div class="campos mb-5">
+                  <h3 class="titulo mb-4">Cambiar contraseña</h3>
+              
+                  
+                  <div class="row align-items-center g-0 w-100">
+                      <div class="col-12 col-md-8 col-lg-6">
+                            <div class="row mensajito">
+                                <span *ngIf="this.errorAutenticacion"
+                                    class="mensaje-error">Error de autenticación
+                                </span>
+                            </div>
+                            <div class="col-12 d-flex flex-column flex-md-row mb-5">
+                                <div class="row w-100 mx-0">
+                                    <div class="f-rojo col-4 col-md-4">Contraseña</div>
+                                    <input type="password"
+                                        class="inpt campo col-8 col-md-8"
+                                        formControlName="passwd"
+                                        /></div>
+                            </div>
+                    
+                            <div class="col-12 d-flex flex-column flex-md-row mb-5 mt-md-0 mt-2">
+                                <div class="row w-100 mx-0">
+                                    <div class="f-rojo col-4 col-md-4">Nueva contraseña</div>
+                                    <input type="password"
+                                        class="inpt campo col-8 col-md-8"
+                                        formControlName="passwdNueva"
+                                        /></div>
+                            </div>
+
+                            <div class="col-12 d-flex flex-column flex-md-row">
+                                <div class="row w-100 mx-0">
+                                    <div class="f-rojo col-4 col-md-4">Rep. contraseña</div>
+                                    <input type="password"
+                                        class="inpt campo col-8 col-md-8"
+                                        formControlName="passwdRep"
+                                        /></div>
+                            </div>
+                            <div class="row col-12 mensajito">
+                                <span *ngIf="this.contraNoCoincide"
+                                    class="mensaje-error">Las contraseñas no coinciden
+                                </span>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn-primario width"
+                        [disabled]="this.passwdForm.invalid">
+                        Cambiar contraseña
+                    </button>
+                </div>
+              </form>
+        </div>

@@ -1,0 +1,86 @@
+<div class="modal fade" id="modalNotificacion" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bordeColor">
+        <h1 class="modal-title modalTitulo" id="staticBackdropLabel">{{notificacion.titulo}}</h1>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <label for="mensaje">Mensaje:</label>
+              <p [innerHTML]="notificacion.mensaje" class="form-control mb-3"></p>
+              <div *ngIf="notificacion.aceptado_rechazadoImagen != 'Rechazado'; else imagenRechazadaModal">
+                <img src="../../../assets/imagenes/peticion_galeria/{{notificacion.nombreImagen}}" class="form-control">
+                <div *ngIf="notificacion.descripcionImagen">
+                  <label for="mensaje">Descripcion:</label>
+                  <p class="form-control">{{notificacion.descripcionImagen}}</p>
+                </div>
+              </div>
+              <ng-template #imagenRechazadaModal>
+                <img src="../../../assets/imagenes/peticion_galeria/rechazadas/{{notificacion.nombreImagen}}" class="form-control">
+                <div *ngIf="notificacion.descripcionImagen">
+                  <label for="mensaje">Descripcion:</label>
+                  <p class="form-control">{{notificacion.descripcionImagen}}</p>
+                </div>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="puedeModificar; else usuarioRegistrado">
+        <div *ngIf="!notificacion.verificadoImagen; else denegar" class="modal-footer d-flex justify-content-around">
+          <button type="button" class="btn btn-terciario" (click)="aceptarFoto()">Aceptar</button>
+          <button type="button" class="btn btn-terciario" (click)="rechazarFoto()">Rechazar</button>
+          <button type="button" class="btn btn-terciario"
+          data-bs-target="#confirmar_Borrar" data-bs-toggle="modal" data-bs-dismiss="modal">Borrar Petición</button>
+          <button type="button" class="btn btn-terciario" data-bs-dismiss="modal">Salir</button>
+
+        </div>
+        <ng-template #denegar>
+          <div class="modal-footer d-flex justify-content-around">
+            <button type="button" class="btn btn-terciario" (click)="aceptarFoto()" disabled>Aceptar</button>
+            <button type="button" class="btn btn-terciario" (click)="rechazarFoto()" disabled>Rechazar</button>
+            <button type="button" class="btn btn-terciario" (click)="borrarNotificacion()">Borrar Petición</button>
+            <button type="button" class="btn btn-terciario" data-bs-dismiss="modal">Salir</button>
+          </div>
+          </ng-template>
+
+      </div>
+
+      <ng-template #usuarioRegistrado>
+        <div class="modal-footer d-flex justify-content-evenly">
+          <button type="button" class="btn btn-terciario" (click)="borrarNotificacion()">Borrar Notificación</button>
+          <a href="./galeria"><button type="button" class="btn btn-terciario">Subir otra foto</button></a>
+          <button type="button" class="btn btn-terciario" data-bs-dismiss="modal">Salir</button>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal fade" id="confirmar_Borrar" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="mostrarConfirmacion" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalToggleLabel2">¿Estas seguro?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>¿Estas seguro que desea <strong>borrar</strong> esta petición?</p>
+        <p>Aun no has elegido si aceptar la foto</p>
+        <p>Si borras esta petición, se rechazará la foto automaticamente, y le llegará la notificación al usuario
+          {{notificacion.nombrePropietarioUser}}.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secundario" data-bs-target="#modalNotificacion"
+        data-bs-toggle="modal" data-bs-dismiss="modal" (click)="borrarNotificacion()">
+          Si, estoy seguro
+        </button>
+        <button type="button" class="btn btn-secundario" data-bs-target="#modalNotificacion" data-bs-toggle="modal" data-bs-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
