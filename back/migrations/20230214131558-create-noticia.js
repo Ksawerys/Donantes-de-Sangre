@@ -18,7 +18,7 @@ module.exports = {
         allowNull: true
       },
       contenido: {
-        type: Sequelize.STRING(65000),
+        type: Sequelize.STRING(),
         allowNull: false
       },
       seccion: {
