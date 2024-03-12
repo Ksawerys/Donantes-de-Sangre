@@ -1,0 +1,5 @@
+package-lock.json
+/back/node-modules
+/back/package-lock.json
+/front/node-modules
+/front/package-lock.json
