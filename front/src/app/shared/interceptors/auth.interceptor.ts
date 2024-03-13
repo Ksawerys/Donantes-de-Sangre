@@ -1,17 +1,19 @@
 import { Injectable } from '@angular/core';
 import jwtDecode from 'jwt-decode';
-import {HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpErrorResponse} from '@angular/common/http';
-import { catchError, Observable, throwError } from 'rxjs';
+import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpErrorResponse } from '@angular/common/http';
+import { catchError, Observable, of, throwError } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { Router } from '@angular/router';
 import { AlertService } from '../services/alerta-error.service';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-  constructor(private authService: AuthService,private router: Router, private alertService: AlertService) {}
+  constructor(private authService: AuthService, private router: Router, private alertService: AlertService, private http: HttpClient) { }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+    this.checkInternetConnection();
     return next.handle(request).pipe(
       catchError((requestError: HttpErrorResponse) => {
         if (requestError.status === 0) {
@@ -20,8 +22,8 @@ export class AuthInterceptor implements HttpInterceptor {
           this.alertService.setAlertMessage('Ha ocurrido un error con su petición');
         }
         if (requestError && requestError.status === 401) {
-          const token : {id: number, iat: number, exp: number} = jwtDecode(JSON.parse(localStorage.getItem('user')!).token);
-          
+          const token: { id: number, iat: number, exp: number } = jwtDecode(JSON.parse(localStorage.getItem('user')!).token);
+
           const fechaExpiracion = new Date(0);
           fechaExpiracion.setUTCSeconds(token.exp);
 
@@ -35,9 +37,17 @@ export class AuthInterceptor implements HttpInterceptor {
           }, 350);
         }
 
-        return throwError(requestError)  as Observable<HttpEvent<unknown>>;
+        return throwError(requestError) as Observable<HttpEvent<unknown>>;
       })
-    ); 
+    );
+  }
+  checkInternetConnection() {
+    this.http.get('https://www.google.com').pipe(
+      catchError(() => {
+        this.router.navigate(['/offline']);
+        return of(null);
+      })
+    ).subscribe();
   }
 }
 //400 404 403 401 500

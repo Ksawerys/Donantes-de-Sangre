@@ -26,6 +26,7 @@ import { LaHermandadModule } from './la-hermandad/la-hermandad.module';
 import { NotificacionesComponent } from './notificaciones/notificaciones.component';
 import { NotificacionesModule } from './notificaciones/notificaciones.module';
 import { ErrorServidorComponent } from './error/error-servidor/error-servidor.component';
+import { ErrorConexionComponent } from './error/error-conexion/error-conexion.component';
 registerLocaleData(localeEs);
 
 @NgModule({
@@ -36,6 +37,7 @@ registerLocaleData(localeEs);
         GaleriaComponent,
         NotificacionesComponent,
         ErrorServidorComponent,
+        ErrorConexionComponent,
     ],
     providers: [
         { provide: LOCALE_ID, useValue: 'es-es' },
