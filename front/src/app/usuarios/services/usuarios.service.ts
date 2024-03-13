@@ -20,60 +20,31 @@ export class UsuariosService {
 
 
   fetchInfoUser() {
-    const header = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'x-token': JSON.parse(localStorage.getItem('user')!).token
-      })
-    };
-
     const id = JSON.parse(localStorage.getItem('user')!).id;
 
     return this.httpUsuarios.get<interfaces.FetchUserInfoResponse>(this.usuariosUrl
-      + '/getinfouser/' + id, header).pipe(tap(info => this._infoUser = info));
+      + '/getinfouser/' + id, { params: { auth: 'true' } }).pipe(tap(info => this._infoUser = info));
   }
 
 
   updateUserPerfil(userInfo: interfaces.UserInfo) {
-    const header = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'x-token': JSON.parse(localStorage.getItem('user')!).token
-      })
-    };
-
     userInfo.codSeguridad = JSON.parse(localStorage.getItem('user')!).codSeguridad;
 
     return this.httpUsuarios.put<interfaces.UpdateUserResponse>(this.usuariosUrl
-      + '/updateuserperfil', userInfo, header);
+      + '/updateuserperfil', userInfo, { params: { auth: 'true' } });
   }
 
 
   updateUserAdmin(userInfo: {nDonante: string, gSanguineo: string, id?: string}) {
-    const header = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'x-token': JSON.parse(localStorage.getItem('user')!).token
-      })
-    };
-
     userInfo.id = JSON.parse(localStorage.getItem('user')!).id
     return this.httpUsuarios.put<interfaces.UpdateUserResponse>(this.usuariosUrl
-      + '/updateuseradmin', userInfo, header);
+      + '/updateuseradmin', userInfo, { params: { auth: 'true' } });
   }
 
 
   fetchUsers() {
-    const header = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'x-token': JSON.parse(localStorage.getItem('user')!).token
-      })
-    };
-
     return this.httpUsuarios.get<interfaces.fetchUsersResponse>(this.usuariosUrl
-      + '/getinfousers', header);
+      + '/getinfousers', { params: { auth: 'true' } });
   }
-
 
 }

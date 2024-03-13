@@ -21,21 +21,11 @@ export class TelefonosService {
 
 
   insertOrUpdateTfno(datos: Telefono): Observable<TelefonoResponse> {
-    const header = { headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'x-token': JSON.parse(localStorage.getItem('user')!).token
-    })};
-
-    return this.http.put<TelefonoResponse>(`${this.baseUrl}/insertOrUpdateTfno`, datos, header);
+    return this.http.put<TelefonoResponse>(`${this.baseUrl}/insertOrUpdateTfno`, datos, { params: { auth: 'true' } });
   }
 
 
   deleteTfno(id: number): Observable<TelefonoDeleteResponse> {
-    const header = { headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'x-token': JSON.parse(localStorage.getItem('user')!).token
-    })};
-
-    return this.http.delete<TelefonoDeleteResponse>(`${this.baseUrl}/deleteTfno/${id}`, header);
+    return this.http.delete<TelefonoDeleteResponse>(`${this.baseUrl}/deleteTfno/${id}`, { params: { auth: 'true' } });
   }
 }
