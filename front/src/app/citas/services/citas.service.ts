@@ -36,7 +36,7 @@ export class CitasService {
         'x-token': JSON.parse(localStorage.getItem('user')!).token
       })
     };
-
+    
     return this.httpPedirCita.get<interfaces.HorarioCitasResponse>(this.pedirCitaUrl
       + '/gethorasdisponibles/' + fecha, header).pipe(tap(citas => this._citasReservadas = citas));
   }
