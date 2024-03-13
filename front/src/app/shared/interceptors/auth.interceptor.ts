@@ -14,9 +14,7 @@ export class AuthInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
       catchError((requestError: HttpErrorResponse) => {
-        console.log('--------------------',requestError);
         if (requestError.status === 0) {
-          console.log('Error de conexión');
           this.router.navigate(['/error']);
         } else if (![400, 404, 403, 401, 500].includes(requestError.status)) {
           this.alertService.setAlertMessage('Ha ocurrido un error con su petición');
