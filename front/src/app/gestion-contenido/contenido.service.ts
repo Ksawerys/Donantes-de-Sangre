@@ -41,14 +41,7 @@ export class ContenidoService {
     this.aux=this.noticias;
   }
   borrarNoticia(id: string): Observable<ResponseNoticia> {
-    const header = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'x-token': JSON.parse(localStorage.getItem('user')!).token
-      }),
-      body: { id: id }
-    };
-    return this.http.delete<ResponseNoticia>(`${this.baseUrl}/api/noticias/borrar`, header);
+    return this.http.delete<ResponseNoticia>(`${this.baseUrl}/api/noticias/borrar`, { params: { auth: 'true' } });
   }
   editarNoticia(id: string, noticia: Noticia): Observable<ResponseNoticia> {
     const payload = new FormData();
@@ -59,21 +52,11 @@ export class ContenidoService {
     payload.append('seccion', noticia.seccion);
     payload.append('archivo', noticia.imagen);
 
-    const header = {
-      headers: new HttpHeaders({
-        'x-token': JSON.parse(localStorage.getItem('user')!).token
-      })
-    };
-    return this.http.put<ResponseNoticia>(`${this.baseUrl}/api/noticias/modificar/`, payload, header);
+    return this.http.put<ResponseNoticia>(`${this.baseUrl}/api/noticias/modificar/`, payload, { params: { auth: 'true' } });
   }
 
   obtenerNoticia(id: string): Observable<ResponseNoticia> {
-    const header = {
-      headers: new HttpHeaders({
-        'x-token': JSON.parse(localStorage.getItem('user')!).token
-      })
-    };
-    return this.http.post<ResponseNoticia>(`${this.baseUrl}/api/noticias/get`, { id: id }, header);
+    return this.http.post<ResponseNoticia>(`${this.baseUrl}/api/noticias/get`, { id: id }, { params: { auth: 'true' } });
   }
 
   añadirNoticia(noticia: Contenido): Observable<ResponseNoticia> {
@@ -83,13 +66,8 @@ export class ContenidoService {
     payload.append('contenido', noticia.contenido);
     payload.append('seccion', noticia.seccion);
     payload.append('archivo', noticia.imagen);
-    const header = {
-      headers: new HttpHeaders({
-        'x-token': JSON.parse(localStorage.getItem('user')!).token
-      })
-    };
 
-    return this.http.post<ResponseNoticia>(`${this.baseUrl}/api/noticias/registrar`, payload, header);
+    return this.http.post<ResponseNoticia>(`${this.baseUrl}/api/noticias/registrar`, payload, { params: { auth: 'true' } });
   }
 
   generarFiltro(titulo: string): void {
