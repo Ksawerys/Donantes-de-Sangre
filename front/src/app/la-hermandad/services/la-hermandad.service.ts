@@ -28,12 +28,7 @@ export class LaHermandadService {
 
 
   updateHistoria(historia: Historia): Observable<HistoriaResponse> {
-    const header = { headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'x-token': JSON.parse(localStorage.getItem('user')!).token
-    })};
-
-    return this.http.put<HistoriaResponse>(`${this.baseUrl}/updateHistoria`, historia, header);
+    return this.http.put<HistoriaResponse>(`${this.baseUrl}/updateHistoria`, historia, { params: { auth: 'true' } });
   }
 
 
@@ -49,42 +44,22 @@ export class LaHermandadService {
 
 
   insertCargo(cargo: Cargo): Observable<CargoInsertResponse> {
-    const header = { headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'x-token': JSON.parse(localStorage.getItem('user')!).token
-    })};
-
-    return this.http.post<CargoInsertResponse>(`${this.baseUrl}/insertCargo`, cargo, header);
+    return this.http.post<CargoInsertResponse>(`${this.baseUrl}/insertCargo`, cargo, { params: { auth: 'true' } });
   }
 
 
   insertOrUpdateIntegranteJunta(integrante: Integrante): Observable<IntUpdateInsertResponse> {
-    const header = { headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'x-token': JSON.parse(localStorage.getItem('user')!).token
-    })};
-
-    return this.http.put<IntUpdateInsertResponse>(`${this.baseUrl}/insertOrUpdateIntegranteJunta`, integrante, header);
+    return this.http.put<IntUpdateInsertResponse>(`${this.baseUrl}/insertOrUpdateIntegranteJunta`, integrante, { params: { auth: 'true' } });
   }
 
 
   deleteCargo(id: number): Observable<CargoDeleteResponse>{
-    const header = { headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'x-token': JSON.parse(localStorage.getItem('user')!).token
-    })};
-
-    return this.http.delete<CargoDeleteResponse>(`${this.baseUrl}/deleteCargo/${id}`, header)
+    return this.http.delete<CargoDeleteResponse>(`${this.baseUrl}/deleteCargo/${id}`, { params: { auth: 'true' } })
       .pipe(tap(resp => { if (resp.success) this.cargos.splice(this.cargos.findIndex(c => c.id == resp.data), 1) }));
   }
 
 
   deleteIntegranteJunta(id: number): Observable<IntDeleteResponse> {
-    const header = { headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'x-token': JSON.parse(localStorage.getItem('user')!).token
-    })};
-
-    return this.http.delete<IntDeleteResponse>(`${this.baseUrl}/deleteIntegranteJunta/${id}`, header);
+    return this.http.delete<IntDeleteResponse>(`${this.baseUrl}/deleteIntegranteJunta/${id}`, { params: { auth: 'true' } });
   }
 }

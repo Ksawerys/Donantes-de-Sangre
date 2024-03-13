@@ -41,37 +41,17 @@ export class ChatService {
     return [...this.desbloqueados];
   }
   getListadoMensajes(): Observable<ResponseMensajes> {
-    const header = {
-      headers: new HttpHeaders({
-        'x-token': JSON.parse(localStorage.getItem('user')!).token
-      })
-    };
-    return this.http.get<ResponseMensajes>(`${this.baseUrl}/api/chat/listado`, header).pipe(tap(resp => { if (resp.success !== false) { this.mensajes = resp.data } }))
+    return this.http.get<ResponseMensajes>(`${this.baseUrl}/api/chat/listado`, { params: { auth: 'true' } }).pipe(tap(resp => { if (resp.success !== false) { this.mensajes = resp.data } }))
   }
   getListadoBloqueados(): Observable<ResponseModerarUser> {
-    const header = {
-      headers: new HttpHeaders({
-        'x-token': JSON.parse(localStorage.getItem('user')!).token
-      })
-    };
-    return this.http.get<ResponseModerarUser>(`${this.baseUrl}/api/chat/listadobloqueados`, header).pipe(tap(resp => { if (resp.success !== false) { this.bloqueados = resp.data } }))
+    return this.http.get<ResponseModerarUser>(`${this.baseUrl}/api/chat/listadobloqueados`, { params: { auth: 'true' } }).pipe(tap(resp => { if (resp.success !== false) { this.bloqueados = resp.data } }))
   }
   getListadoDesbloqueados(): Observable<ResponseModerarUser> {
-    const header = {
-      headers: new HttpHeaders({
-        'x-token': JSON.parse(localStorage.getItem('user')!).token
-      })
-    };
-    return this.http.get<ResponseModerarUser>(`${this.baseUrl}/api/chat/listadodesbloqueados`, header).pipe(tap(resp => { if (resp.success !== false) { this.desbloqueados = resp.data } }))
+    return this.http.get<ResponseModerarUser>(`${this.baseUrl}/api/chat/listadodesbloqueados`, { params: { auth: 'true' } }).pipe(tap(resp => { if (resp.success !== false) { this.desbloqueados = resp.data } }))
   }
   comprobarEstado(): Observable<ResponseEstado> {
     const user = localStorage.getItem('user')!;
-    const header = {
-      headers: new HttpHeaders({
-        'x-token': JSON.parse(localStorage.getItem('user')!).token
-      })
-    };
-    return this.http.post<ResponseEstado>(`${this.baseUrl}/api/chat/comprobarestado`, { id: JSON.parse(user).id }, header);
+    return this.http.post<ResponseEstado>(`${this.baseUrl}/api/chat/comprobarestado`, { id: JSON.parse(user).id }, { params: { auth: 'true' } });
   }
 
   agregarMensaje(mensaje: Mensaje): void {
