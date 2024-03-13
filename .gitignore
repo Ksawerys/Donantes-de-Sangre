@@ -4,3 +4,4 @@ package-lock.json
 /front/node-modules
 /front/package-lock.json
 /front/.idea
+/back/.env
