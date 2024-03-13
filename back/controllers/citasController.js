@@ -26,7 +26,7 @@ const pedirCita = async(req, res = response) => {
             
                     const resp = await queriesCitas.insertCita(cita);
             
-                    mandarCorreoFechaCita(cita.userId, cita.fecha, cita.donacion, resp.id);
+                    // mandarCorreoFechaCita(cita.userId, cita.fecha, cita.donacion, resp.id);
                     
                     res.status(200).json({success: true, msg: 'cita insertada con éxito'});
             }
@@ -169,7 +169,7 @@ const getHorasDisponibles = async(req, res = response) => {
 
             res.status(200).json({success: true, horas: horasDisponibles});
         }).catch(err => {
-
+          
             res.status(200).json({success: false, msg: 'se ha producido un error'});
         });
 }
@@ -177,8 +177,8 @@ const getHorasDisponibles = async(req, res = response) => {
 
 const getHorasCitas = async(req, res = response) => {
     try {
+     
         const horas = await queriesCitas.getHorarioCitas();
-
         res.status(200).json({success: true, horas: horas});
     }
     catch (err) {
