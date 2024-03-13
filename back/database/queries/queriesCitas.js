@@ -75,7 +75,7 @@ const getCitasFechaHora = async(fecha) => {
 
 const getHorarioCitas = async() => {
     let diasHoras = {l: [], m: [], x: [], j: [], v: [], s:[], d:[]};
-    const horas = await conexion.query('SELECT diasHoras.hora, diasHoras.codDia FROM diasHoras');
+    const horas = await conexion.query('SELECT diashoras.hora, diashoras.codDia FROM diashoras');
 
     Object.keys(diasHoras).forEach(key => {
         horas.forEach(hora => {

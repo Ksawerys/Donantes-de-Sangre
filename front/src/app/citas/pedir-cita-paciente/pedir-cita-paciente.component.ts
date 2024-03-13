@@ -44,6 +44,7 @@ export class PedirCitaPacienteComponent {
     this.fecha = this.calendar.getToday();
     this.transFecha(this.fecha);
     this.compRegistro();
+    this.traerHorario()
   }
 
 
