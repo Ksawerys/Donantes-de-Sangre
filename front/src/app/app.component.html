@@ -1,5 +1,9 @@
-<app-menu></app-menu>
+<app-menu  *ngIf="router.url !== '/error'"></app-menu>
 
-<router-outlet></router-outlet>
+<div class="alert alert-danger w-50" role="alert" *ngIf="alertMessage">
+    <p>{{ alertMessage }}</p>
+  </div>
+  
+  <router-outlet></router-outlet>
 
-<app-footer></app-footer>
+<app-footer  *ngIf="router.url !== '/error'"></app-footer>

@@ -25,6 +25,7 @@ import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
 import { LaHermandadModule } from './la-hermandad/la-hermandad.module';
 import { NotificacionesComponent } from './notificaciones/notificaciones.component';
 import { NotificacionesModule } from './notificaciones/notificaciones.module';
+import { ErrorServidorComponent } from './error/error-servidor/error-servidor.component';
 registerLocaleData(localeEs);
 
 @NgModule({
@@ -33,7 +34,8 @@ registerLocaleData(localeEs);
         AptoSangreComponent,
         GaleriaComponent,
         GaleriaComponent,
-        NotificacionesComponent
+        NotificacionesComponent,
+        ErrorServidorComponent,
     ],
     providers: [
         { provide: LOCALE_ID, useValue: 'es-es' },
