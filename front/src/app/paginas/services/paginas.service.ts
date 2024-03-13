@@ -25,23 +25,11 @@ export class PaginasService {
 
 
   borrarMemoria(id: number): Observable<BorrarMemResponse> {
-    const header = {
-      headers: new HttpHeaders({
-        'x-token': JSON.parse(localStorage.getItem('user')!).token
-      })
-    };
-
-    return this.http.delete<BorrarMemResponse>(`${this.baseUrl}/deleteMemoria/${id}`, header);
+    return this.http.delete<BorrarMemResponse>(`${this.baseUrl}/deleteMemoria/${id}`, { params: { auth: 'true' } });
   }
 
 
   insertOrUpdateMemoria(memoria: MemoriaAddUpdate): Observable<InsertUpdateMemResponse> {
-    const header = {
-      headers: new HttpHeaders({
-        'x-token': JSON.parse(localStorage.getItem('user')!).token
-      })
-    };
-
     const payload = new FormData();
     payload.append('id', memoria.id.toString());
     payload.append('anio', memoria.anio.toString());
@@ -50,7 +38,7 @@ export class PaginasService {
     if (memoria.imgBorrar) payload.append('imgBorrar', memoria.imgBorrar);
     if (memoria.docBorrar) payload.append('docBorrar', memoria.docBorrar);
 
-    return this.http.put<InsertUpdateMemResponse>(`${this.baseUrl}/insertOrUpdateMemoria`, payload, header);
+    return this.http.put<InsertUpdateMemResponse>(`${this.baseUrl}/insertOrUpdateMemoria`, payload, { params: { auth: 'true' } });
   }
 
 
