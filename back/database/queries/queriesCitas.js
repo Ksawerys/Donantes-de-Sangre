@@ -188,7 +188,7 @@ const getCitasPasadasUser = async(id) => {
 }
 
 const getCitasPendientes = async() => {
-    return await models.Cita.findAll({
+    const modelo= await models.Cita.findAll({
         attributes: ['id', 'fecha', 'donacion', 'cancelada'],
         where: {
             fecha: {
@@ -198,6 +198,19 @@ const getCitasPendientes = async() => {
         include: ['user'],
         order: [['cancelada', 'ASC'], ['fecha', 'DESC']]
     }); 
+    console.log('-----------------------------------')
+    console.log(modelo)
+    if(modelo instanceof models.Cita){
+        console.log('-----------------------------------')
+        console.log({citas:[modelo]})
+        return {citas:[modelo]}
+    }{
+    }
+        return modelo
+   
+        
+    
+   
 }
 
 
