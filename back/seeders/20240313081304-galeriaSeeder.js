@@ -16,7 +16,8 @@ module.exports = {
     const enlaces = [
       'https://www.donantespllno.es/Contenido/Galerias/Visita%20al%20centro%20de%20Transfusiones%20de%20CR/img_1337755562_395.jpg',
       'https://www.donantespllno.es/Contenido/Galerias/Visita%20al%20centro%20de%20Transfusiones%20de%20CR/img_1337755596_908.jpg',
-      'https://www.donantespllno.es/Contenido/2017/PAN2017_3_Despues%20de%20sociedad.JPGhttps://www.donantespllno.es/Contenido/Galerias/Visita%20al%20centro%20de%20Transfusiones%20de%20CR/img_1337755631_433.jpg',
+      'https://www.donantespllno.es/Contenido/2017/PAN2017_3_Despues%20de%20sociedad.JPG',
+      'https://www.donantespllno.es/Contenido/Galerias/Visita%20al%20centro%20de%20Transfusiones%20de%20CR/img_1337755631_433.jpg',
       'https://www.donantespllno.es/Contenido/Galerias/Visita%20al%20centro%20de%20Transfusiones%20de%20CR/img_1337755670_422.jpg',
       'https://www.donantespllno.es/Contenido/Galerias/Visita%20al%20centro%20de%20Transfusiones%20de%20CR/img_1337755701_418.jpg',
       'https://www.donantespllno.es/Contenido/Galerias/Visita%20al%20centro%20de%20Transfusiones%20de%20CR/img_1337755784_329.jpg',
