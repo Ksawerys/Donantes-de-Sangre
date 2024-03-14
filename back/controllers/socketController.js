@@ -249,10 +249,11 @@ const socketController = (socket) => {
   });
 
   socket.on('insertar-altas', async (payload, callback) => {
+    console.log('HOLAAAAAAAAAAAAAAAAAAAAAAAAA----------------------------',payload)
     const user = JSON.parse(socket.handshake.query.payload);
 
     if (validarToken(user.token) != -1 && await validarRol(user)) {
-
+      console.log('HOLAAAAAAAAAAAAAAAAAAAAAAAAA----------------------------',payload)
       const resp = await statsController.insertAltas(payload);
       callback(resp);
 

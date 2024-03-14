@@ -32,9 +32,9 @@ export class WebsocketService extends Socket {
   }
 
 
-  emitEventInsertarAltas = (payload: FormData): Promise<MsgResponseAlta> => {
+  emitEventInsertarAltas = (payload: FormData): Promise<MsgResponseAlta> => {  
     return new Promise((resolve, reject) => {
-      this.ioSocket.emit('insertar-altas', payload, (respuesta: MsgResponseAlta) => {
+      this.ioSocket.emit('insertar-altas', payload, (respuesta: MsgResponseAlta) => {      
         resolve(respuesta);
       });
     });
