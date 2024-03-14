@@ -65,7 +65,7 @@ export class AuthService {
   puedeModificar(): Observable<boolean> {
 
     const user = localStorage.getItem('user');
-
+    
     if (!user) {
       return of(false);
 
