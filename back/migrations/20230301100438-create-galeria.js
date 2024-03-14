@@ -15,10 +15,13 @@ module.exports = {
       },
       descripcion: {
         type: Sequelize.STRING,
-        allowNull: true
+        allowNull: true,
+        defaultValue: null,
       },
       propietario: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 1,
       },
       createdAt: {
         type: Sequelize.DATE,
