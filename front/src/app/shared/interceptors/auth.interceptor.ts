@@ -15,7 +15,7 @@ export class AuthInterceptor implements HttpInterceptor {
     let peticion = request.clone();
     const param = request.params.get('auth');
     if (param) {
-      const t = sessionStorage.getItem('token');
+      const t = localStorage.getItem('token');
       if (t) {
         peticion = request.clone({
           headers: request.headers.set('x-token', t)
