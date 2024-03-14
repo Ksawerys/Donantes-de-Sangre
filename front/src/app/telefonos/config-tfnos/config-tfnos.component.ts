@@ -107,7 +107,7 @@ export class TfnosConfigComponent implements OnInit {
         Validators.pattern(/^(\(?(\+34|0034|34)\)?[ -]+)?([0-9][ -]*){9}/)
       ])],
       extension: [null, Validators.compose([
-        Validators.maxLength(11),
+        Validators.maxLength(10),
         Validators.pattern(/^[0-9]*$/)
       ])]
     });
