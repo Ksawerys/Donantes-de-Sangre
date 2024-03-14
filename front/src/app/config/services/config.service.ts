@@ -56,26 +56,16 @@ export class ConfigService {
   }
 
   borrarAudio(id: string): Observable<ResponseCancion> {
-    const header = {
-      headers: new HttpHeaders({
-        'x-token': JSON.parse(localStorage.getItem('user')!).token
-      })
-    };
 
-    return this.http.delete<ResponseCancion>(`${this.configUrl}/musica/borrar/${id}`, header);
+    return this.http.delete<ResponseCancion>(`${this.configUrl}/musica/borrar/${id}`, {params: {auth: true}});
   }
   borrarHimnoTodos() {
     this.canciones = [];
   }
 
   borrarTodos(): Observable<ResponseAudio> {
-    const header = {
-      headers: new HttpHeaders({
-        'x-token': JSON.parse(localStorage.getItem('user')!).token
-      })
-    };
 
-    return this.http.delete<ResponseAudio>(`${this.configUrl}/musica/borrar`, header);
+    return this.http.delete<ResponseAudio>(`${this.configUrl}/musica/borrar`, {params: {auth: true}});
   }
 
   editarAudio(id: string, cancion: Cancion): Observable<ResponseCancion> {
@@ -84,21 +74,12 @@ export class ConfigService {
     payload.append('titulo', cancion.titulo);
     payload.append('letra', cancion.letra);
     payload.append('archivo', cancion.cancion);
-    const header = {
-      headers: new HttpHeaders({
-        'x-token': JSON.parse(localStorage.getItem('user')!).token
-      })
-    };
-    return this.http.put<ResponseCancion>(`${this.configUrl}/musica/modificar/`, payload, header);
+    
+    return this.http.put<ResponseCancion>(`${this.configUrl}/musica/modificar/`, payload, {params: {auth: true}});
   }
   obtenerCancion(id: string): Observable<ResponseCancion> {
-    const header = {
-      headers: new HttpHeaders({
-        'x-token': JSON.parse(localStorage.getItem('user')!).token
-      })
-    };
 
-    return this.http.post<ResponseCancion>(`${this.configUrl}/musica/get`, { id: id }, header);
+    return this.http.post<ResponseCancion>(`${this.configUrl}/musica/get`, { id: id }, {params: {auth: true}});
   }
   editarCancion(cancion: Cancion) {
     let posicion = this.canciones.findIndex(c => c.id == cancion.id);
@@ -171,12 +152,8 @@ export class ConfigService {
   }
 
   addFaq(pregunta: string, respuesta: string): Observable<ResponseFaq> {
-    const header = {
-      headers: new HttpHeaders({
-        'x-token': JSON.parse(localStorage.getItem('user')!).token
-      })
-    };
-    return this.http.post<ResponseFaq>(`${this.configUrl}/faq/registrar`, { pregunta: pregunta, respuesta: respuesta }, header);
+    
+    return this.http.post<ResponseFaq>(`${this.configUrl}/faq/registrar`, { pregunta: pregunta, respuesta: respuesta }, {params: {auth: true}});
   }
 
   addFaqInterface(faq: Faq): void {
@@ -184,12 +161,8 @@ export class ConfigService {
     this.checks.push({ id: faq.id, marcado: false });
   }
   editarFaq(id:string,pregunta:string,respuesta:string):Observable<ResponseFaq>{
-    const header = {
-      headers: new HttpHeaders({
-        'x-token': JSON.parse(localStorage.getItem('user')!).token
-      })
-    };
-    return this.http.put<ResponseFaq>(`${this.configUrl}/faq/modificar`, {id:id, pregunta: pregunta, respuesta: respuesta }, header);
+    
+    return this.http.put<ResponseFaq>(`${this.configUrl}/faq/modificar`, {id:id, pregunta: pregunta, respuesta: respuesta }, {params: {auth: true}});
   }
   editarFaqInterface(faq:Faq){
     let posicion = this.faqs.findIndex(f => f.id == faq.id);
@@ -250,12 +223,8 @@ export class ConfigService {
     return this.http.get<ResponseChat>(`${this.configUrl}/chat/estadochat`);
   }
   actualizarEstadoChat(estado:number):Observable<ResponseChat>{
-    const header = {
-      headers: new HttpHeaders({
-        'x-token': JSON.parse(localStorage.getItem('user')!).token
-      })
-    };
-    return this.http.post<ResponseChat>(`${this.configUrl}/chat/actualizarestadochat`,{estado:estado},header);
+    
+    return this.http.post<ResponseChat>(`${this.configUrl}/chat/actualizarestadochat`,{estado:estado},{params: {auth: true}});
   }
 
 }

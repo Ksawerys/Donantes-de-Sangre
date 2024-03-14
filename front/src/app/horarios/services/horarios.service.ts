@@ -21,35 +21,19 @@ export class HorariosService {
 
 
   insertHorarios(horarios: Horario[]): Observable<HorarioResponse> {
-    const header = { headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'x-token': JSON.parse(localStorage.getItem('user')!).token
-    })};
-
-    return this.http.post<HorarioResponse>(`${this.baseUrl}/insertHorarios`, horarios, header);
+    return this.http.post<HorarioResponse>(`${this.baseUrl}/insertHorarios`, horarios, { params: { auth: 'true' } });
   }
 
 
   updateHorarios(hGuardar: Horario[], hBorrar: number[]): Observable<HorarioResponse> {
-    const header = { headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'x-token': JSON.parse(localStorage.getItem('user')!).token
-    })};
-
     return this.http.put<HorarioResponse>(`${this.baseUrl}/updateHorarios`,
-      { hGuardar: hGuardar, hBorrar: hBorrar }, header
-    );
+      { hGuardar: hGuardar, hBorrar: hBorrar }, { params: { auth: 'true' } });
   }
 
 
 
   deleteHorarios(horariosBorrar: Horario[]): Observable<HorarioDeleteResponse> {
-    const header = { headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'x-token': JSON.parse(localStorage.getItem('user')!).token
-    })};
-
     //He puesto un put porque necesito borrar varias cosas y en un delete no puedes enviar payload.
-    return this.http.put<HorarioDeleteResponse>(`${this.baseUrl}/deleteHorarios`, horariosBorrar, header);
+    return this.http.put<HorarioDeleteResponse>(`${this.baseUrl}/deleteHorarios`, horariosBorrar, { params: { auth: 'true' } });
   }
 }
