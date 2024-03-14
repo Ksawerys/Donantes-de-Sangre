@@ -6,6 +6,7 @@ import { DatePickerComponent } from '../date-picker/date-picker.component';
 import { CommonModule } from '@angular/common';
 import { Route, Router } from '@angular/router';
 import { SharedService } from 'src/app/shared/services/shared.service';
+import { AlertService } from 'src/app/shared/services/alerta-error.service';
 
 
 
@@ -36,7 +37,8 @@ export class PedirCitaPacienteComponent {
     private pedirCitaHttpService: CitasService,
     private calendar: NgbCalendar,
     private router: Router,
-    private sharedService: SharedService
+    private sharedService: SharedService,
+    private alertService: AlertService,
     ) {}
 
   ngOnInit() {
@@ -93,7 +95,7 @@ export class PedirCitaPacienteComponent {
         }, 1500);
       }
       else {
-
+        this.alertService.setAlertMessage('No se ha podido pedir cita prueba con otra hora');
         setTimeout(() => {
           this.sharedService.citaPedida.next(1);
         }, 1500);
