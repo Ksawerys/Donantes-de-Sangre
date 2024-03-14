@@ -202,7 +202,7 @@ export class CitasService {
         'x-token': JSON.parse(localStorage.getItem('user')!).token
       })
     };
-
+    console.log(codDia,hora)
     return this.httpPedirCita.post<interfaces.CancelarCitaResponse>(this.pedirCitaUrl +
       '/inserthoracita', {hora: hora, codDia: codDia}, header);
   }

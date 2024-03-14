@@ -32,7 +32,8 @@ export class RegistrarAltasComponent {
       payload.fecha = `${this.fecha.year}-${this.fecha.month}-${this.fecha.day}`;
 
       this.socketService.emitEventInsertarAltas( payload )
-        .then(resp => {
+      .then(resp => {
+        
           if (resp.success) this.registrada = true;
           else this.registrada = false;
 
