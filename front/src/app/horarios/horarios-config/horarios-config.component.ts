@@ -336,16 +336,26 @@ export class HorariosConfigComponent {
       hour: '',
       minute: ''
     };
+  
+    if (typeof time==='string') {
+      let partesHora: string[] = time.split(":");
 
-    t.hour = time.hour < 10 ? '0' + time.hour : time.hour;
-    t.minute = time.minute < 10 ? '0' + time.minute : time.minute;
+      if (partesHora.length===2) {
+        let hora: string = partesHora[0];
+        let minutos: string = partesHora[1]; 
 
+        t.hour = parseInt(hora) < 10 ? '' + hora : hora; 
+        t.minute = parseInt(minutos) < 10 ? '' + minutos : minutos; 
+      }
+    }
+  
     return t;
   }
 
 
   checkTime() {
     const formatedTime = this.formatHora(this.time);
+    console.log(formatedTime)
     const cTime = formatedTime.hour + ':' + formatedTime.minute + ':00';
     this.horaValida = false;
 
@@ -397,14 +407,15 @@ export class HorariosConfigComponent {
 
 
   anadirHora(dia: string) {
-    const formatedTime = this.formatHora(this.time);
+    // const formatedTime = this.formatHora(this.time);
     // const cTime = formatedTime.hour + ':' + formatedTime.minute + ':00';
-    const horaAnadir = formatedTime.hour + ':' + formatedTime.minute;
+    // const horaAnadir = formatedTime.hour + ':' + formatedTime.minute;
     // let anadir = true;
-
+    const hora=this.time
+    console.log(this.time)
     // this.horasMostrar.map(hora => {if (hora == horaAnadir) {anadir = false; return;}});
 
-    this.citasService.insertHoraCita(this.diaSeleccionado, horaAnadir + ':00').subscribe(resp => {
+    this.citasService.insertHoraCita(this.diaSeleccionado, hora + ':00').subscribe(resp => {
 
       if (resp.success) {
         // this.horas.push(this.time.hour + ':' + this.time.minute);

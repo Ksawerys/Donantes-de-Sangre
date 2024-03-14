@@ -124,7 +124,7 @@ export class CitasService {
 
 
   insertHoraCita(codDia: string, hora: string) {
-
+    console.log(hora)
     return this.httpPedirCita.post<interfaces.CancelarCitaResponse>(this.pedirCitaUrl +
       '/inserthoracita', {hora: hora, codDia: codDia}, {params: {auth: true}});
   }
