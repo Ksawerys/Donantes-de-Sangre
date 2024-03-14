@@ -12,17 +12,14 @@ import { PoliticasCookiesComponent } from './paginas/politicas-cookies/politicas
 import { UsuariosGuard } from './usuarios/guards/usuarios.guard';
 import { NotificacionesComponent } from './notificaciones/notificaciones.component';
 import { ErrorServidorComponent } from './error/error-servidor/error-servidor.component';
-import { ErrorConexionComponent } from './error/error-conexion/error-conexion.component';
+import { GuardPaginaErrorGuard } from './shared/guards/guard-pagina-error.guard';
 
 
 const routes: Routes = [
   {
-    path: 'offline',
-    component: ErrorConexionComponent
-  },
-  {
     path: 'error',
-    component: ErrorServidorComponent
+    component: ErrorServidorComponent,
+    canActivate: [GuardPaginaErrorGuard] 
   },
   {
     path: '',

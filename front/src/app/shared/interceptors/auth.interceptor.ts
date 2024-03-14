@@ -5,15 +5,13 @@ import { catchError, Observable, of, throwError } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { Router } from '@angular/router';
 import { AlertService } from '../services/alerta-error.service';
-import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-  constructor(private authService: AuthService, private router: Router, private alertService: AlertService, private http: HttpClient) { }
+  constructor(private authService: AuthService, private router: Router, private alertService: AlertService, ) { }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    this.checkInternetConnection();
     return next.handle(request).pipe(
       catchError((requestError: HttpErrorResponse) => {
         if (requestError.status === 0) {
@@ -41,13 +39,4 @@ export class AuthInterceptor implements HttpInterceptor {
       })
     );
   }
-  checkInternetConnection() {
-    this.http.get('https://www.google.com').pipe(
-      catchError(() => {
-        this.router.navigate(['/offline']);
-        return of(null);
-      })
-    ).subscribe();
-  }
 }
-//400 404 403 401 500
