@@ -99,7 +99,7 @@ export class PedirCitaPacienteComponent {
         }, 1500);
       }
 
-      this.router.navigate(['']);
+      // this.router.navigate(['']);
     });
   }
 }

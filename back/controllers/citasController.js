@@ -103,14 +103,14 @@ const getCitasPasadasUser = async(req, res = response) => {
 
 const getCitasPendientes = async(req, res = response) => {
     try {
+     
         const citas = await queriesCitas.getCitasPendientes();
-
         limpiarUser(citas);
 
         res.status(200).json({success: true, citas: citas, msg:'citas devueltas con éxito'});
     }
     catch (err) {
-
+        console.log(err)
         res.status(200).json({success: false, msg: 'se ha producido un error'});
     }
 }
@@ -125,8 +125,8 @@ const getCitasPasadas = async(req, res = response) => {
         res.status(200).json({success: true, citas: citas, msg:'citas devueltas con éxito'});
     }
     catch (err) {
-
-        res.status(200).json({success: false, msg: 'se ha producido un error'});
+        console.log(err)
+        res.status(200).json({success: false, msg: err});
     }
 }
 
@@ -403,8 +403,9 @@ const limpiarUser = (citas) => {
     const filtro = ({id, nombre}) => ({id, nombre});
 
     citas.forEach(cita => {
-        
-        cita.user.dataValues = filtro(cita.user.dataValues);
+        if(cita.dataValues.user!=null){
+            cita.dataValues.user = {id:cita.dataValues.user.id,nombre:cita.dataValues.user.nombre};
+        }
     });
 }
 

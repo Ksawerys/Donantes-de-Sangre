@@ -12,7 +12,19 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor(private authService: AuthService, private router: Router, private alertService: AlertService, ) { }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    return next.handle(request).pipe(
+    let peticion = request.clone();
+    const param = request.params.get('auth');
+    if (param) {
+      const t = sessionStorage.getItem('token');
+      if (t) {
+        peticion = request.clone({
+          headers: request.headers.set('x-token', t)
+        });
+      }
+    }
+    
+    return next.handle(peticion).pipe(
+      
       catchError((requestError: HttpErrorResponse) => {
         if (requestError.status === 0) {
           this.router.navigate(['/error']);

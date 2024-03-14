@@ -48,13 +48,7 @@ export class AuthService {
 
 
   cambiarPasswd(passwd: string, passwdNueva: string) {
-    const header = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'x-token': JSON.parse(localStorage.getItem('user')!).token
-      })
-    };
-
+   
     const user = JSON.parse(localStorage.getItem('user')!);
     const passwds = {
       id: user.id,
@@ -64,7 +58,7 @@ export class AuthService {
     };
 
     return this.httpUsers.put<interfaces.RecPasswdResponse>(this.authUrl
-      + '/cambiarpasswd', passwds, header);
+      + '/cambiarpasswd', passwds, {params: {auth:true}});
   }
 
 
@@ -76,14 +70,8 @@ export class AuthService {
       return of(false);
 
     } else {
-      const header = {
-        headers: new HttpHeaders({
-          'Content-Type':  'application/json',
-          'x-token' : JSON.parse(localStorage.getItem('user')!).token
-        })
-      };
 
-      return this.httpUsers.get<interfaces.Auth>(`${this.authUrl}/puedeModificar/${JSON.parse(user).id}`, header)
+      return this.httpUsers.get<interfaces.Auth>(`${this.authUrl}/puedeModificar/${JSON.parse(user).id}`, {params:{auth:true}})
         .pipe(
           map(auth => {
             if (auth.success) {

@@ -21,11 +21,7 @@ export class DireccionesService {
 
 
   insertOrUpdateDir(datos: Direccion): Observable<DireccionResponse> {
-    const header = { headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'x-token': JSON.parse(localStorage.getItem('user')!).token
-    })};
-
-    return this.http.put<DireccionResponse>(`${this.baseUrl}/insertOrUpdateDir`, datos, header);
+    
+    return this.http.put<DireccionResponse>(`${this.baseUrl}/insertOrUpdateDir`, datos, {params: {auth: true}});
   }
 }
