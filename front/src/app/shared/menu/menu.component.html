@@ -62,7 +62,7 @@
           <a class="nav-link enlace" (click)="ensenarModal()">Pedir cita</a>
         </li>
 
-        <li *ngIf="!puedeModificar" class="nav-item">
+        <li *ngIf="estaRegistrado" class="nav-item">
           <a class="nav-link enlace" href="../../citas/mostrarcitas">Mis citas</a>
         </li>
 
