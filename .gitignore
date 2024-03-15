@@ -3,8 +3,5 @@ package-lock.json
 /back/package-lock.json
 /front/node-modules
 /front/package-lock.json
-<<<<<<< HEAD
 /front/.idea
-=======
-back/.env
->>>>>>> 3c7f6c398cfae34a4e6cf3bf08342c04068a12ae
+/back/.env
