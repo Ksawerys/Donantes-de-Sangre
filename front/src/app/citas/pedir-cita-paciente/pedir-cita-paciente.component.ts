@@ -95,7 +95,6 @@ export class PedirCitaPacienteComponent {
         }, 1500);
       }
       else {
-        this.alertService.setAlertMessage('No se ha podido pedir cita prueba con otra hora');
         setTimeout(() => {
           this.sharedService.citaPedida.next(1);
         }, 1500);
