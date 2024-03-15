@@ -2,6 +2,8 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators, FormsModule } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { Telefono } from 'src/app/telefonos/interfaces/telefonos.interfaces';
+import { TelefonosService } from 'src/app/telefonos/services/telefonos.service';
 
 @Component({
   selector: 'app-recuperar-passwd',
@@ -11,15 +13,18 @@ import { Router } from '@angular/router';
 export class RecuperarPasswdComponent {
 
   emailRecPasswdEnviado: number = -1;
+  telefonos: Telefono[] = [];
 
   constructor(
     private authHttsService: AuthService,
-    private router: Router,
+    private router: Router, private tfnosService: TelefonosService
   ) {}
 
   ngOnInit() {
-
     this.emailRecPasswdEnviado = -1;
+    this.tfnosService.getTelefonos().subscribe(resp => {
+      if (resp.success) this.telefonos = resp.data;
+    });
   }
 
   @Output() onRecPasswd: EventEmitter<number> = new EventEmitter();

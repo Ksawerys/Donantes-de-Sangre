@@ -4,11 +4,11 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'http://donantes.gitignore.tech:5002',
+  baseUrl: 'http://localhost:9092',
   baseSocket: 'http://localhost:3000',
-  apiUrl: "https://localhost:7274",
+  apiUrl: "https://localhost:9092",
   client_ID: '562168214750-u16u9p1acs5nk39gtco2gtal57geo6jo.apps.googleusercontent.com',
-  socketUrl: 'http://donantes.gitignore.tech:5021'
+  socketUrl: 'http://localhost:5021'
 };
 
 /*

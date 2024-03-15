@@ -8,9 +8,17 @@
         *ngFor="let imagen of this.galeria_imagenes | paginate: { itemsPerPage: 6, currentPage: p }; let i=index"
         class="gallery-img">
 
-          <img (click)="onPreviewImage(i)"
-          src="../../assets/imagenes/galeria/{{imagen.nombre}}"
-          id="{{p}}-{{i}}">
+          <img *ngIf="imagen.nombre.includes('http'); else imagenLocal"
+                (click)="onPreviewImage(i)"
+                [src]="imagen.nombre"
+                id="{{p}}-{{i}}">
+
+          <ng-template #imagenLocal>
+            <img (click)="onPreviewImage(i)"
+                 src="../../assets/imagenes/galeria/{{imagen.nombre}}"
+                 id="{{p}}-{{i}}">
+          </ng-template>
+
           <input *ngIf="puedeModificar" type="checkbox" class="custom-control custom-checkbox image-checkbox custom-control-input checkbox-inline" id="{{imagen.id}}" alt="{{imagen.nombre}}">
 
           <h4 class="descripcion">{{imagen.descripcion}}</h4>
@@ -42,7 +50,12 @@
             <h4 class="descripcion">{{this.currentLightboxImage.descripcion}}</h4>
           </div>
           <div class="col-12 d-flex justify-content-center darEspacio">
-            <img src="../../assets/imagenes/galeria/{{this.currentLightboxImage.nombre}}" alt="">
+            <img *ngIf="this.currentLightboxImage!.nombre.includes('http'); else imagenLocal"
+              [src]="this.currentLightboxImage!.nombre" alt="">
+          
+            <ng-template #imagenLocal>
+              <img src="../../assets/imagenes/galeria/{{this.currentLightboxImage?.nombre}}" alt="">
+            </ng-template>
           </div>
         </div>
 

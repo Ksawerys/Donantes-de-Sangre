@@ -1,5 +1,9 @@
-<app-menu></app-menu>
+<app-menu  *ngIf="router.url !== '/error'"></app-menu>
+<div class="alert alert-danger alert-dismissible position-fixed fade show ms-3" role="alert" *ngIf="alertMessage">
+    <p>{{ alertMessage }}</p>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  
+  <router-outlet></router-outlet>
 
-<router-outlet></router-outlet>
-
-<app-footer></app-footer>
+<app-footer  *ngIf="router.url !== '/error'"></app-footer>

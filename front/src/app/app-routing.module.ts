@@ -11,9 +11,16 @@ import { TerminosUsoComponent } from './paginas/terminos-uso/terminos-uso.compon
 import { PoliticasCookiesComponent } from './paginas/politicas-cookies/politicas-cookies.component';
 import { UsuariosGuard } from './usuarios/guards/usuarios.guard';
 import { NotificacionesComponent } from './notificaciones/notificaciones.component';
+import { ErrorServidorComponent } from './error/error-servidor/error-servidor.component';
+import { GuardPaginaErrorGuard } from './shared/guards/guard-pagina-error.guard';
 
 
 const routes: Routes = [
+  {
+    path: 'error',
+    component: ErrorServidorComponent,
+    canActivate: [GuardPaginaErrorGuard] 
+  },
   {
     path: '',
     loadChildren: () => import('./paginas/paginas.module').then( m => m.PaginasModule )

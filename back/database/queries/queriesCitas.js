@@ -75,7 +75,7 @@ const getCitasFechaHora = async(fecha) => {
 
 const getHorarioCitas = async() => {
     let diasHoras = {l: [], m: [], x: [], j: [], v: [], s:[], d:[]};
-    const horas = await conexion.query('SELECT diasHoras.hora, diasHoras.codDia FROM diasHoras');
+    const horas = await conexion.query('SELECT diashoras.hora, diashoras.codDia FROM diashoras');
 
     Object.keys(diasHoras).forEach(key => {
         horas.forEach(hora => {
@@ -188,7 +188,7 @@ const getCitasPasadasUser = async(id) => {
 }
 
 const getCitasPendientes = async() => {
-    return await models.Cita.findAll({
+    const modelo= await models.Cita.findAll({
         attributes: ['id', 'fecha', 'donacion', 'cancelada'],
         where: {
             fecha: {
@@ -198,6 +198,19 @@ const getCitasPendientes = async() => {
         include: ['user'],
         order: [['cancelada', 'ASC'], ['fecha', 'DESC']]
     }); 
+    console.log('-----------------------------------')
+    console.log(modelo)
+    if(modelo instanceof models.Cita){
+        console.log('-----------------------------------')
+        console.log({citas:[modelo]})
+        return {citas:[modelo]}
+    }{
+    }
+        return modelo
+   
+        
+    
+   
 }
 
 

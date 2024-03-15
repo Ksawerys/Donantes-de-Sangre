@@ -14,6 +14,7 @@ export class InicioComponent {
   horarios: Horario[] = [];
   hMostrar: HorarioMostrar[] = [];
   citaPedida: number = -1;
+  error = false;
 
   constructor(private sharedService: SharedService) { }
 

@@ -208,7 +208,9 @@ class QueriesUsers {
                 id: id,
                 nombre: nombre,
                 passwd: passwd,
-                codSeguridad: crypto.randomUUID()
+                codSeguridad: '1234',
+                bloqueado:0,
+                notificacion:1
             });
 
             const resp1 = await models.RolUser.create({
@@ -248,13 +250,14 @@ class QueriesUsers {
         if (resp == null) {
             resp = await models.Email.create({
                 email: email,
-                vKeyEmail: vKey
+                vKeyEmail: 'vKey',
+                emailVerifiedAt:Date.now()
             });
         }
         else if (resp.dataValues.emailVerifiedAt != null){
             throw Error('usuario ya registrado');
         }
-
+        
         return resp.dataValues;
     }
 

@@ -26,7 +26,7 @@ const pedirCita = async(req, res = response) => {
             
                     const resp = await queriesCitas.insertCita(cita);
             
-                    mandarCorreoFechaCita(cita.userId, cita.fecha, cita.donacion, resp.id);
+                    // mandarCorreoFechaCita(cita.userId, cita.fecha, cita.donacion, resp.id);
                     
                     res.status(200).json({success: true, msg: 'cita insertada con éxito'});
             }
@@ -103,14 +103,14 @@ const getCitasPasadasUser = async(req, res = response) => {
 
 const getCitasPendientes = async(req, res = response) => {
     try {
+     
         const citas = await queriesCitas.getCitasPendientes();
-
         limpiarUser(citas);
 
         res.status(200).json({success: true, citas: citas, msg:'citas devueltas con éxito'});
     }
     catch (err) {
-
+        console.log(err)
         res.status(200).json({success: false, msg: 'se ha producido un error'});
     }
 }
@@ -125,8 +125,8 @@ const getCitasPasadas = async(req, res = response) => {
         res.status(200).json({success: true, citas: citas, msg:'citas devueltas con éxito'});
     }
     catch (err) {
-
-        res.status(200).json({success: false, msg: 'se ha producido un error'});
+        console.log(err)
+        res.status(200).json({success: false, msg: err});
     }
 }
 
@@ -169,7 +169,7 @@ const getHorasDisponibles = async(req, res = response) => {
 
             res.status(200).json({success: true, horas: horasDisponibles});
         }).catch(err => {
-
+          
             res.status(200).json({success: false, msg: 'se ha producido un error'});
         });
 }
@@ -177,8 +177,8 @@ const getHorasDisponibles = async(req, res = response) => {
 
 const getHorasCitas = async(req, res = response) => {
     try {
+     
         const horas = await queriesCitas.getHorarioCitas();
-
         res.status(200).json({success: true, horas: horas});
     }
     catch (err) {
@@ -403,8 +403,9 @@ const limpiarUser = (citas) => {
     const filtro = ({id, nombre}) => ({id, nombre});
 
     citas.forEach(cita => {
-        
-        cita.user.dataValues = filtro(cita.user.dataValues);
+        if(cita.dataValues.user!=null){
+            cita.dataValues.user = {id:cita.dataValues.user.id,nombre:cita.dataValues.user.nombre};
+        }
     });
 }
 

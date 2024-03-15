@@ -2,6 +2,19 @@
 [formGroup]="emailRecPasswdForm" (ngSubmit)="mandarEmailRecPasswd()">
 
 <div class="mt-4 mb-2">
+    <label class="form-label" for="emailRecPasswd">Contacta en estos teléfonos</label><br>
+    <div class="telefonos text-center">
+        <div class="telefono d-flex align-items-center"
+          *ngFor="let t of telefonos">
+    
+          <i class="fa-solid fa-phone me-2 fs-6"></i>
+    
+          <p class="fw-bold">{{ t.numero }}<span *ngIf="t.extension"> ext. {{ t.extension }}</span></p>
+        </div>
+      </div>
+</div>  
+
+<!-- <div class="mt-4 mb-2">
     <label class="form-label" for="emailRecPasswd">Email</label><br>
     <input
         type="text"
@@ -10,7 +23,7 @@
         placeholder="Introduce una dirección de email"
         formControlName="email"
     >
-</div>
+</div>  
 
 <span
     class="form-text errorLogin mb-2"
@@ -37,7 +50,7 @@
         (click)="irAlLogin()">Cancelar</button>
 </div>
 
-</form>
+</form> 
 
 
 
@@ -65,4 +78,4 @@
         class="btn btn-secundario"
         (click)="irAlLogin()">Ir al login</button>
 </div>
-</form>
+</form> -->

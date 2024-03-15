@@ -6,6 +6,7 @@ import { DatePickerComponent } from '../date-picker/date-picker.component';
 import { CommonModule } from '@angular/common';
 import { Route, Router } from '@angular/router';
 import { SharedService } from 'src/app/shared/services/shared.service';
+import { AlertService } from 'src/app/shared/services/alerta-error.service';
 
 
 
@@ -36,7 +37,8 @@ export class PedirCitaPacienteComponent {
     private pedirCitaHttpService: CitasService,
     private calendar: NgbCalendar,
     private router: Router,
-    private sharedService: SharedService
+    private sharedService: SharedService,
+    private alertService: AlertService,
     ) {}
 
   ngOnInit() {
@@ -44,6 +46,7 @@ export class PedirCitaPacienteComponent {
     this.fecha = this.calendar.getToday();
     this.transFecha(this.fecha);
     this.compRegistro();
+    this.traerHorario()
   }
 
 
@@ -84,7 +87,7 @@ export class PedirCitaPacienteComponent {
     const tipoDonacion = this.citaForm.get('donacion')?.value;
 
     this.pedirCitaHttpService.insertCita(id, fechaCita, tipoDonacion).subscribe(resp => {
-      console.log(resp);
+      
       if (resp.success) {
 
         setTimeout(() => {  
@@ -92,7 +95,6 @@ export class PedirCitaPacienteComponent {
         }, 1500);
       }
       else {
-
         setTimeout(() => {
           this.sharedService.citaPedida.next(1);
         }, 1500);
